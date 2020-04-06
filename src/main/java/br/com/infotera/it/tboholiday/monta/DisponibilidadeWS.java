@@ -249,7 +249,7 @@ public class DisponibilidadeWS {
             }
 
             quartoPesquisa = new WSQuartoUh(sqPesquisa,
-                    new WSUh(null, nmQuarto, hr.getRoomTypeCode(), nmQuarto, nmQuarto, dsParametro),
+                    new WSUh(null, nmQuarto, nmQuarto, nmQuarto, nmQuarto, dsParametro),
                     new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
                     new WSTarifa(sgMoeda, vlNeto, null, hr.getRatePlanCode(), null, null));
 
