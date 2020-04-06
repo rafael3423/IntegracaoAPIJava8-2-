@@ -86,8 +86,13 @@ public class TarifarWS {
             
             //a partir daqui nova chamada
             
-            
-            
+            for(WSReservaHotelUh rhu : reservaHotelUhList){
+                
+                //montar a chamada
+                
+                
+            }
+//            fazer a chamada
             
         }
         
