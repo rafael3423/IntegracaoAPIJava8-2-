@@ -7,6 +7,7 @@ import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifa;
 import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSTarifaAdicionalTipoEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
 import br.com.infotera.common.hotel.WSHotel;
@@ -57,33 +58,37 @@ public class DisponibilidadeWS {
 
         Map<Integer, List<WSReservaNome>> reservanomeMap = new HashMap();
 
-        for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) {
+        try {
+            for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) {
 
-            sqQuarto++;
+                sqQuarto++;
 
-            RoomGuest hospede = new RoomGuest();
+                RoomGuest hospede = new RoomGuest();
 
-            ArrayOfInt idadesCrianca = new ArrayOfInt();
+                ArrayOfInt idadesCrianca = new ArrayOfInt();
 
-            int qtAdt = 0;
-            for (WSReservaNome rn : cuh.getReservaNomeList()) {
-                if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
-                    idadesCrianca.getInt().add(rn.getQtIdade());
-                } else {
-                    qtAdt++;
+                int qtAdt = 0;
+                for (WSReservaNome rn : cuh.getReservaNomeList()) {
+                    if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
+                        idadesCrianca.getInt().add(rn.getQtIdade());
+                    } else {
+                        qtAdt++;
+                    }
                 }
+
+                hospede.setAdultCount(qtAdt);
+
+                if (idadesCrianca.getInt() != null && !idadesCrianca.getInt().isEmpty()) {
+                    hospede.setChildCount(idadesCrianca.getInt().size());
+                    hospede.setChildAge(idadesCrianca);
+                }
+
+                listaNomes.getRoomGuest().add(hospede);
+                reservanomeMap.put(sqQuarto, cuh.getReservaNomeList());
+
             }
-
-            hospede.setAdultCount(qtAdt);
-
-            if (idadesCrianca.getInt() != null && !idadesCrianca.getInt().isEmpty()) {
-                hospede.setChildCount(idadesCrianca.getInt().size());
-                hospede.setChildAge(idadesCrianca);
-            }
-
-            listaNomes.getRoomGuest().add(hospede);
-            reservanomeMap.put(sqQuarto, cuh.getReservaNomeList());
-
+        } catch (Exception ex) {
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         if (disponibilidadeRQ.getMunicipioId() != null && !disponibilidadeRQ.getMunicipioId().equals("")) {
@@ -114,50 +119,54 @@ public class DisponibilidadeWS {
 
         List<WSHotelPesquisa> hotelPesquisaList = new ArrayList();
 
-        for (HotelResult hr : hotelSearchResponse.getHotelResultList().getHotelResult()) {
+        try {
+            for (HotelResult hr : hotelSearchResponse.getHotelResultList().getHotelResult()) {
 
-            WSHotelCategoria hotelCategoria = new WSHotelCategoria(hr.getHotelInfo().getRating().toString(), hr.getHotelInfo().getRating().toString());
+                WSHotelCategoria hotelCategoria = new WSHotelCategoria(hr.getHotelInfo().getRating().toString(), hr.getHotelInfo().getRating().toString());
 
-            WSEndereco endereco = new WSEndereco();
+                WSEndereco endereco = new WSEndereco();
 
-            endereco.setDsEndereco(hr.getHotelInfo().getHotelAddress());
-            endereco.setNrLatitude(hr.getHotelInfo().getLatitude().toString());
-            endereco.setNrLongitude(hr.getHotelInfo().getLongitude().toString());
+                endereco.setDsEndereco(hr.getHotelInfo().getHotelAddress());
+                endereco.setNrLatitude(hr.getHotelInfo().getLatitude().toString());
+                endereco.setNrLongitude(hr.getHotelInfo().getLongitude().toString());
 
-            List<WSMedia> imagemList = new ArrayList();
+                List<WSMedia> imagemList = new ArrayList();
 
-            imagemList.add(new WSMedia(null, hr.getHotelInfo().getHotelPicture()));
+                imagemList.add(new WSMedia(null, hr.getHotelInfo().getHotelPicture()));
 
-            WSHotel hotel = new WSHotel(null,
-                    hr.getHotelInfo().getHotelName(),
-                    hr.getHotelInfo().getHotelDescription(),
-                    hotelCategoria,
-                    null,
-                    null,
-                    endereco,
-                    imagemList);
+                WSHotel hotel = new WSHotel(null,
+                        hr.getHotelInfo().getHotelName(),
+                        hr.getHotelInfo().getHotelDescription(),
+                        hotelCategoria,
+                        null,
+                        null,
+                        endereco,
+                        imagemList);
 
-            hotel.setIdExterno(hr.getHotelInfo().getHotelCode());
-            hotel.setIdExterno2(disponibilidadeRQ.getMunicipioId());
+                hotel.setIdExterno(hr.getHotelInfo().getHotelCode());
+                hotel.setIdExterno2(disponibilidadeRQ.getMunicipioId());
 
-            List<WSQuarto> quartoList = new ArrayList();
-            List<WSQuartoUh> quartoUhList = new ArrayList();
+                List<WSQuarto> quartoList = new ArrayList();
+                List<WSQuartoUh> quartoUhList = new ArrayList();
 
-            WSTarifa tarifa = new WSTarifa(hr.getMinHotelPrice().getCurrency(), Double.parseDouble(hr.getMinHotelPrice().getTotalPrice().toString()), null);
+                WSTarifa tarifa = new WSTarifa(hr.getMinHotelPrice().getCurrency(), Double.parseDouble(hr.getMinHotelPrice().getTotalPrice().toString()), null);
 
-            quartoUhList.add(new WSQuartoUh(1, null, null, tarifa));
+                quartoUhList.add(new WSQuartoUh(1, null, null, tarifa));
 
-            quartoList.add(new WSQuarto(Integer.parseInt(hotelSearchResponse.getNoOfRoomsRequested()),
-                    new WSConfigUh(),
-                    quartoUhList));
+                quartoList.add(new WSQuarto(Integer.parseInt(hotelSearchResponse.getNoOfRoomsRequested()),
+                        new WSConfigUh(),
+                        quartoUhList));
 
-            hotelPesquisaList.add(new WSHotelPesquisa(disponibilidadeRQ.getIntegrador(),
-                    Utils.toDate(hotelSearchResponse.getCheckInDate(), "dd/MM/yyyy HH:mm:ss"),
-                    Utils.toDate(hotelSearchResponse.getCheckOutDate(), "dd/MM/yyyy HH:mm:ss"),
-                    hotel,
-                    quartoList,
-                    null,
-                    hotelSearchResponse.getSessionId() + "#" + hr.getResultIndex()));
+                hotelPesquisaList.add(new WSHotelPesquisa(disponibilidadeRQ.getIntegrador(),
+                        Utils.toDate(hotelSearchResponse.getCheckInDate(), "dd/MM/yyyy HH:mm:ss"),
+                        Utils.toDate(hotelSearchResponse.getCheckOutDate(), "dd/MM/yyyy HH:mm:ss"),
+                        hotel,
+                        quartoList,
+                        null,
+                        hotelSearchResponse.getSessionId() + "#" + hr.getResultIndex()));
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         if (hotelPesquisaList.size() == 1) {
@@ -187,104 +196,119 @@ public class DisponibilidadeWS {
         WSQuartoUh quartoPesquisa = new WSQuartoUh();
         Map<Integer, HotelRoom> mapQuartoPesquisa = new HashMap();
 
-        for (HotelRoom hr : hotelRoomAvailabilityResponse.getHotelRooms().getHotelRoom()) {
+        try {
+            for (HotelRoom hr : hotelRoomAvailabilityResponse.getHotelRooms().getHotelRoom()) {
 
-            mapQuartoPesquisa.put(hr.getRoomIndex(), hr);
+                mapQuartoPesquisa.put(hr.getRoomIndex(), hr);
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         Map<Integer, List<HotelRoom>> mapQuartoPesquisadoList = new LinkedHashMap();
 
         int sqRoomIndex = 0;
+        try {
+            for (RoomCombination rc : hotelRoomAvailabilityResponse.getOptionsForBooking().getRoomCombination()) {
+                List<HotelRoom> quartoPesquisadoList = new ArrayList();
+                try {
+                    for (int roomIndex : rc.getRoomIndex()) {
+                        quartoPesquisadoList.add(mapQuartoPesquisa.get(roomIndex));
+                    }
+                } catch (Exception ex) {
+                    throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
+                }
 
-        for (RoomCombination rc : hotelRoomAvailabilityResponse.getOptionsForBooking().getRoomCombination()) {
-            List<HotelRoom> quartoPesquisadoList = new ArrayList();
-
-            for (int roomIndex : rc.getRoomIndex()) {
-                quartoPesquisadoList.add(mapQuartoPesquisa.get(roomIndex));
+                mapQuartoPesquisadoList.put(sqRoomIndex, quartoPesquisadoList);
+                sqRoomIndex++;
             }
-
-            mapQuartoPesquisadoList.put(sqRoomIndex, quartoPesquisadoList);
-            sqRoomIndex++;
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
         tarifaAdicionalList.add(new WSTarifaAdicional());
+        try {
+            for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
 
-        for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
+                int count = 0;
+                Double vlNeto = 0.0;
+                Double vlTaxa = 0.0;
+                String sgMoeda = null;
+                List<ParDisp> parDispList = new ArrayList();
+                String roomChaveId = "";
+                String roomNameId = "";
+                LinkedHashMap<String, Integer> quartoConfig = new LinkedHashMap<>();
+                try {
+                    for (HotelRoom hr : map.getValue()) {
 
-            int count = 0;
-            Double vlNeto = 0.0;
-            Double vlTaxa = 0.0;
-            String sgMoeda = null;
-            List<ParDisp> parDispList = new ArrayList();
-            String roomChaveId = "";
-            String roomNameId = "";
-            LinkedHashMap<String, Integer> quartoConfig = new LinkedHashMap<>();
+                        count++;
 
-            for (HotelRoom hr : map.getValue()) {
+                        List<Supplement> supplementList = new ArrayList();
 
-                count++;
+                        if (hr.getSupplements() != null && !hr.getSupplements().equals("")) {
+                            for (Supplement s : hr.getSupplements().getSupplement()) {
+                                supplementList.add(s);
+                            }
+                        }
+                        Gson gson = new Gson();
 
-                List<Supplement> supplementList = new ArrayList();
+                        ParDisp parDisp = new ParDisp(hr.getRoomIndex() + "",
+                                hr.getRoomTypeCode(),
+                                hr.getRatePlanCode(),
+                                Utils.gerarDsReservaNome(reservanomeMap.get(count)),
+                                gson.toJson(supplementList),
+                                hr.getRoomRate().getRoomFare().toString() + "#" + hr.getRoomRate().getRoomTax().toString() + "#" + hr.getRoomRate().getTotalFare().toString(),
+                                hr.getRoomTypeName());
 
-                if (hr.getSupplements() != null && !hr.getSupplements().equals("")) {
-                    for (Supplement s : hr.getSupplements().getSupplement()) {
-                        supplementList.add(s);
+                        parDispList.add(parDisp);
+
+                        String dsParametro = gson.toJson(parDispList);
+
+                        vlNeto = Utils.somar(vlNeto, Double.parseDouble(hr.getRoomRate().getRoomFare().toString()));
+                        vlTaxa = Utils.somar(vlTaxa, Double.parseDouble(hr.getRoomRate().getRoomTax().toString()));
+
+                        Integer qtQuarto = quartoConfig.get(hr.getRoomTypeName());
+                        if (qtQuarto == null) {
+                            quartoConfig.put(hr.getRoomTypeName(), 1);
+                        } else {
+                            qtQuarto++;
+                            quartoConfig.replace(hr.getRoomTypeName(), qtQuarto);
+                        }
+
+                        if (roomChaveId.equalsIgnoreCase("")) {
+                            roomChaveId = Integer.toString(hr.getRoomIndex());
+                            roomNameId = hr.getRoomTypeName();
+                        } else {
+                            roomChaveId += "#" + Integer.toString(hr.getRoomIndex());
+                            roomNameId += "#" + hr.getRoomTypeName();
+                        }
+
+                        String textoQuarto = null;
+                        for (Map.Entry<String, Integer> quarto : quartoConfig.entrySet()) {
+                            if (textoQuarto == null) {
+                                textoQuarto = quarto.getValue() + "x " + quarto.getKey();
+                            } else {
+                                textoQuarto = textoQuarto + "+ " + quarto.getValue() + "x " + quarto.getKey();
+                            }
+                        }
+
+                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
+
+                        quartoPesquisa = new WSQuartoUh(sqPesquisa,
+                                new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
+                                new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
+                                new WSTarifa(sgMoeda = hr.getRoomRate().getCurrency(), vlNeto, null, hr.getRatePlanCode(), null, null, tarifaAdicionalList));
+
                     }
-                }
-                Gson gson = new Gson();
-
-                ParDisp parDisp = new ParDisp(hr.getRoomIndex() + "",
-                        hr.getRoomTypeCode(),
-                        hr.getRatePlanCode(),
-                        Utils.gerarDsReservaNome(reservanomeMap.get(count)),
-                        gson.toJson(supplementList),
-                        hr.getRoomRate().getRoomFare().toString() + "#" + hr.getRoomRate().getRoomTax().toString() + "#" + hr.getRoomRate().getTotalFare().toString(),
-                        hr.getRoomTypeName());
-
-                parDispList.add(parDisp);
-
-                String dsParametro = gson.toJson(parDispList);
-
-                vlNeto = Utils.somar(vlNeto, Double.parseDouble(hr.getRoomRate().getRoomFare().toString()));
-                vlTaxa = Utils.somar(vlTaxa, Double.parseDouble(hr.getRoomRate().getRoomTax().toString()));
-
-
-                Integer qtQuarto = quartoConfig.get(hr.getRoomTypeName());
-                if (qtQuarto == null) {
-                    quartoConfig.put(hr.getRoomTypeName(), 1);
-                } else {
-                    qtQuarto++;
-                    quartoConfig.replace(hr.getRoomTypeName(), qtQuarto);
+                } catch (Exception ex) {
+                    throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
-                if (roomChaveId.equalsIgnoreCase("")) {
-                    roomChaveId = Integer.toString(hr.getRoomIndex());
-                    roomNameId = hr.getRoomTypeName();
-                } else {
-                    roomChaveId += "#" + Integer.toString(hr.getRoomIndex());
-                    roomNameId += "#" + hr.getRoomTypeName();
-                }
-
-                String textoQuarto = null;
-                for (Map.Entry<String, Integer> quarto : quartoConfig.entrySet()) {
-                    if (textoQuarto == null) {
-                        textoQuarto = quarto.getValue() + "x " + quarto.getKey();
-                    } else {
-                        textoQuarto = textoQuarto + "+ " + quarto.getValue() + "x " + quarto.getKey();
-                    }
-                }
-
-                tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
-
-                quartoPesquisa = new WSQuartoUh(sqPesquisa,
-                        new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
-                        new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
-                        new WSTarifa(sgMoeda = hr.getRoomRate().getCurrency(), vlNeto, null, hr.getRatePlanCode(), null, null, tarifaAdicionalList));
-
+                quartoUhList.add(quartoPesquisa);
             }
-
-            quartoUhList.add(quartoPesquisa);
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSQuarto> quartoList = new ArrayList();

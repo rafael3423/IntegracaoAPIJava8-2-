@@ -7,6 +7,7 @@ import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
@@ -46,80 +47,90 @@ public class ReservarWS {
         Boolean leadGuest = true;
         int sqQuato = 0;
 
-        for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
+        try {
+            for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
 
-            paymentInfo.setVoucherBooking(true);
-            paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
+                paymentInfo.setVoucherBooking(true);
+                paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
 
-            RequestedRooms requestedRooms = new RequestedRooms();
+                RequestedRooms requestedRooms = new RequestedRooms();
 
-            SuppInfo suppInfo = new SuppInfo();
+                SuppInfo suppInfo = new SuppInfo();
 
-            ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+                ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
-            String chvTarifas[] = parDisp.getA5().split("#");
+                String chvTarifas[] = parDisp.getA5().split("#");
 
-            BigDecimal bigFare = new BigDecimal(chvTarifas[0]);
-            BigDecimal bigTax = new BigDecimal(chvTarifas[1]);
-            BigDecimal bigTotalFare = new BigDecimal(chvTarifas[2]);
+                BigDecimal bigFare = new BigDecimal(chvTarifas[0]);
+                BigDecimal bigTax = new BigDecimal(chvTarifas[1]);
+                BigDecimal bigTotalFare = new BigDecimal(chvTarifas[2]);
 
-            Rate rate = new Rate();
-            rate.setRoomFare(bigFare);
-            rate.setRoomTax(bigTax);
-            rate.setTotalFare(bigTotalFare);
+                Rate rate = new Rate();
+                rate.setRoomFare(bigFare);
+                rate.setRoomTax(bigTax);
+                rate.setTotalFare(bigTotalFare);
 
-            Supplement[] supplement = (Supplement[]) UtilsWS.fromJson(parDisp.getA4(), Supplement[].class);
+                Supplement[] supplement = (Supplement[]) UtilsWS.fromJson(parDisp.getA4(), Supplement[].class);
 
-            sqQuato++;
+                sqQuato++;
 
-            if (supplement.length != 0 && supplement != null) {
+                if (supplement.length != 0 && supplement != null) {
 
-                ArrayOfSuppInfo arrayOfSuppInfo = new ArrayOfSuppInfo();
+                    ArrayOfSuppInfo arrayOfSuppInfo = new ArrayOfSuppInfo();
+                    try {
+                        for (Supplement s : supplement) {
+                            suppInfo.setPrice(s.getPrice());
+                            suppInfo.setSuppID(s.getSuppID());
+                            suppInfo.setSuppIsSelected(false);
+                            suppInfo.setSuppChargeType(SuppChargeType.AT_PROPERTY);
 
-                for (Supplement s : supplement) {
-                    suppInfo.setPrice(s.getPrice());
-                    suppInfo.setSuppID(s.getSuppID());
-                    suppInfo.setSuppIsSelected(false);
-                    suppInfo.setSuppChargeType(SuppChargeType.AT_PROPERTY);
+                            arrayOfSuppInfo.getSuppInfo().add(suppInfo);
+                        }
+                    } catch (Exception ex) {
+                        throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                    }
 
-                    arrayOfSuppInfo.getSuppInfo().add(suppInfo);
+                    requestedRooms.setSupplements(arrayOfSuppInfo);
+
+                }
+                try {
+                    for (WSReservaNome rn : rhuh.getReservaNomeList()) {
+
+                        Guest guest = new Guest();
+                        GuestType guestType = null;
+
+                        if (rn.getPaxTipo().isAdt() || rn.getPaxTipo().isSrn()) {
+                            guestType = guestType.ADULT;
+                        } else if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
+                            guestType = guestType.CHILD;
+                        }
+
+                        guest.setGuestType(guestType);
+                        guest.setGuestInRoom(sqQuato);
+                        guest.setTitle("MR");
+                        guest.setFirstName(rn.getNmNome() + "NOME");
+                        guest.setLastName(rn.getNmSobrenome() + "SOBRENOME");
+                        guest.setAge(rn.getQtIdade());
+                        guest.setLeadGuest(leadGuest);
+                        leadGuest = false;
+
+                        arrayOfGuest.getGuest().add(guest);
+                    }
+                } catch (Exception ex) {
+                    throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
-                requestedRooms.setSupplements(arrayOfSuppInfo);
+                requestedRooms.setRoomIndex(sqQuato);
+                requestedRooms.setRoomTypeName(rhuh.getUh().getDsUh());
+                requestedRooms.setRoomTypeCode(rhuh.getUh().getCdUh());
+                requestedRooms.setRatePlanCode(rhuh.getTarifa().getCdTarifa());
+                requestedRooms.setRoomRate(rate);
+
+                arrayOfRequestedRooms.getHotelRoom().add(requestedRooms);
 
             }
-
-            for (WSReservaNome rn : rhuh.getReservaNomeList()) {
-
-                Guest guest = new Guest();
-                GuestType guestType = null;
-
-                if (rn.getPaxTipo().isAdt() || rn.getPaxTipo().isSrn()) {
-                    guestType = guestType.ADULT;
-                } else if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
-                    guestType = guestType.CHILD;
-                }
-
-                guest.setGuestType(guestType);
-                guest.setGuestInRoom(sqQuato);
-                guest.setTitle("MR");
-                guest.setFirstName(rn.getNmNome() + "NOME");
-                guest.setLastName(rn.getNmSobrenome() + "SOBRENOME");
-                guest.setAge(rn.getQtIdade());
-                guest.setLeadGuest(leadGuest);
-                leadGuest = false;
-
-                arrayOfGuest.getGuest().add(guest);
-            }
-
-            requestedRooms.setRoomIndex(sqQuato);
-            requestedRooms.setRoomTypeName(rhuh.getUh().getDsUh());
-            requestedRooms.setRoomTypeCode(rhuh.getUh().getCdUh());
-            requestedRooms.setRatePlanCode(rhuh.getTarifa().getCdTarifa());
-            requestedRooms.setRoomRate(rate);
-
-            arrayOfRequestedRooms.getHotelRoom().add(requestedRooms);
-
+        } catch (Exception ex) {
+            throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         String chvSplit[] = reservarRQ.getReserva().getReservaHotel().getDsParametro().split("#");

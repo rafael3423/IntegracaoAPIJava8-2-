@@ -71,8 +71,6 @@ public class ConsultarReservaWS {
             Double qntDia = Utils.subtrair(Double.parseDouble(chvDiaCheckOut[2]), Double.parseDouble(chvDiaCheckIn[2]));
             Double vlDiaria = Utils.dividir(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), qntDia);
 
-            vlCancelamento = Utils.multiplicar(vlDiaria, Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString()));
-
             if (bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getChargeType().toString().toUpperCase().equals("FIXED")) {
                 vlCancelamento = Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString());
 
@@ -80,6 +78,7 @@ public class ConsultarReservaWS {
                 vlCancelamento = Utils.dividir(Utils.multiplicar(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString())), 100.00);
 
             } else if (bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getChargeType().toString().toUpperCase().equals("NIGHT")) {
+                vlCancelamento = Utils.multiplicar(vlDiaria, Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString()));
 
             }
 
@@ -179,12 +178,11 @@ public class ConsultarReservaWS {
             } catch (Exception ex) {
                 throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
             }
-            
+
             tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO,
                     "Taxa de serviço.",
                     rd.getRoomRate().getCurrency(),
                     Double.parseDouble(rd.getRoomRate().getRoomTax().toString())));
-
 
             WSTarifa tarifa = new WSTarifa(rd.getRoomRate().getCurrency(),
                     Double.parseDouble(rd.getRoomRate().getRoomFare().toString()),

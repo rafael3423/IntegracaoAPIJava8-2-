@@ -63,7 +63,7 @@ public class WS {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response helloWorld() {
-        return Response.ok("Hello World EZLINK").build();
+        return Response.ok("Hello World TBOHoliday").build();
     }
 
     @Path("disponibilidade")

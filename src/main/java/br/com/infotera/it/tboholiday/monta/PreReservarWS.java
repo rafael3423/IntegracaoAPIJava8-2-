@@ -14,12 +14,12 @@ import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifa;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
 import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRS;
 import br.com.infotera.it.tboholiday.ChamaWS;
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,49 +37,53 @@ public class PreReservarWS {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
 
+        try {
+            for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
 
-        for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
+                WSTarifa tarifa = new WSTarifa(rhu.getTarifa().getSgMoeda(),
+                        rhu.getTarifa().getVlNeto(),
+                        null,
+                        rhu.getTarifa().getCdTarifa(),
+                        null,
+                        rhu.getTarifa().getPoliticaList(),
+                        rhu.getTarifa().getTarifaAdicionalList());
 
-            WSTarifa tarifa = new WSTarifa(rhu.getTarifa().getSgMoeda(),
-                    rhu.getTarifa().getVlNeto(),
-                    null,
-                    rhu.getTarifa().getCdTarifa(),
-                    null,
-                    rhu.getTarifa().getPoliticaList(),
-                    rhu.getTarifa().getTarifaAdicionalList());
+                WSUh uh = new WSUh(null,
+                        rhu.getUh().getCdUh(),
+                        rhu.getUh().getDsCategoria(),
+                        rhu.getUh().getDsUh(),
+                        rhu.getUh().getDsParametro());
 
-            WSUh uh = new WSUh(null,
-                    rhu.getUh().getCdUh(),
-                    rhu.getUh().getDsCategoria(),
-                    rhu.getUh().getDsUh(),
-                    rhu.getUh().getDsParametro());
+                List<WSReservaNome> reservaNomeList = new ArrayList();
+                try {
+                    for (WSReservaNome rn : rhu.getReservaNomeList()) {
 
-            List<WSReservaNome> reservaNomeList = new ArrayList();
+                        reservaNomeList.add(new WSReservaNome(rn.getNmNome(),
+                                rn.getNmSobrenome(),
+                                rn.getPaxTipo(),
+                                rn.getDtNascimento(),
+                                rn.getQtIdade(),
+                                rn.getSexo()));
 
-            for (WSReservaNome rn : rhu.getReservaNomeList()) {
+                        rhu.setReservaNomeList(reservaNomeList);
+                    }
+                } catch (Exception ex) {
+                    throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                }
 
-                reservaNomeList.add(new WSReservaNome(rn.getNmNome(),
-                        rn.getNmSobrenome(),
-                        rn.getPaxTipo(),
-                        rn.getDtNascimento(),
-                        rn.getQtIdade(),
-                        rn.getSexo()));
-
-                rhu.setReservaNomeList(reservaNomeList);
+                int sqQuarto = 0;
+                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
+                        uh,
+                        rhu.getRegime(),
+                        tarifa,
+                        rhu.getDtEntrada(),
+                        rhu.getDtSaida(),
+                        reservaNomeList,
+                        WSReservaStatusEnum.SOLICITACAO));
             }
-
-            int sqQuarto = 0;
-            reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
-                    uh,
-                    rhu.getRegime(),
-                    tarifa,
-                    rhu.getDtEntrada(),
-                    rhu.getDtSaida(),
-                    reservaNomeList,
-                    WSReservaStatusEnum.SOLICITACAO));
+        } catch (Exception ex) {
+            throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-
-        
 
         WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
         reservaHotel.setHotel(preReservarRQ.getReserva().getReservaHotel().getHotel());
