@@ -68,7 +68,7 @@ public class ReservaRelatorioWS {
                 case "FAILED":
                     reservaStatusEnum = WSReservaStatusEnum.INCONSISTENTE;
                     break;
-                case "CANCELLATIONINPROGRESS":
+                case "CANCELLATION_IN_PROGRESS":
                     reservaStatusEnum = WSReservaStatusEnum.INCONSISTENTE;
                     break;
                 case "VOUCHERED":
@@ -81,7 +81,7 @@ public class ReservaRelatorioWS {
             WSReservaHotel reservaHotel = new WSReservaHotel(dtReserva,
                     null,
                     bbd.getBookingId(),
-                    new WSHotel(null, bbd.getTBOHotelCode(), null, null),
+                    new WSHotel(Integer.parseInt(bbd.getTBOHotelCode()), null, null, null),
                     reservaHotelUhList,
                     null,
                     null,

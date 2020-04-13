@@ -19,7 +19,7 @@ public class PreCancelarReservaWS {
 
         ConsultarReservaWS consultarWS = new ConsultarReservaWS();
 
-        return consultarWS.consultar(preCancelarReservaRQ);
+        return consultarWS.consultar(preCancelarReservaRQ, true);
     }
 
 }

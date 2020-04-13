@@ -5,7 +5,9 @@ import br.com.infotera.common.WSEndereco;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifa;
+import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
+import br.com.infotera.common.enumerator.WSTarifaAdicionalTipoEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
 import br.com.infotera.common.hotel.WSHotel;
 import br.com.infotera.common.hotel.WSHotelCategoria;
@@ -23,6 +25,7 @@ import br.com.infotera.it.tboholiday.ParDisp;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import tektravel.hotelbookingapi.ArrayOfInt;
@@ -33,7 +36,6 @@ import tektravel.hotelbookingapi.HotelRoomAvailabilityRequest;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityResponse;
 import tektravel.hotelbookingapi.HotelSearchRequest;
 import tektravel.hotelbookingapi.HotelSearchResponse;
-
 import tektravel.hotelbookingapi.RoomCombination;
 import tektravel.hotelbookingapi.RoomGuest;
 import tektravel.hotelbookingapi.Supplement;
@@ -50,12 +52,7 @@ public class DisponibilidadeWS {
 
         HotelSearchRequest hotelSearchRequest = new HotelSearchRequest();
 
-        hotelSearchRequest.setCheckInDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtEntrada(), true));
-        hotelSearchRequest.setCheckOutDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtSaida(), true));
-        hotelSearchRequest.setCityId(Integer.parseInt(disponibilidadeRQ.getMunicipioId()));
-
         int sqQuarto = 0;
-        String sgNacinoalidade = null;
         ArrayOfRoomGuest listaNomes = new ArrayOfRoomGuest();
 
         Map<Integer, List<WSReservaNome>> reservanomeMap = new HashMap();
@@ -63,7 +60,6 @@ public class DisponibilidadeWS {
         for (WSConfigUh cuh : disponibilidadeRQ.getConfigUhList()) {
 
             sqQuarto++;
-            sgNacinoalidade = cuh.getReservaNomeList().get(0).getSgNacionalidade();
 
             RoomGuest hospede = new RoomGuest();
 
@@ -90,9 +86,26 @@ public class DisponibilidadeWS {
 
         }
 
-        hotelSearchRequest.setResultCount(1);
+        if (disponibilidadeRQ.getMunicipioId() != null && !disponibilidadeRQ.getMunicipioId().equals("")) {
+            hotelSearchRequest.setCityId(Integer.parseInt(disponibilidadeRQ.getMunicipioId()));
+        } else {
+            String hotelCodeList = null;
+            for (WSHotel hid : disponibilidadeRQ.getHotelList()) {
+                if (hotelCodeList == null) {
+                    hotelCodeList = hid.getIdExterno();
+                } else {
+                    hotelCodeList = hotelCodeList + "," + hid.getIdExterno();
+                }
+            }
+
+            hotelSearchRequest.getFilters().setHotelCodeList(hotelCodeList);
+        }
+
+//      hotelSearchRequest.setResultCount(1);
+        hotelSearchRequest.setCheckInDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtEntrada(), true));
+        hotelSearchRequest.setCheckOutDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtSaida(), true));
         hotelSearchRequest.setNoOfRooms(sqQuarto);
-        hotelSearchRequest.setGuestNationality(sgNacinoalidade);
+        hotelSearchRequest.setGuestNationality("BR");
         hotelSearchRequest.setRoomGuests(listaNomes);
         hotelSearchRequest.setResponseTime(disponibilidadeRQ.getIntegrador().getTimeoutSegundos());
         hotelSearchRequest.setIsNearBySearchAllowed(true);
@@ -125,6 +138,7 @@ public class DisponibilidadeWS {
                     imagemList);
 
             hotel.setIdExterno(hr.getHotelInfo().getHotelCode());
+            hotel.setIdExterno2(disponibilidadeRQ.getMunicipioId());
 
             List<WSQuarto> quartoList = new ArrayList();
             List<WSQuartoUh> quartoUhList = new ArrayList();
@@ -147,7 +161,7 @@ public class DisponibilidadeWS {
         }
 
         if (hotelPesquisaList.size() == 1) {
-            disponibilidadeUh(hotelPesquisaList.get(0), disponibilidadeRQ.getIntegrador(), reservanomeMap);
+            hotelPesquisaList.set(0, disponibilidadeUh(hotelPesquisaList.get(0), disponibilidadeRQ.getIntegrador(), reservanomeMap));
         }
 
         return new WSDisponibilidadeHotelRS(hotelPesquisaList, disponibilidadeRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
@@ -177,85 +191,101 @@ public class DisponibilidadeWS {
 
             mapQuartoPesquisa.put(hr.getRoomIndex(), hr);
         }
-//            sqPesquisa++;
-//
-//            List<WSPolitica> politicaCancelamentoList = new ArrayList();
-//
-//            if (hr.getCancelPolicies() != null) {
-//                for (CancelPolicy cp : hr.getCancelPolicies().getCancelPolicy()) {
-//
-//                    politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
-//                            hr.getCancelPolicies().getDefaultPolicy(),
-//                            cp.getCurrency(),
-//                            Double.parseDouble(cp.getCancellationCharge().toString()),
-//                            null,
-//                            null,
-//                            false,
-//                            Utils.toDate(cp.getFromDate(), "yyyy-MM-dd'T'HH:mm:ss"),
-//                            Utils.toDate(cp.getToDate(), "yyyy-MM-dd'T'HH:mm:ss"),
-//                            true));
-//                }
-//            }
 
-        List<HotelRoom> quartoPesquisadoList = new ArrayList();
+        Map<Integer, List<HotelRoom>> mapQuartoPesquisadoList = new LinkedHashMap();
+
+        int sqRoomIndex = 0;
 
         for (RoomCombination rc : hotelRoomAvailabilityResponse.getOptionsForBooking().getRoomCombination()) {
+            List<HotelRoom> quartoPesquisadoList = new ArrayList();
 
             for (int roomIndex : rc.getRoomIndex()) {
                 quartoPesquisadoList.add(mapQuartoPesquisa.get(roomIndex));
             }
+
+            mapQuartoPesquisadoList.put(sqRoomIndex, quartoPesquisadoList);
+            sqRoomIndex++;
         }
 
-        int count = 0;
+        List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
+        tarifaAdicionalList.add(new WSTarifaAdicional());
 
-        List<ParDisp> parDispList = new ArrayList();
+        for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
 
-        Double vlNeto = 0.0;
-        String sgMoeda = null;
-        String nmQuarto = "";
+            int count = 0;
+            Double vlNeto = 0.0;
+            Double vlTaxa = 0.0;
+            String sgMoeda = null;
+            List<ParDisp> parDispList = new ArrayList();
+            String roomChaveId = "";
+            String roomNameId = "";
+            LinkedHashMap<String, Integer> quartoConfig = new LinkedHashMap<>();
 
-        for (HotelRoom hr : quartoPesquisadoList) {
+            for (HotelRoom hr : map.getValue()) {
 
-            count++;
+                count++;
 
-            List<Supplement> supplementList = new ArrayList();
+                List<Supplement> supplementList = new ArrayList();
 
-            for (Supplement s : hr.getSupplements().getSupplement()) {
-                supplementList.add(s);
+                if (hr.getSupplements() != null && !hr.getSupplements().equals("")) {
+                    for (Supplement s : hr.getSupplements().getSupplement()) {
+                        supplementList.add(s);
+                    }
+                }
+                Gson gson = new Gson();
+
+                ParDisp parDisp = new ParDisp(hr.getRoomIndex() + "",
+                        hr.getRoomTypeCode(),
+                        hr.getRatePlanCode(),
+                        Utils.gerarDsReservaNome(reservanomeMap.get(count)),
+                        gson.toJson(supplementList),
+                        hr.getRoomRate().getRoomFare().toString() + "#" + hr.getRoomRate().getRoomTax().toString() + "#" + hr.getRoomRate().getTotalFare().toString(),
+                        hr.getRoomTypeName());
+
+                parDispList.add(parDisp);
+
+                String dsParametro = gson.toJson(parDispList);
+
+                vlNeto = Utils.somar(vlNeto, Double.parseDouble(hr.getRoomRate().getRoomFare().toString()));
+                vlTaxa = Utils.somar(vlTaxa, Double.parseDouble(hr.getRoomRate().getRoomTax().toString()));
+
+
+                Integer qtQuarto = quartoConfig.get(hr.getRoomTypeName());
+                if (qtQuarto == null) {
+                    quartoConfig.put(hr.getRoomTypeName(), 1);
+                } else {
+                    qtQuarto++;
+                    quartoConfig.replace(hr.getRoomTypeName(), qtQuarto);
+                }
+
+                if (roomChaveId.equalsIgnoreCase("")) {
+                    roomChaveId = Integer.toString(hr.getRoomIndex());
+                    roomNameId = hr.getRoomTypeName();
+                } else {
+                    roomChaveId += "#" + Integer.toString(hr.getRoomIndex());
+                    roomNameId += "#" + hr.getRoomTypeName();
+                }
+
+                String textoQuarto = null;
+                for (Map.Entry<String, Integer> quarto : quartoConfig.entrySet()) {
+                    if (textoQuarto == null) {
+                        textoQuarto = quarto.getValue() + "x " + quarto.getKey();
+                    } else {
+                        textoQuarto = textoQuarto + "+ " + quarto.getValue() + "x " + quarto.getKey();
+                    }
+                }
+
+                tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
+
+                quartoPesquisa = new WSQuartoUh(sqPesquisa,
+                        new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
+                        new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
+                        new WSTarifa(sgMoeda = hr.getRoomRate().getCurrency(), vlNeto, null, hr.getRatePlanCode(), null, null, tarifaAdicionalList));
+
             }
 
-            Gson gson = new Gson();
-
-            String supplement = gson.toJson(supplementList);
-
-            ParDisp parDisp = new ParDisp(hr.getRoomIndex() + "",
-                    hr.getRoomTypeCode(),
-                    hr.getRatePlanCode(),
-                    Utils.gerarDsReservaNome(reservanomeMap.get(count)),
-                    supplement,
-                    null);
-
-            parDispList.add(parDisp);
-
-            String dsParametro = gson.toJson(parDispList);
-
-            vlNeto = Utils.somar(vlNeto, Double.parseDouble(hr.getRoomRate().getTotalFare().toString()));
-            sgMoeda = hr.getRoomRate().getCurrency();
-
-            if (nmQuarto.equals("")) {
-                nmQuarto = hr.getRoomTypeName();
-            } else {
-                nmQuarto = nmQuarto + "#" + hr.getRoomTypeName();
-            }
-
-            quartoPesquisa = new WSQuartoUh(sqPesquisa,
-                    new WSUh(null, nmQuarto, nmQuarto, nmQuarto, nmQuarto, dsParametro),
-                    new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
-                    new WSTarifa(sgMoeda, vlNeto, null, hr.getRatePlanCode(), null, null));
-
+            quartoUhList.add(quartoPesquisa);
         }
-
-        quartoUhList.add(quartoPesquisa);
 
         List<WSQuarto> quartoList = new ArrayList();
 

@@ -28,7 +28,6 @@ import br.com.infotera.it.tboholiday.monta.ReservaRelatorioWS;
 import br.com.infotera.it.tboholiday.monta.ReservarWS;
 import br.com.infotera.it.tboholiday.monta.TarifarWS;
 
-
 /**
  *
  * @author rafael
@@ -57,8 +56,8 @@ public class MontaWS {
 
     public WSReservaRS consultar(WSReservaRQ consultaReservaRQ) throws ErrorException {
         ConsultarReservaWS consultarReservaWS = new ConsultarReservaWS();
-        WSReservaRS reservaRS = consultarReservaWS.consultar(consultaReservaRQ);
-        return reservaRS; 
+        WSReservaRS reservaRS = consultarReservaWS.consultar(consultaReservaRQ, false);
+        return reservaRS;
     }
 
     public WSReservaRS cancelar(WSReservaRQ cancelaReservaRQ) throws ErrorException {

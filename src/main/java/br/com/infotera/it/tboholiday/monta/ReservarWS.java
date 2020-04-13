@@ -5,22 +5,21 @@ import br.com.infotera.common.WSReserva;
 import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
-import br.com.infotera.common.WSTarifa;
 import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
-import br.com.infotera.common.enumerator.WSReservaStatusEnum;
-import br.com.infotera.common.hotel.WSUh;
-import br.com.infotera.common.politica.WSPolitica;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservarRS;
+import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
+import br.com.infotera.it.tboholiday.ParDisp;
+import br.com.infotera.it.tboholiday.UtilsWS;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import tektravel.hotelbookingapi.ArrayOfGuest;
 import tektravel.hotelbookingapi.ArrayOfRequestedRooms;
+import tektravel.hotelbookingapi.ArrayOfSuppInfo;
 import tektravel.hotelbookingapi.Guest;
 import tektravel.hotelbookingapi.GuestType;
 import tektravel.hotelbookingapi.HotelBookRequest;
@@ -29,6 +28,9 @@ import tektravel.hotelbookingapi.PaymentInfo;
 import tektravel.hotelbookingapi.PaymentModeType;
 import tektravel.hotelbookingapi.Rate;
 import tektravel.hotelbookingapi.RequestedRooms;
+import tektravel.hotelbookingapi.SuppChargeType;
+import tektravel.hotelbookingapi.SuppInfo;
+import tektravel.hotelbookingapi.Supplement;
 
 public class ReservarWS {
 
@@ -37,13 +39,55 @@ public class ReservarWS {
     public WSReservarRS reservar(WSReservarRQ reservarRQ) throws ErrorException {
 
         HotelBookRequest hotelBookRequest = new HotelBookRequest();
+
+        ArrayOfRequestedRooms arrayOfRequestedRooms = new ArrayOfRequestedRooms();
+        ArrayOfGuest arrayOfGuest = new ArrayOfGuest();
+        PaymentInfo paymentInfo = new PaymentInfo();
+        Boolean leadGuest = true;
         int sqQuato = 0;
 
         for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
 
-            Boolean leadGuest = true;
+            paymentInfo.setVoucherBooking(true);
+            paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
+
+            RequestedRooms requestedRooms = new RequestedRooms();
+
+            SuppInfo suppInfo = new SuppInfo();
+
+            ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+
+            String chvTarifas[] = parDisp.getA5().split("#");
+
+            BigDecimal bigFare = new BigDecimal(chvTarifas[0]);
+            BigDecimal bigTax = new BigDecimal(chvTarifas[1]);
+            BigDecimal bigTotalFare = new BigDecimal(chvTarifas[2]);
+
+            Rate rate = new Rate();
+            rate.setRoomFare(bigFare);
+            rate.setRoomTax(bigTax);
+            rate.setTotalFare(bigTotalFare);
+
+            Supplement[] supplement = (Supplement[]) UtilsWS.fromJson(parDisp.getA4(), Supplement[].class);
+
             sqQuato++;
-            ArrayOfGuest arrayOfGuest = new ArrayOfGuest();
+
+            if (supplement.length != 0 && supplement != null) {
+
+                ArrayOfSuppInfo arrayOfSuppInfo = new ArrayOfSuppInfo();
+
+                for (Supplement s : supplement) {
+                    suppInfo.setPrice(s.getPrice());
+                    suppInfo.setSuppID(s.getSuppID());
+                    suppInfo.setSuppIsSelected(false);
+                    suppInfo.setSuppChargeType(SuppChargeType.AT_PROPERTY);
+
+                    arrayOfSuppInfo.getSuppInfo().add(suppInfo);
+                }
+
+                requestedRooms.setSupplements(arrayOfSuppInfo);
+
+            }
 
             for (WSReservaNome rn : rhuh.getReservaNomeList()) {
 
@@ -56,63 +100,43 @@ public class ReservarWS {
                     guestType = guestType.CHILD;
                 }
 
-                guest.setLeadGuest(leadGuest);
-                leadGuest = false;
                 guest.setGuestType(guestType);
                 guest.setGuestInRoom(sqQuato);
-                guest.setFirstName(rn.getNmNome());
-                guest.setLastName(rn.getNmSobrenome());
+                guest.setTitle("MR");
+                guest.setFirstName(rn.getNmNome() + "NOME");
+                guest.setLastName(rn.getNmSobrenome() + "SOBRENOME");
                 guest.setAge(rn.getQtIdade());
+                guest.setLeadGuest(leadGuest);
+                leadGuest = false;
 
                 arrayOfGuest.getGuest().add(guest);
             }
 
-            PaymentInfo paymentInfo = new PaymentInfo();
-
-            paymentInfo.setVoucherBooking(true);
-            paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
-
-            ArrayOfRequestedRooms arrayOfRequestedRooms = new ArrayOfRequestedRooms();
-            RequestedRooms requestedRooms = new RequestedRooms();
-
-            Double vlTarifa = 0.0;
-            for (WSTarifaAdicional ta : rhuh.getTarifa().getTarifaAdicionalList()) {
-                vlTarifa = vlTarifa + ta.getVlNeto();
-            }
-
-            BigDecimal bigFare = new BigDecimal(rhuh.getTarifa().getVlNeto());
-            BigDecimal bigTax = new BigDecimal(vlTarifa);
-            BigDecimal bigTotalFare = new BigDecimal(rhuh.getTarifa().getVlTotal());
-
-            Rate rate = new Rate();
-            rate.setRoomFare(bigFare);
-            rate.setRoomTax(bigTax);
-            rate.setTotalFare(bigTotalFare);
-
             requestedRooms.setRoomIndex(sqQuato);
-            requestedRooms.setRoomTypeName(rhuh.getUh().getCdUh());
-            requestedRooms.setRoomTypeCode(rhuh.getUh().getIdToken());
+            requestedRooms.setRoomTypeName(rhuh.getUh().getDsUh());
+            requestedRooms.setRoomTypeCode(rhuh.getUh().getCdUh());
             requestedRooms.setRatePlanCode(rhuh.getTarifa().getCdTarifa());
             requestedRooms.setRoomRate(rate);
 
             arrayOfRequestedRooms.getHotelRoom().add(requestedRooms);
 
-            String chvSplit[] = reservarRQ.getReserva().getReservaHotel().getDsParametro().split("#");
-
-            hotelBookRequest.setGuestNationality(rhuh.getReservaNomeList().get(0).getSgNacionalidade());
-            hotelBookRequest.setClientReferenceNumber(reservarRQ.getIntegrador().getUsuario());
-            hotelBookRequest.setGuests(arrayOfGuest);
-            hotelBookRequest.setPaymentInfo(paymentInfo);
-            hotelBookRequest.setSessionId(chvSplit[0]);
-            hotelBookRequest.setNoOfRooms(sqQuato);
-            hotelBookRequest.setResultIndex(Integer.parseInt(chvSplit[1]));
-            hotelBookRequest.setHotelCode(reservarRQ.getReserva().getReservaHotel().getHotel().getId().toString());
-            hotelBookRequest.setHotelName(reservarRQ.getReserva().getReservaHotel().getHotel().getNome());
-            hotelBookRequest.setRestrictDuplicateBooking(false);
-            hotelBookRequest.setHotelRooms(arrayOfRequestedRooms);
-            hotelBookRequest.getSupplements
-
         }
+
+        String chvSplit[] = reservarRQ.getReserva().getReservaHotel().getDsParametro().split("#");
+
+        String date = Utils.formatData(new Date(), "ddMMyyHHmmss000");
+
+        hotelBookRequest.setGuestNationality("BR");
+        hotelBookRequest.setClientReferenceNumber(date + "#TBOH");
+        hotelBookRequest.setGuests(arrayOfGuest);
+        hotelBookRequest.setPaymentInfo(paymentInfo);
+        hotelBookRequest.setSessionId(chvSplit[0]);
+        hotelBookRequest.setNoOfRooms(sqQuato);
+        hotelBookRequest.setResultIndex(Integer.parseInt(chvSplit[1]));
+        hotelBookRequest.setHotelCode(reservarRQ.getReserva().getReservaHotel().getHotel().getIdExterno());
+        hotelBookRequest.setHotelName(reservarRQ.getReserva().getReservaHotel().getHotel().getNome());
+        hotelBookRequest.setRestrictDuplicateBooking(false);
+        hotelBookRequest.setHotelRooms(arrayOfRequestedRooms);
 
         HotelBookResponse hotelBookResponse = chamaWS.chamadaPadrao(reservarRQ.getIntegrador(), hotelBookRequest, HotelBookResponse.class);
 
@@ -120,7 +144,7 @@ public class ReservarWS {
 
         WSReserva reserva = new WSReserva(new WSReservaHotel(Integer.toString(hotelBookResponse.getBookingId())));
 
-        WSReservaRS reservaRS = consultarReservaWS.consultar(new WSReservaRQ(reservarRQ.getIntegrador(), reserva));
+        WSReservaRS reservaRS = consultarReservaWS.consultar(new WSReservaRQ(reservarRQ.getIntegrador(), reserva), false);
 
         return new WSReservarRS(reservaRS.getReserva(), reservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
 

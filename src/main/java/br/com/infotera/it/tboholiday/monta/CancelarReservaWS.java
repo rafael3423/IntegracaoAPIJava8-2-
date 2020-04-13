@@ -19,18 +19,18 @@ public class CancelarReservaWS {
 
     public WSReservaRS cancelar(WSReservaRQ reservaRQ) throws ErrorException {
 
-        WSReservaRS consultarCancelamento = consultarReservaWS.consultar(reservaRQ);
+        WSReservaRS consultarCancelamento = consultarReservaWS.consultar(reservaRQ, true);
 
         if (consultarCancelamento.getReserva().getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.CONFIRMADO)) {
             HotelCancelRequest hotelCancelRequest = new HotelCancelRequest();
 
             hotelCancelRequest.setBookingId(Integer.parseInt(reservaRQ.getReserva().getReservaHotel().getNrLocalizador()));
-            hotelCancelRequest.setRemarks("");
+            hotelCancelRequest.setRemarks("Cancelamento");
             hotelCancelRequest.setRequestType(CancelRequestType.HOTEL_CANCEL);
 
             chamaWS.chamadaPadrao(reservaRQ.getIntegrador(), hotelCancelRequest, HotelCancelResponse.class);
 
-            WSReservaRS reserva = consultarReservaWS.consultar(reservaRQ);
+            WSReservaRS reserva = consultarReservaWS.consultar(reservaRQ, true);
 
             return reserva;
         } else {

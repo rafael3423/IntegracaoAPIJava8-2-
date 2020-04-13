@@ -17,17 +17,19 @@ public class ParDisp {
     private String a3;
     private String a4;
     private String a5;
+    private String a6;
 
     public ParDisp() {
     }
 
-    public ParDisp(String a0, String a1, String a2, String a3, String a4, String a5) {
+    public ParDisp(String a0, String a1, String a2, String a3, String a4, String a5, String a6) {
         this.a0 = a0;
         this.a1 = a1;
         this.a2 = a2;
         this.a3 = a3;
         this.a4 = a4;
         this.a5 = a5;
+        this.a6 = a6;
     }
 
     public String getA0() {
@@ -76,6 +78,14 @@ public class ParDisp {
 
     public void setA5(String a5) {
         this.a5 = a5;
+    }
+
+    public String getA6() {
+        return a6;
+    }
+
+    public void setA6(String a6) {
+        this.a6 = a6;
     }
 
 }

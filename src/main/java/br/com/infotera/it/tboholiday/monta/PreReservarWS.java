@@ -17,14 +17,11 @@ import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
 import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
-import br.com.infotera.common.politica.WSPolitica;
+import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRS;
 import br.com.infotera.it.tboholiday.ChamaWS;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
-import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
-import tektravel.hotelbookingapi.AvailabilityAndPricingResponse;
-import tektravel.hotelbookingapi.BookingOptions;
-import tektravel.hotelbookingapi.RoomCombination;
 
 public class PreReservarWS {
 
@@ -33,53 +30,29 @@ public class PreReservarWS {
     public WSPreReservarRS preReservar(WSPreReservarRQ preReservarRQ) throws ErrorException {
 
         TarifarWS tarifarWS = new TarifarWS();
-        
+
         preReservarRQ.getReserva().getReservaHotel().setReservaStatus(WSReservaStatusEnum.ORCAMENTO);
-        
-        tarifarWS.tarifarHotel(new WSTarifarHotelRQ(preReservarRQ.getIntegrador(), preReservarRQ.getReserva().getReservaHotel()));
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        RoomCombination roomCombination = new RoomCombination();
-        roomCombination.getRoomIndex().add(1);
-        BookingOptions bookingOptions = new BookingOptions();
-        bookingOptions.setFixedFormat(false);
-        bookingOptions.getRoomCombination().add(roomCombination);
 
-        AvailabilityAndPricingRequest availabilityAndPricingRequest = new AvailabilityAndPricingRequest();
-
-        availabilityAndPricingRequest.setSessionId("1e2c0c94-2e32-4aed-9e8e-e4e43c23daa2");
-        availabilityAndPricingRequest.setResultIndex(1);
-        availabilityAndPricingRequest.setOptionsForBooking(bookingOptions);
-
-        AvailabilityAndPricingResponse availabilityAndPricingResponse = chamaWS.chamadaPadrao(preReservarRQ.getIntegrador(), availabilityAndPricingRequest, AvailabilityAndPricingResponse.class);
+        WSTarifarHotelRS tarifarHotelRS = tarifarWS.tarifarHotel(new WSTarifarHotelRQ(preReservarRQ.getIntegrador(), preReservarRQ.getReserva().getReservaHotel()));
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
 
-        for (WSReservaHotelUh rhu : preReservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
 
-            List<WSPolitica> politicaCancelamentoList = new ArrayList();
+        for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
 
-            WSTarifa tarifa = new WSTarifa(,
-                    ,
+            WSTarifa tarifa = new WSTarifa(rhu.getTarifa().getSgMoeda(),
+                    rhu.getTarifa().getVlNeto(),
                     null,
+                    rhu.getTarifa().getCdTarifa(),
                     null,
-                    null,
-                    politicaCancelamentoList);
+                    rhu.getTarifa().getPoliticaList(),
+                    rhu.getTarifa().getTarifaAdicionalList());
 
             WSUh uh = new WSUh(null,
                     rhu.getUh().getCdUh(),
                     rhu.getUh().getDsCategoria(),
                     rhu.getUh().getDsUh(),
-                    );
+                    rhu.getUh().getDsParametro());
 
             List<WSReservaNome> reservaNomeList = new ArrayList();
 
@@ -94,7 +67,7 @@ public class PreReservarWS {
 
                 rhu.setReservaNomeList(reservaNomeList);
             }
-            
+
             int sqQuarto = 0;
             reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
                     uh,
@@ -105,6 +78,8 @@ public class PreReservarWS {
                     reservaNomeList,
                     WSReservaStatusEnum.SOLICITACAO));
         }
+
+        
 
         WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
         reservaHotel.setHotel(preReservarRQ.getReserva().getReservaHotel().getHotel());

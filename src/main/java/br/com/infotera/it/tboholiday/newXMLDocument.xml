@@ -1,1 +1,737 @@
-https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWDRs2N0xKVxJ8Rd5lyfVTJI=
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <HotelRoomAvailabilityResponse xmlns="http://TekTravel/HotelBookingApi">
+            <Status>
+                <StatusCode>01</StatusCode>
+                <Description>Successful: AvailableHotelRoom Successful</Description>
+            </Status>
+            <ResultIndex>1</ResultIndex>
+            <HotelRooms>
+                <HotelRoom>
+                    <RoomIndex>1</RoomIndex>
+                    <RoomTypeName>Standard Double Room,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|207014774$37341^^1^^200993847|207014774|37341</RoomTypeCode>
+                    <RatePlanCode>200993847|207014774|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="61.37" RoomTax="11.62" TotalFare="72.99">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="20.4582800000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="48.66" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>2</RoomIndex>
+                    <RoomTypeName>Standard Double Room,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|207014774$37341^^2^^200993847|207014774|37341</RoomTypeCode>
+                    <RatePlanCode>200993847|207014774|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="61.37" RoomTax="11.62" TotalFare="72.99">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="20.4582800000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="48.66" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>3</RoomIndex>
+                    <RoomTypeName>Standard Double Room,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|207014774$37321^^1^^200993847|207014774|37321</RoomTypeCode>
+                    <RatePlanCode>200993847|207014774|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="61.37" RoomTax="11.62" TotalFare="72.99">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="20.4582800000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="48.66" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>4</RoomIndex>
+                    <RoomTypeName>Standard Double Room,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|207014774$37321^^2^^200993847|207014774|37321</RoomTypeCode>
+                    <RatePlanCode>200993847|207014774|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="61.37" RoomTax="11.62" TotalFare="72.99">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="20.4582800000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="20.4582800000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="48.66" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>5</RoomIndex>
+                    <RoomTypeName>Junior Suite, 1 Bedroom,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993849|207014773$37321^^1^^200993849|207014773|37321</RoomTypeCode>
+                    <RatePlanCode>200993849|207014773|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="143.19" RoomTax="27.16" TotalFare="170.35">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="47.7294000000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="47.7294000000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="47.7294000000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;377 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - Bedroom &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="113.57" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>6</RoomIndex>
+                    <RoomTypeName>Junior Suite, 1 Bedroom,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>200993849|207014773$37321^^2^^200993849|207014773|37321</RoomTypeCode>
+                    <RatePlanCode>200993849|207014773|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="143.19" RoomTax="27.16" TotalFare="170.35">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="47.7294000000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="47.7294000000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="47.7294000000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;377 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - Bedroom &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="113.57" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>7</RoomIndex>
+                    <RoomTypeName>Suite,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>201757592|208767975$37321^^1^^201757592|208767975|37321</RoomTypeCode>
+                    <RatePlanCode>201757592|208767975|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="184.13" RoomTax="34.94" TotalFare="219.07">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="61.37511000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="61.37511000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="61.37511000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;484-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="146.04" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>8</RoomIndex>
+                    <RoomTypeName>Suite,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Internet</Inclusion>
+                    <RoomTypeCode>201757592|208767975$37321^^2^^201757592|208767975|37321</RoomTypeCode>
+                    <RatePlanCode>201757592|208767975|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="184.13" RoomTax="34.94" TotalFare="219.07">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="61.37511000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="61.37511000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="61.37511000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;484-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="146.04" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>Room_Only</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>9</RoomIndex>
+                    <RoomTypeName>Standard Double Room,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|204846180$37341^^1^^200993847|204846180|37341</RoomTypeCode>
+                    <RatePlanCode>200993847|204846180|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="282.32" RoomTax="53.56" TotalFare="335.88">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="94.1064600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="223.92" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>10</RoomIndex>
+                    <RoomTypeName>Standard Double Room,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|204846180$37341^^2^^200993847|204846180|37341</RoomTypeCode>
+                    <RatePlanCode>200993847|204846180|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="282.32" RoomTax="53.56" TotalFare="335.88">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="94.1064600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="223.92" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>11</RoomIndex>
+                    <RoomTypeName>Standard Double Room,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|204846180$37321^^1^^200993847|204846180|37321</RoomTypeCode>
+                    <RatePlanCode>200993847|204846180|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="282.32" RoomTax="53.56" TotalFare="335.88">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="94.1064600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="223.92" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>12</RoomIndex>
+                    <RoomTypeName>Standard Double Room,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993847|204846180$37321^^2^^200993847|204846180|37321</RoomTypeCode>
+                    <RatePlanCode>200993847|204846180|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="282.32" RoomTax="53.56" TotalFare="335.88">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="94.1064600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="94.1064600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;323-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Accessibility&lt;/b&gt; - Wheelchair accessible and wheelchair-width doorways&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5Gfh8Vh1n7YWJzSTtRXy3I1K6Iqq15nXD7ioBZa51ZJ+FCND/uFVfHa/pdNjGnbNVScD/dfn88DCPpFLBkjIvcRrS0li68GgBwbKJFifg/jqk/+wJY/0NjIfzpDDwHOuKILUiqWSb9oVIY/OhFOrq0jlcfYNIz7ahLczo98of4qjbNPB3WERpnIaB1QT6gRStIGOlmDg5uzVKmYgM4acJgM3fwPwDzgqcvRo9Do2OHfb5BzJEjoJ8uYh08m0ha1OAL988D5uS2n6aRwlQOMuVhmzX3ZbbvGbdT6YkIODEl1sHK+oPcDRd2f+62++KNF84sqAhVu/ewastcPCq35t4db61Gkwd4a+AcOSp9V2ZOwps091kuN4x8l55Seo27XjjkdzNxzY/Xe0kOD+iEVLcI6gsmRclHD2IWEBGCsuBgmTDNCCpQsFRxppFJu9eEOM7T6e4kp4NBq0u0Sk5uMaVch8PgUlb87YMoKfHz0BS2IpypB9zaul1IJ5keqNF8UQjboxqzZx/Q9OzOwOXEJqsCNmmqdmkiTD9HLzUtDvdeqCub4nxb/BVyggfck2bL9WwJunnhrt3olFjyDn3MDI9hIU9Eey9qxZLdZhzSb/qSxYxUXJbJWTCP8oB1mToznUyovK60KsUAHLfJReaKhWeMnS2NtFJwxfEVwWU5beq21Rf/SwILzAp1C4wSsE1UhizIXwrWoHpastcyrgWHCytOxi/wolg7YuKO1pfr3vCoDVtqcWgqNV4OT+ir+q4QYlT5aMxyKqj2kS7KZgcoCj3paqdA9bmM1UDfpKprIwF3YxI+kIusRteVnH8wd9Q4PdQbbQIn+LApMJsKN8OKVWxy92aNK5hpLzeNZdG340bR/+Eq/dGDM4hOJdZV0IM4IboIkjaMGlnrvnksYEVujVs+Y3Oto4OelvfJUbItOCsEqBiDlLBQjiuNbYl+M/1i4GEXVMjW1ZNuCGX2LfoCcJdkihh/k5NsnQN3OZIds7mdrrr53GV8Jj/1J1tqG/KMm4KUqLpGE2D8XecVKcYh5hbeyEUM6BAfzOTgK53jwPqOQHMEgNmEKeRhENbjh09mGJaontG1mctkS+2Mdt0ezKw1Hwo8aa8WCCUYwpgK26lmIi19xz56Y1DWUnzg3UrhvO+XlxN+bxtnqOllw+iObKiOL/6Wd9aiCTYo6I8++fhFBJdXQP0mfZqhvLJOuzGfU41A7HfYKznsLnQO2is5/wqE/3rqq2450ErafPdgWK5gu/Vm6ykv/kH3qyMMInUd6dnk=</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="223.92" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Standard Double Room,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>13</RoomIndex>
+                    <RoomTypeName>Junior Suite, 1 Bedroom,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993849|204846192$37321^^1^^200993849|204846192|37321</RoomTypeCode>
+                    <RatePlanCode>200993849|204846192|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="364.13" RoomTax="69.05" TotalFare="433.18">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="121.3774600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="121.3774600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="121.3774600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;377 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - Bedroom &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="288.79" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>14</RoomIndex>
+                    <RoomTypeName>Junior Suite, 1 Bedroom,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993849|204846192$37321^^2^^200993849|204846192|37321</RoomTypeCode>
+                    <RatePlanCode>200993849|204846192|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="364.13" RoomTax="69.05" TotalFare="433.18">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="121.3774600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="121.3774600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="121.3774600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;377 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - Bedroom &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="288.79" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Junior Suite, 1 Bedroom,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>15</RoomIndex>
+                    <RoomTypeName>Suite,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>201757592|208767972$37321^^1^^201757592|208767972|37321</RoomTypeCode>
+                    <RatePlanCode>201757592|208767972|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="405.07" RoomTax="76.79" TotalFare="481.86">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="135.0230500000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="135.0230500000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="135.0230500000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;484-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="321.24" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>16</RoomIndex>
+                    <RoomTypeName>Suite,1 King Bed</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>201757592|208767972$37321^^2^^201757592|208767972|37321</RoomTypeCode>
+                    <RatePlanCode>201757592|208767972|37321</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="405.07" RoomTax="76.79" TotalFare="481.86">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="135.0230500000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="135.0230500000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="135.0230500000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;484-sq-foot room with a balcony &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5HEzerFoiWtHXku55kwuScB2HLm+0tXUQH5T9j7FTJm1cOoyz3Ad1fkobRg8jNONf2uh2AqbYPGP+rQ5wffsnZPwF7SRvTMHMZFIzKIarNB6b+4emosSJ2eOEuNvTJQSwMRMf3HUQr3kkVI+WkQTZ+sfOG/VgoR7FGluEEb0BD2kHQNMgXKt/VrZBa2AdDNtk2wrsXP3heOOLhd2JWrt+X6XSxoNQfIRQLXvkwvaWoiv4h8XWJO38snBlUl5fXDF0nHBuXUX0ZC5JAcO1QwKUKrOyb6xl9WRqbil/oPjxbzN8VUydCtELpkWoRsi+jyZXPXzCLprHs7qVMd2CRKBpCL</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="321.24" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite,1 King Bed" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>17</RoomIndex>
+                    <RoomTypeName>Suite, 2 Bedrooms,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993831|204846149$37341^^1^^200993831|204846149|37341</RoomTypeCode>
+                    <RatePlanCode>200993831|204846149|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="466.44" RoomTax="88.50" TotalFare="554.94">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="155.4816600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="155.4816600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="155.4816600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;624 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - 2 bedrooms &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5G4DHsQhbjPEoRp2gb0cqohdwfoaa8tpOd+uDi+7q2AU0WM+HIcuU79R7Y7BGLOE0dmOkxgMEu+yqaITffBYEZgOv1Z8rsiwfm/vjgNFqlXc/EQf5lUoGmExWQLeHAjr8iVCVUVCqkWg+srx4Ov387+L4O4MnObs8f9qzDDx3IAoEXIfpJHM5aLv4SphLhRVSUKioxObyu2JputGjyac+b6RoiVeDBnjbzkfddyXZguSES+aIypJO6qdUuaeeKp579bG2P2nGOnxIQHZO6CwaWasaFWUmHcn0v1vkRt1M8AFR3YGAVwPostIyDNHNsN6oq/ccBWmKlBkEjZzkE2J/pdrCohLIOEpx4pFP5C4v+FYtFD4JWDBy5mTGSvw+/WDHGwJVP+w2/JRd7iHGb3SChydLpQy9IN2UfWNc1n//Wpv0LTvOZglRv+SjcV1SGTHQUO/9xiByFGYGHcl9/iXmiVZZkV6tKNVpWeqjeXIRIfCPDJSv3j5QwQD0fH4msBPxvptqWihWBreBk2lsC98RE4KZwUEoyhzG5073lbP844Dtc7r+2TDykH0BlCNTCe14xK9efyB+01l07s6SafYqwglaDA+H9gv23CMptQeRraGSVUvOx4jegIETnhs1xBike7DWkUB8qbFATj1GWwqWKITxWR/X5YEqKJLh6bnbRM0z95pUqBygVTOyu5BRyN+VXGOtOQ39+5OGXLzLXhBXrYQKD1LZf73+u+4RcC8R15kauxFkWoxV17SS8xqn1JZyad7puKsr3qTSTsuJnY7w/+TpG1c8RhUVbMQOchX26VceatNOeuWZhPousJ9IWEqN0cIsEY22Qslild+YlxO6WW1bp7MisPuww34Ujhl+6rV9/+fxTxdSgEI2WvbMlGsqroNfjjy+/qYU3igHUcLJ43/fj21XkJrP2COBqD7j5/+QEA23YcEmVDX23qJukYWBfir9puQYpITYev7Q1E8++W+T+mvLisB+JsFXd2KLzBpC3R2WRSr+OXQh7KYNDRP9xzd+GsYvXLC0iWQ2zjB2VcEeY3KNCeaE4T5Ma5huXL+S+4XNun14LygEgcDZdkBOVc4uCe0lWUbEHG5sEQNS4sSRSDU8ctYdArhE0z8sgdXiy7CghemTbbFp/XBxnyQhGdSWh/CajIVkmi8w//ogySrVQliC/XDNwLGXHWwwOpXss5oMsaxAQKzcmvbUKx9qLMdWfTgC5L2+VWTHlgoEZvnHI+xl2LEIt+/oqSEmCiSwB4WEzgpTDlU38vhyUvLRaqqdcdvOMqTCChIlYZjm788g6dor0UWmI5qizoK+7kcY5LCJixMytf/vq+G47By3P1UpsWikfMOFowZTG9AE74QT6lEa4SSH+J4IFyStkAdA==</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="369.96" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>18</RoomIndex>
+                    <RoomTypeName>Suite, 2 Bedrooms,2 Twin Beds</RoomTypeName>
+                    <Inclusion>Free Breakfast,Free Internet</Inclusion>
+                    <RoomTypeCode>200993831|204846149$37341^^2^^200993831|204846149|37341</RoomTypeCode>
+                    <RatePlanCode>200993831|204846149|37341</RatePlanCode>
+                    <RoomRate IsPackageRate="false" IsInstantConfirmed="true" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="466.44" RoomTax="88.50" TotalFare="554.94">
+                        <DayRates>
+                            <DayRate Date="2020-05-12T00:00:00" BaseFare="155.4816600000"/>
+                            <DayRate Date="2020-05-13T00:00:00" BaseFare="155.4816600000"/>
+                            <DayRate Date="2020-05-14T00:00:00" BaseFare="155.4816600000"/>
+                        </DayRates>
+                        <ExtraGuestCharges>0</ExtraGuestCharges>
+                        <ChildCharges>0</ChildCharges>
+                        <Discount>0</Discount>
+                        <OtherCharges>0</OtherCharges>
+                        <ServiceTax>0</ServiceTax>
+                    </RoomRate>
+                    <RoomPromtion/>
+                    <Supplements>
+                        <Supplement Type="PerStaySupplement" SuppID="1" SuppName="mandatory_tax" SuppIsMandatory="true" SuppChargeType="AtProperty" Price="30.00" CurrencyCode="AED"/>
+                    </Supplements>
+                    <RoomAdditionalInfo>
+                        <Description>&lt;p&gt;&lt;/p&gt;&lt;p&gt;624 sq feet &lt;/p&gt;&lt;br/&gt;&lt;p&gt;&lt;b&gt;Layout&lt;/b&gt; - 2 bedrooms &lt;/p&gt;&lt;p&gt;&lt;b&gt;Internet&lt;/b&gt; - Free WiFi &lt;/p&gt;&lt;p&gt;&lt;b&gt;Entertainment&lt;/b&gt; - 32-inch LCD TV with digital channels&lt;/p&gt;&lt;p&gt;&lt;b&gt;Food and Drink&lt;/b&gt; - 24-hour room service and minibar&lt;/p&gt;&lt;p&gt;&lt;b&gt;Bathroom&lt;/b&gt; - Private bathroom, shower/tub combination, free toiletries, and a hair dryer&lt;/p&gt;&lt;p&gt;&lt;b&gt;Practical&lt;/b&gt; - Safe, desk, and phone; rollaway/extra beds available on request&lt;/p&gt;&lt;p&gt;&lt;b&gt;Comfort&lt;/b&gt; - Climate-controlled air conditioning and daily housekeeping&lt;/p&gt;&lt;p&gt;&lt;b&gt;Need to Know&lt;/b&gt; - Bed sheets not available&lt;/p&gt;&lt;p&gt;Smoking And Non-Smoking&lt;/p&gt;</Description>
+                        <ImageURLs>
+                            <URL>https://api.tbotechnology.in/imageresource.aspx?img=FbrGPTrju5e5v0qrAGTD8pPBsj8/wYA59yZzciIrL6KxdYNxIG6Bd9biqEbyQNUqaei0zWGkP5G4DHsQhbjPEoRp2gb0cqohdwfoaa8tpOd+uDi+7q2AU0WM+HIcuU79R7Y7BGLOE0dmOkxgMEu+yqaITffBYEZgOv1Z8rsiwfm/vjgNFqlXc/EQf5lUoGmExWQLeHAjr8iVCVUVCqkWg+srx4Ov387+L4O4MnObs8f9qzDDx3IAoEXIfpJHM5aLv4SphLhRVSUKioxObyu2JputGjyac+b6RoiVeDBnjbzkfddyXZguSES+aIypJO6qdUuaeeKp579bG2P2nGOnxIQHZO6CwaWasaFWUmHcn0v1vkRt1M8AFR3YGAVwPostIyDNHNsN6oq/ccBWmKlBkEjZzkE2J/pdrCohLIOEpx4pFP5C4v+FYtFD4JWDBy5mTGSvw+/WDHGwJVP+w2/JRd7iHGb3SChydLpQy9IN2UfWNc1n//Wpv0LTvOZglRv+SjcV1SGTHQUO/9xiByFGYGHcl9/iXmiVZZkV6tKNVpWeqjeXIRIfCPDJSv3j5QwQD0fH4msBPxvptqWihWBreBk2lsC98RE4KZwUEoyhzG5073lbP844Dtc7r+2TDykH0BlCNTCe14xK9efyB+01l07s6SafYqwglaDA+H9gv23CMptQeRraGSVUvOx4jegIETnhs1xBike7DWkUB8qbFATj1GWwqWKITxWR/X5YEqKJLh6bnbRM0z95pUqBygVTOyu5BRyN+VXGOtOQ39+5OGXLzLXhBXrYQKD1LZf73+u+4RcC8R15kauxFkWoxV17SS8xqn1JZyad7puKsr3qTSTsuJnY7w/+TpG1c8RhUVbMQOchX26VceatNOeuWZhPousJ9IWEqN0cIsEY22Qslild+YlxO6WW1bp7MisPuww34Ujhl+6rV9/+fxTxdSgEI2WvbMlGsqroNfjjy+/qYU3igHUcLJ43/fj21XkJrP2COBqD7j5/+QEA23YcEmVDX23qJukYWBfir9puQYpITYev7Q1E8++W+T+mvLisB+JsFXd2KLzBpC3R2WRSr+OXQh7KYNDRP9xzd+GsYvXLC0iWQ2zjB2VcEeY3KNCeaE4T5Ma5huXL+S+4XNun14LygEgcDZdkBOVc4uCe0lWUbEHG5sEQNS4sSRSDU8ctYdArhE0z8sgdXiy7CghemTbbFp/XBxnyQhGdSWh/CajIVkmi8w//ogySrVQliC/XDNwLGXHWwwOpXss5oMsaxAQKzcmvbUKx9qLMdWfTgC5L2+VWTHlgoEZvnHI+xl2LEIt+/oqSEmCiSwB4WEzgpTDlU38vhyUvLRaqqdcdvOMqTCChIlYZjm788g6dor0UWmI5qizoK+7kcY5LCJixMytf/vq+G47By3P1UpsWikfMOFowZTG9AE74QT6lEa4SSH+J4IFyStkAdA==</URL>
+                        </ImageURLs>
+                    </RoomAdditionalInfo>
+                    <CancelPolicies PolicyFormat="Nodes">
+                        <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-04-12" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-05-08" ToDate="2020-05-09" ChargeType="Fixed" CancellationCharge="369.96" Currency="USD"/>
+                        <CancelPolicy RoomTypeName="Suite, 2 Bedrooms,2 Twin Beds" FromDate="2020-05-10" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
+                        <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    </CancelPolicies>
+                    <Amenities>Rollaway/extra beds (surcharge)|Minibar|Free WiFi|Daily housekeeping|Smoking and Non-Smoking|Iron/ironing board (on request)|Shower/tub combination|Phone|Desk|Towels provided|Private bathroom|In-room climate control (air conditioning)|Free toiletries|LCD TV|Hair dryer|In-room safe|Linens not available|Digital TV service|Room service (24 hours)</Amenities>
+                    <MealType>BreakFast</MealType>
+                </HotelRoom>
+            </HotelRooms>
+            <OptionsForBooking>
+                <FixedFormat>true</FixedFormat>
+                <RoomCombination>
+                    <RoomIndex>1</RoomIndex>
+                    <RoomIndex>2</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>3</RoomIndex>
+                    <RoomIndex>4</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>5</RoomIndex>
+                    <RoomIndex>6</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>7</RoomIndex>
+                    <RoomIndex>8</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>9</RoomIndex>
+                    <RoomIndex>10</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>11</RoomIndex>
+                    <RoomIndex>12</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>13</RoomIndex>
+                    <RoomIndex>14</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>15</RoomIndex>
+                    <RoomIndex>16</RoomIndex>
+                </RoomCombination>
+                <RoomCombination>
+                    <RoomIndex>17</RoomIndex>
+                    <RoomIndex>18</RoomIndex>
+                </RoomCombination>
+            </OptionsForBooking>
+        </HotelRoomAvailabilityResponse>
+    </s:Body>
+</s:Envelope>
+

@@ -4,27 +4,22 @@ package br.com.infotera.it.tboholiday;
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSPreReservarRQ;
+import br.com.infotera.common.WSPreReservarRS;
 import br.com.infotera.common.WSReserva;
 import br.com.infotera.common.WSReservaHotel;
+import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
-import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.enumerator.WSAmbienteEnum;
-import br.com.infotera.common.enumerator.WSIntegradorEnum;
 import br.com.infotera.common.enumerator.WSPaxTipoEnum;
-import br.com.infotera.common.enumerator.WSRelatorioPeriodoEnum;
-import br.com.infotera.common.enumerator.WSSexoEnum;
+import br.com.infotera.common.enumerator.WSReservaStatusEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
-import br.com.infotera.common.hotel.WSConfigUhIdade;
 import br.com.infotera.common.hotel.WSHotel;
-import br.com.infotera.common.hotel.rqrs.WSDetalheHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
-import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
+import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRS;
+import br.com.infotera.common.hotel.rqrs.WSPesquisaHotelRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.util.Utils;
-import br.com.infotera.it.tboholiday.monta.ConsultarReservaWS;
-import br.com.infotera.it.tboholiday.monta.DetalharHotelWS;
-import br.com.infotera.it.tboholiday.monta.ReservaRelatorioWS;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,7 +38,7 @@ public class TesteWS {
         dsCredencialList.add("Inf@64890970");
         integrador.setDsCredencialList(dsCredencialList);
         integrador.setAmbiente(WSAmbienteEnum.HOMOLOGACAO);
-        integrador.setTimeoutSegundos(1500);
+        integrador.setTimeoutSegundos(30000);
 
         Date dtEntrada = Utils.toDate("2020-05-12", "yyyy-MM-dd");
         Date dtSaida = Utils.toDate("2020-05-15", "yyyy-MM-dd");
@@ -57,8 +52,8 @@ public class TesteWS {
                 null,
                 null,
                 null,
-                WSPaxTipoEnum.ADT,
-                20,
+                WSPaxTipoEnum.CHD,
+                2,
                 "BR",
                 null,
                 null));
@@ -74,7 +69,9 @@ public class TesteWS {
                 "BR",
                 null,
                 null));
-        
+
+        configUhList.add(new WSConfigUh(reservaNomeList));
+        configUhList.add(new WSConfigUh(reservaNomeList));
         configUhList.add(new WSConfigUh(reservaNomeList));
 
         WSDisponibilidadeHotelRQ disponibilidadeHotelRQ = new WSDisponibilidadeHotelRQ(integrador,
@@ -84,36 +81,59 @@ public class TesteWS {
                 configUhList,
                 null);
 
-                
         MontaWS montaWS = new MontaWS();
-        
-        
-//        DISPONIBILIDADE
-//        montaWS.disponibilidade(disponibilidadeHotelRQ);                      
-        
-//        PRE-RESERVAR
-//        montaWS.preReservar(preReservarRQ)
+//
+////        DISPONIBILIDADE
+        WSDisponibilidadeHotelRS disponibilidadeHotelRS = montaWS.disponibilidade(disponibilidadeHotelRQ);
+//
+////        PRE-RESERVAR
+//        List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
+//
+//        WSReservaHotelUh reservaHotelUh = new WSReservaHotelUh(1,
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getUh(),
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getRegime(),
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getQuartoUhList().get(0).getTarifa(),
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getDtEntrada(),
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getDtSaida(),
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getQuartoList().get(0).getConfigUh().getReservaNomeList(),
+//                WSReservaStatusEnum.SOLICITACAO);
+//
+//        reservaHotelUhList.add(reservaHotelUh);
+//
+//        WSReservaHotel reservaHotel = new WSReservaHotel();
+//
+//        reservaHotel = new WSReservaHotel(WSReservaStatusEnum.SOLICITACAO,
+//                disponibilidadeHotelRS.getHotelPesquisaList().get(0).getHotel(),
+//                reservaHotelUhList);
+//
+//        reservaHotel.setDsParametro(disponibilidadeHotelRS.getHotelPesquisaList().get(0).getDsParametro());
+//
+//        WSPreReservarRQ preReserva = new WSPreReservarRQ(integrador, new WSReserva(reservaHotel));
+//
+//        WSPreReservarRS preReservaRS = montaWS.preReservar(preReserva);
+//
+////        RESERVAR
+//        montaWS.reservar(new WSReservarRQ(integrador, preReservaRS.getReserva()));
 
-//        RESERVAR
-//        montaWS.reservar(new WSReservarRQ(integrador, new WSReserva()));
-
-//        CONSULTAR
-//        montaWS.consultar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
-        
+//        CONSULTA
+//        montaWS.consultar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("127707"))));
 //        DETALHE HOTEL
 //        montaWS.detalharHotel(new WSDetalheHotelRQ(integrador, new WSHotel(null, "1136544", null)));
-        
 //        RELATORIO DE RESERVAS
-        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-03-01","yyyy-MM-dd"), Utils.toDate("2020-04-05","yyyy-MM-dd")));
-      
+//        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-03-01","yyyy-MM-dd"), Utils.toDate("2020-04-05","yyyy-MM-dd")));
 //        PRE-CANCELAR
-//        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("1136544"))));
-
+//        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
 //        CANCELAR
-//        montaWS.cancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel(""))));
-
+//        montaWS.cancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("127707"))));
 //        TARIFAR
 //        montaWS.tarifar(new WSTarifarHotelRQ(integrador, new WSReservaHotel("")));
+//PESQUISAR
+//        WSPesquisaHotelRQ pesquisaHotelRQ = new WSPesquisaHotelRQ();
+//
+//        pesquisaHotelRQ.setIntegrador(integrador);
+//        pesquisaHotelRQ.setCdDestino("136873");
+//
+//        montaWS.pesquisarHotel(pesquisaHotelRQ);
 
     }
 }

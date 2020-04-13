@@ -38,7 +38,7 @@ public class DetalharHotelWS {
 
         HotelDetailsResponse hotelDetailsResponse = chamaWS.chamadaPadrao(detalheHotelRQ.getIntegrador(), hotelDetailsRequest, HotelDetailsResponse.class);
 
-        String cvhMap[] = hotelDetailsResponse.getHotelDetails().getMap().split("|");
+        String cvhMap[] = hotelDetailsResponse.getHotelDetails().getMap().split("\\|");
 
         WSEndereco endereco = new WSEndereco(hotelDetailsResponse.getHotelDetails().getAddress(),
                 null,
@@ -72,8 +72,8 @@ public class DetalharHotelWS {
 
         WSHotelCategoria hotelCategoria = new WSHotelCategoria(hotelDetailsResponse.getHotelDetails().getHotelRating().toString(), hotelDetailsResponse.getHotelDetails().getHotelRating().toString());
         
-        WSHotel hotel = new WSHotel(hotelDetailsResponse.getHotelDetails().getHotelCode(),
-                null,
+        WSHotel hotel = new WSHotel(null,
+                Integer.parseInt(hotelDetailsResponse.getHotelDetails().getHotelCode()),
                 hotelDetailsResponse.getHotelDetails().getHotelName(),
                 hotelDetailsResponse.getHotelDetails().getDescription(),
                 endereco,

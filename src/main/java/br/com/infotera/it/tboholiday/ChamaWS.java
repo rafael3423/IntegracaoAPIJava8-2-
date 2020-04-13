@@ -24,10 +24,12 @@ import org.apache.cxf.transport.http.HTTPConduit;
 import org.tempuri.HotelService;
 import tektravel.hotelbookingapi.AuthenticationData;
 import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
+import tektravel.hotelbookingapi.GiataHotelCodesRequest;
 import tektravel.hotelbookingapi.HotelBookRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailBasedOnDateRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailRequest;
 import tektravel.hotelbookingapi.HotelCancelRequest;
+import tektravel.hotelbookingapi.HotelCancellationPolicyRequest;
 import tektravel.hotelbookingapi.HotelDetailsRequest;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityRequest;
 import tektravel.hotelbookingapi.HotelSearchRequest;
@@ -98,9 +100,6 @@ public class ChamaWS {
             } else if (envio instanceof HotelRoomAvailabilityRequest) {
                 metodo = "availableHotelRooms";
 
-            } else if (envio instanceof AvailabilityAndPricingRequest) {
-                metodo = "availabilityAndPricing";
-
             } else if (envio instanceof HotelBookRequest) {
                 metodo = "hotelBook";
 
@@ -112,9 +111,16 @@ public class ChamaWS {
 
             } else if (envio instanceof HotelBookingDetailBasedOnDateRequest) {
                 metodo = "hotelBookingDetailBasedOnDate";
-            }
-            else if (envio instanceof HotelCancelRequest) {
+
+            } else if (envio instanceof HotelCancelRequest) {
                 metodo = "hotelCancel";
+
+            } else if (envio instanceof HotelCancellationPolicyRequest) {
+                metodo = "hotelCancellationPolicy";
+            } 
+            
+            else if (envio instanceof GiataHotelCodesRequest) {
+                metodo = "giataHotelCodeList";
             }
 
             try {
