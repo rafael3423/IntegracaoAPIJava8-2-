@@ -138,21 +138,24 @@ public class ConsultarReservaWS {
                 sqQuarto++;
 
                 if (bookingDetail.getHotelCancelPolicies().getCancelPolicy() != null && !bookingDetail.getHotelCancelPolicies().getCancelPolicy().equals("")) {
+                    try {
+                        for (CancelPolicy cp : bookingDetail.getHotelCancelPolicies().getCancelPolicy()) {
 
-                    for (CancelPolicy cp : bookingDetail.getHotelCancelPolicies().getCancelPolicy()) {
-
-                        if (cp.getRoomIndex().equals(sqQuarto)) {
-                            politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
-                                    bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy(),
-                                    cp.getCurrency(),
-                                    vlCancelamento,
-                                    null,
-                                    null,
-                                    stImediata,
-                                    Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
-                                    Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
-                                    stNaoRefundable));
+                            if (cp.getRoomIndex().equals(sqQuarto)) {
+                                politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
+                                        bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy(),
+                                        cp.getCurrency(),
+                                        vlCancelamento,
+                                        null,
+                                        null,
+                                        stImediata,
+                                        Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
+                                        Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
+                                        stNaoRefundable));
+                            }
                         }
+                    } catch (Exception ex) {
+                        throw new ErrorException(integrador, ConsultarReservaWS.class, "montaReserva", WSMensagemErroEnum.HPC, "Ocorreu uma falha ao gerar politicas de cancelamento", WSIntegracaoStatusEnum.NEGADO, ex);
                     }
                 }
 
@@ -160,7 +163,6 @@ public class ConsultarReservaWS {
                 Double vlMulta = 0.0;
 
                 try {
-
                     for (WSPolitica politica : politicaCancelamentoList) {
                         if (politica.getPoliticaTipo().isCancelamento()) {
                             if ((politica.getPoliticaCancelamento().isStNaoReembolsavel()) || (new Date().compareTo(politica.getPoliticaCancelamento().getDtMinCancelamento()) == 1)) {
@@ -205,71 +207,74 @@ public class ConsultarReservaWS {
                         null));
 
             }
-
-            WSReservaStatusEnum reservaStatusEnum = null;
-
-            switch (bookingDetail.getBookingStatus().toString().toUpperCase()) {
-                case "CONFIRMED":
-                    reservaStatusEnum = reservaStatusEnum.CONFIRMADO;
-                    break;
-                case "REJECTED":
-                    reservaStatusEnum = reservaStatusEnum.NEGADO;
-                    break;
-                case "CANCELLED":
-                    reservaStatusEnum = reservaStatusEnum.CANCELADO;
-                    break;
-                case "PENDING":
-                    reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                    break;
-                case "FAILED":
-                    reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                    break;
-                case "CANCELLATION_IN_PROGRESS":
-                    reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                    break;
-                case "VOUCHERED":
-                    reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                    break;
-                default:
-                    break;
-            }
-
-            String chvMap[] = bookingDetail.getMap().split("\\|");
-
-            WSEndereco endereco = new WSEndereco(bookingDetail.getAddressLine1(),
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    chvMap[0],
-                    chvMap[1]);
-
-            WSHotelCategoria hotelCategoria = new WSHotelCategoria(null, bookingDetail.getRating().toString());
-
-            WSHotel hotel = new WSHotel("",
-                    bookingDetail.getHotelName(),
-                    null,
-                    hotelCategoria,
-                    null,
-                    null,
-                    endereco,
-                    null,
-                    null);
-
-            hotel.setId(Integer.parseInt(bookingDetail.getTBOHotelCode()));
-
-            WSReservaHotel reservaHotel = new WSReservaHotel(Utils.toDate(bookingDetail.getBookingDate().toString(), "yyyy-MM-dd"),
-                    null,
-                    bookingDetail.getBookingId() + "",
-                    hotel,
-                    reservaHotelUhList,
-                    null,
-                    null,
-                    reservaStatusEnum,
-                    null,
-                    null);
-
-            return new WSReserva(reservaHotel);
+        } catch (Exception ex) {
+            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao efetuar a consulta da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
         }
+
+        WSReservaStatusEnum reservaStatusEnum = null;
+
+        switch (bookingDetail.getBookingStatus().toString().toUpperCase()) {
+            case "CONFIRMED":
+                reservaStatusEnum = reservaStatusEnum.CONFIRMADO;
+                break;
+            case "REJECTED":
+                reservaStatusEnum = reservaStatusEnum.NEGADO;
+                break;
+            case "CANCELLED":
+                reservaStatusEnum = reservaStatusEnum.CANCELADO;
+                break;
+            case "PENDING":
+                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
+                break;
+            case "FAILED":
+                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
+                break;
+            case "CANCELLATION_IN_PROGRESS":
+                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
+                break;
+            case "VOUCHERED":
+                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
+                break;
+            default:
+                break;
+        }
+
+        String chvMap[] = bookingDetail.getMap().split("\\|");
+
+        WSEndereco endereco = new WSEndereco(bookingDetail.getAddressLine1(),
+                "",
+                "",
+                "",
+                "",
+                "",
+                chvMap[0],
+                chvMap[1]);
+
+        WSHotelCategoria hotelCategoria = new WSHotelCategoria(null, bookingDetail.getRating().toString());
+
+        WSHotel hotel = new WSHotel("",
+                bookingDetail.getHotelName(),
+                null,
+                hotelCategoria,
+                null,
+                null,
+                endereco,
+                null,
+                null);
+
+        hotel.setId(Integer.parseInt(bookingDetail.getTBOHotelCode()));
+
+        WSReservaHotel reservaHotel = new WSReservaHotel(Utils.toDate(bookingDetail.getBookingDate().toString(), "yyyy-MM-dd"),
+                null,
+                bookingDetail.getBookingId() + "",
+                hotel,
+                reservaHotelUhList,
+                null,
+                null,
+                reservaStatusEnum,
+                null,
+                null);
+
+        return new WSReserva(reservaHotel);
     }
+}
