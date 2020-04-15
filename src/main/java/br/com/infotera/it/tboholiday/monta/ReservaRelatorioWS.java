@@ -98,7 +98,6 @@ public class ReservaRelatorioWS {
                 reservaList.add(reserva);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             throw new ErrorException(reservaRelatorioRQ.getIntegrador(), ReservaRelatorioWS.class, "relatorio", WSMensagemErroEnum.HRL, "Ocorreu uma falha ao gerar relatório", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 

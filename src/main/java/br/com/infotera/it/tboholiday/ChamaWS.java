@@ -26,14 +26,23 @@ import static org.glassfish.jersey.internal.util.Pretty.method;
 import org.tempuri.HotelService;
 import tektravel.hotelbookingapi.AuthenticationData;
 import tektravel.hotelbookingapi.GiataHotelCodesRequest;
+import tektravel.hotelbookingapi.GiataHotelCodesResponse;
 import tektravel.hotelbookingapi.HotelBookRequest;
+import tektravel.hotelbookingapi.HotelBookResponse;
 import tektravel.hotelbookingapi.HotelBookingDetailBasedOnDateRequest;
+import tektravel.hotelbookingapi.HotelBookingDetailBasedOnDateResponse;
 import tektravel.hotelbookingapi.HotelBookingDetailRequest;
+import tektravel.hotelbookingapi.HotelBookingDetailResponse;
 import tektravel.hotelbookingapi.HotelCancelRequest;
+import tektravel.hotelbookingapi.HotelCancelResponse;
 import tektravel.hotelbookingapi.HotelCancellationPolicyRequest;
+import tektravel.hotelbookingapi.HotelCancellationPolicyResponse;
 import tektravel.hotelbookingapi.HotelDetailsRequest;
+import tektravel.hotelbookingapi.HotelDetailsResponse;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityRequest;
+import tektravel.hotelbookingapi.HotelRoomAvailabilityResponse;
 import tektravel.hotelbookingapi.HotelSearchRequest;
+import tektravel.hotelbookingapi.HotelSearchResponse;
 
 /**
  *
@@ -98,7 +107,7 @@ public class ChamaWS {
         try {
             if (envio instanceof HotelSearchRequest) {
                 metodo = "hotelSearch";
-               
+
             } else if (envio instanceof HotelRoomAvailabilityRequest) {
                 metodo = "availableHotelRooms";
 
@@ -119,7 +128,7 @@ public class ChamaWS {
 
             } else if (envio instanceof HotelCancellationPolicyRequest) {
                 metodo = "hotelCancellationPolicy";
-                
+
             } else if (envio instanceof GiataHotelCodesRequest) {
                 metodo = "giataHotelCodeList";
             }
@@ -131,7 +140,6 @@ public class ChamaWS {
 
             } catch (Exception ex) {
                 ex.printStackTrace();
-                verificaErroCatch(integrador, ex);
             }
 
         } finally {
@@ -155,52 +163,123 @@ public class ChamaWS {
 
         }
 
-//        verificaErro(integrador, objResponse);
-
+        verificaErro(integrador, objResponse);
         return retorno.cast(objResponse);
     }
 
     private void verificaErro(WSIntegrador integrador, Object objResponse) throws ErrorException {
-        
+
         String dsErro = "";
 
-        
-        
-//        if (erro.contains("\"statusCode\":\"01\"")) {
-//        }else {
-//            if (erro.cont){
-//                dsErro = erro.get;
-//            }
-//        }
+        if (objResponse instanceof HotelSearchResponse) {
+            HotelSearchResponse erro = (HotelSearchResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+            
+        } else if (objResponse instanceof HotelRoomAvailabilityResponse) {
+            HotelRoomAvailabilityResponse erro = (HotelRoomAvailabilityResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+            
+        } else if (objResponse instanceof HotelBookResponse) {
+            HotelBookResponse erro = (HotelBookResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+            
+        } else if (objResponse instanceof HotelBookingDetailResponse) {
+            HotelBookingDetailResponse erro = (HotelBookingDetailResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+            
+        } else if (objResponse instanceof HotelDetailsResponse) {
+            HotelDetailsResponse erro = (HotelDetailsResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+        } else if (objResponse instanceof HotelBookingDetailBasedOnDateResponse) {
+            HotelBookingDetailBasedOnDateResponse erro = (HotelBookingDetailBasedOnDateResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+
+        } else if (objResponse instanceof HotelCancelResponse) {
+            HotelCancelResponse erro = (HotelCancelResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+
+        } else if (objResponse instanceof HotelCancellationPolicyResponse) {
+            HotelCancellationPolicyResponse erro = (HotelCancellationPolicyResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+        } else if (objResponse instanceof GiataHotelCodesResponse) {
+            GiataHotelCodesResponse erro = (GiataHotelCodesResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+        }
 
         if (!dsErro.equals("")) {
             throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENCONEC, dsErro, WSIntegracaoStatusEnum.INCONSISTENTE, null);
         }
-    }
-
-    private void verificaErroCatch(WSIntegrador integrador, Exception ex) throws ErrorException {
-        String dsErro = "";
-//        if (ex instanceof InvocationTargetException) {
-//            InvocationTargetException ivt = (InvocationTargetException) ex;
-//            if (ivt.getTargetException() instanceof ITravelAceServiceSimulacaoCompraErroDeValidacaoFaultFaultMessage) {
-//                ITravelAceServiceSimulacaoCompraErroDeValidacaoFaultFaultMessage faultFaultMessage = (ITravelAceServiceSimulacaoCompraErroDeValidacaoFaultFaultMessage) ivt.getTargetException();
-//                dsErro = faultFaultMessage.getFaultInfo().getMensagem();
-//                throw new ErrorException(integrador, ChamaWS.class, "verificaErroCatch", WSMensagemErroEnum.GENMETHOD, dsErro, WSIntegracaoStatusEnum.NEGADO, ex);
-//            } else if (ivt.getTargetException() instanceof ITravelAceServiceCompraErroDeValidacaoFaultFaultMessage) {
-//                ITravelAceServiceCompraErroDeValidacaoFaultFaultMessage faultFaultMessage = (ITravelAceServiceCompraErroDeValidacaoFaultFaultMessage) ivt.getTargetException();
-//                dsErro = faultFaultMessage.getFaultInfo().getMensagem();
-//                throw new ErrorException(integrador, ChamaWS.class, "verificaErroCatch", WSMensagemErroEnum.GENMETHOD, dsErro, WSIntegracaoStatusEnum.INCONSISTENTE, ex);
-//            } else if (ivt.getTargetException() instanceof ITravelAceServiceGetStatusVoucherErroDeValidacaoFaultFaultMessage) {
-//                ITravelAceServiceGetStatusVoucherErroDeValidacaoFaultFaultMessage faultFaultMessage = (ITravelAceServiceGetStatusVoucherErroDeValidacaoFaultFaultMessage) ivt.getTargetException();
-//                dsErro = faultFaultMessage.getFaultInfo().getMensagem();
-//                throw new ErrorException(integrador, ChamaWS.class, "verificaErroCatch", WSMensagemErroEnum.GENMETHOD, dsErro, WSIntegracaoStatusEnum.INCONSISTENTE, ex);
-//            } else if (ivt.getTargetException() instanceof ITravelAceServiceCancelarCompraErroDeValidacaoFaultFaultMessage) {
-//                ITravelAceServiceCancelarCompraErroDeValidacaoFaultFaultMessage faultFaultMessage = (ITravelAceServiceCancelarCompraErroDeValidacaoFaultFaultMessage) ivt.getTargetException();
-//                dsErro = faultFaultMessage.getFaultInfo().getMensagem();
-//                throw new ErrorException(integrador, ChamaWS.class, "verificaErroCatch", WSMensagemErroEnum.GENMETHOD, dsErro, WSIntegracaoStatusEnum.NEGADO, ex);
-//            } else {
-//                throw new ErrorException(integrador, ChamaWS.class, "verificaErroCatch", WSMensagemErroEnum.GENMETHOD, "Erro não tratado: " + ivt.getTargetException() + ", favor comunicar o suporte.", WSIntegracaoStatusEnum.INCONSISTENTE, null);
-//            }
-//        }
     }
 }
