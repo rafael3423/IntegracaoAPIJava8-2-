@@ -88,7 +88,7 @@ public class DisponibilidadeWS {
 
             }
         } catch (Exception ex) {
-            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDICUH, "Ocorreu uma falha na montagem dos hospedes", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         if (disponibilidadeRQ.getMunicipioId() != null && !disponibilidadeRQ.getMunicipioId().equals("")) {
@@ -112,7 +112,7 @@ public class DisponibilidadeWS {
         hotelSearchRequest.setNoOfRooms(sqQuarto);
         hotelSearchRequest.setGuestNationality("BR");
         hotelSearchRequest.setRoomGuests(listaNomes);
-        hotelSearchRequest.setResponseTime(disponibilidadeRQ.getIntegrador().getTimeoutSegundos());
+        hotelSearchRequest.setResponseTime(30000);
         hotelSearchRequest.setIsNearBySearchAllowed(true);
 
         HotelSearchResponse hotelSearchResponse = chamaWS.chamadaPadrao(disponibilidadeRQ.getIntegrador(), hotelSearchRequest, HotelSearchResponse.class);
@@ -151,7 +151,7 @@ public class DisponibilidadeWS {
 
                 WSTarifa tarifa = new WSTarifa(hr.getMinHotelPrice().getCurrency(), Double.parseDouble(hr.getMinHotelPrice().getTotalPrice().toString()), null);
 
-                quartoUhList.add(new WSQuartoUh(1, null, null, tarifa));
+                quartoUhList.add(new WSQuartoUh(1, new WSUh(null, "hotel", "hotel", "hotel", "hotel", null), new WSRegime("hotel", "hotel", "hotel"), tarifa));
 
                 quartoList.add(new WSQuarto(Integer.parseInt(hotelSearchResponse.getNoOfRoomsRequested()),
                         new WSConfigUh(),
@@ -163,8 +163,10 @@ public class DisponibilidadeWS {
                         hotel,
                         quartoList,
                         null,
+                        false,
                         hotelSearchResponse.getSessionId() + "#" + hr.getResultIndex()));
             }
+
         } catch (Exception ex) {
             throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os hóteis disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }

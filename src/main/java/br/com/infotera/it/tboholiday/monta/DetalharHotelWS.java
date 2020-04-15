@@ -7,10 +7,9 @@ package br.com.infotera.it.tboholiday.monta;
 
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSEndereco;
-import br.com.infotera.common.WSImagem;
 import br.com.infotera.common.WSTelefone;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
-import br.com.infotera.common.enumerator.WSTelefoneTipoEnum;
+import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.hotel.WSFacilidade;
 import br.com.infotera.common.hotel.WSFacilidadeItem;
 import br.com.infotera.common.hotel.WSHotel;
@@ -57,21 +56,29 @@ public class DetalharHotelWS {
 
         List<WSMedia> imagemList = new ArrayList();
 
-        for (ImageUrlDetails imgUrl : hotelDetailsResponse.getHotelDetails().getImageUrls().getImageUrl()) {
-            imagemList.add(new WSMedia(null, imgUrl.getValue()));
+        try {
+            for (ImageUrlDetails imgUrl : hotelDetailsResponse.getHotelDetails().getImageUrls().getImageUrl()) {
+                imagemList.add(new WSMedia(null, imgUrl.getValue()));
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalharHotelWS.class, "detalharHotel", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao buscar o detalhe do hotel.", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSFacilidadeItem> facilidadeItemList = new ArrayList();
 
-        for (String facility : hotelDetailsResponse.getHotelDetails().getHotelFacilities().getHotelFacility()) {
-            facilidadeItemList.add(new WSFacilidadeItem(null, facility, facility, null, null, null, null));
+        try {
+            for (String facility : hotelDetailsResponse.getHotelDetails().getHotelFacilities().getHotelFacility()) {
+                facilidadeItemList.add(new WSFacilidadeItem(null, facility, facility, null, null, null, null));
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalharHotelWS.class, "detalharHotel", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao buscar o detalhe do hotel.", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-        
+
         List<WSFacilidade> facilidadeList = new ArrayList();
-        facilidadeList.add(new WSFacilidade(null,null, facilidadeItemList, null));
+        facilidadeList.add(new WSFacilidade(null, null, facilidadeItemList, null));
 
         WSHotelCategoria hotelCategoria = new WSHotelCategoria(hotelDetailsResponse.getHotelDetails().getHotelRating().toString(), hotelDetailsResponse.getHotelDetails().getHotelRating().toString());
-        
+
         WSHotel hotel = new WSHotel(null,
                 Integer.parseInt(hotelDetailsResponse.getHotelDetails().getHotelCode()),
                 hotelDetailsResponse.getHotelDetails().getHotelName(),

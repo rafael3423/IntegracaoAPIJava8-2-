@@ -21,9 +21,10 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.transport.http.HTTPConduit;
+import static org.glassfish.hk2.utilities.reflection.Pretty.method;
+import static org.glassfish.jersey.internal.util.Pretty.method;
 import org.tempuri.HotelService;
 import tektravel.hotelbookingapi.AuthenticationData;
-import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
 import tektravel.hotelbookingapi.GiataHotelCodesRequest;
 import tektravel.hotelbookingapi.HotelBookRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailBasedOnDateRequest;
@@ -92,11 +93,12 @@ public class ChamaWS {
         AuthenticationData authenticationData = new AuthenticationData();
         authenticationData.setUserName(integrador.getDsCredencialList().get(0));
         authenticationData.setPassword(integrador.getDsCredencialList().get(1));
+        Object tipoObjeto = new Object();
 
         try {
             if (envio instanceof HotelSearchRequest) {
                 metodo = "hotelSearch";
-
+               
             } else if (envio instanceof HotelRoomAvailabilityRequest) {
                 metodo = "availableHotelRooms";
 
@@ -117,9 +119,8 @@ public class ChamaWS {
 
             } else if (envio instanceof HotelCancellationPolicyRequest) {
                 metodo = "hotelCancellationPolicy";
-            } 
-            
-            else if (envio instanceof GiataHotelCodesRequest) {
+                
+            } else if (envio instanceof GiataHotelCodesRequest) {
                 metodo = "giataHotelCodeList";
             }
 
@@ -127,6 +128,7 @@ public class ChamaWS {
 
                 Method method = cls.getDeclaredMethod(metodo, envio.getClass(), AuthenticationData.class);
                 objResponse = method.invoke(port, envio, authenticationData);
+
             } catch (Exception ex) {
                 ex.printStackTrace();
                 verificaErroCatch(integrador, ex);
@@ -153,21 +155,23 @@ public class ChamaWS {
 
         }
 
-        verificaErro(integrador, objResponse);
+//        verificaErro(integrador, objResponse);
 
         return retorno.cast(objResponse);
     }
 
-    private void verificaErro(WSIntegrador integrador, Object object) throws ErrorException {
+    private void verificaErro(WSIntegrador integrador, Object objResponse) throws ErrorException {
+        
         String dsErro = "";
 
-        if (object instanceof String) {
-            String retorno = (String) object;
-            if (retorno.contains("cancelado com sucesso!") || retorno.contains("Voucher já esta cancelado") || retorno.contains("mas todos os produtos foram cancelados com sucesso")) {
-            } else {
-                dsErro = (String) object;
-            }
-        }
+        
+        
+//        if (erro.contains("\"statusCode\":\"01\"")) {
+//        }else {
+//            if (erro.cont){
+//                dsErro = erro.get;
+//            }
+//        }
 
         if (!dsErro.equals("")) {
             throw new ErrorException(integrador, ChamaWS.class, "verificaErro", WSMensagemErroEnum.GENCONEC, dsErro, WSIntegracaoStatusEnum.INCONSISTENTE, null);
