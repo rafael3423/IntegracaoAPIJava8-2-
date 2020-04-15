@@ -229,7 +229,7 @@ public class DisponibilidadeWS {
         }
 
         List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-        tarifaAdicionalList.add(new WSTarifaAdicional());
+//        tarifaAdicionalList.add(new WSTarifaAdicional());
         try {
             for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
 
@@ -295,7 +295,7 @@ public class DisponibilidadeWS {
                             }
                         }
 
-                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
+//                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
 
                         quartoPesquisa = new WSQuartoUh(sqPesquisa,
                                 new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),

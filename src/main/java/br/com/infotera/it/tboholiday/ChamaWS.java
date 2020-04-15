@@ -78,23 +78,21 @@ public class ChamaWS {
         Writer xmlRequest = new StringWriter();
         Writer xmlResponse = new StringWriter();
         org.apache.cxf.endpoint.Client client = ClientProxy.getClient(port);
-//        HTTPConduit conduit = (HTTPConduit) client.getConduit();
-//        conduit.getTlsClientParameters().setDisableCNCheck(true);
 
         HTTPConduit httpConduit = (HTTPConduit) ClientProxy.getClient(port).getConduit();
         TLSClientParameters tlsCP = new TLSClientParameters();
         tlsCP.setDisableCNCheck(true);
         httpConduit.setTlsClientParameters(tlsCP);
 
-        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
+//        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
 
         BindingProvider bp = (BindingProvider) port;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
 
-        LoggingInInterceptor in = new LoggingInInterceptor();
-        in.setLimit(-1);
-        in.setPrintWriter(new PrintWriter(xmlResponse));
-        client.getInInterceptors().add(in);
+//        LoggingInInterceptor in = new LoggingInInterceptor();
+//        in.setLimit(-1);
+//        in.setPrintWriter(new PrintWriter(xmlResponse));
+//        client.getInInterceptors().add(in);
 
         java.util.Map<String, Object> requestContext = ((javax.xml.ws.BindingProvider) port).getRequestContext();
         requestContext.put("set-jaxb-validation-event-handler", "false");
@@ -144,21 +142,21 @@ public class ChamaWS {
 
         } finally {
 
-            String[] aa = xmlRequest.toString().split("Payload: ");
-            String[] ab = aa[1].split("-------");
-            String request = ab[0];
-            String[] ba = xmlResponse.toString().split("Payload: ");
-            String[] bb = ba[1].split("-------");
-            String response = bb[0];
-
-            System.out.println("RQ - > " + metodo + request);
-            System.out.println("RS - > " + metodo + response);
+//            String[] aa = xmlRequest.toString().split("Payload: ");
+//            String[] ab = aa[1].split("-------");
+//            String request = ab[0];
+//            String[] ba = xmlResponse.toString().split("Payload: ");
+//            String[] bb = ba[1].split("-------");
+//            String response = bb[0];
+//
+//            System.out.println("RQ - > " + metodo + request);
+//            System.out.println("RS - > " + metodo + response);
 
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.XML,
                     metodo,
-                    request,
-                    response,
+                    "",//request,
+                    "",//response,
                     Utils.tempoExecucaoSeg(tempoInicio)));
 
         }
