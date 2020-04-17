@@ -65,11 +65,9 @@ public class ConsultarReservaWS {
 
                 Double vlCancelamento = 0.0;
 
-                String chvDiaCheckIn[] = bookingDetail.getCheckInDate().toString().split("-");
-                String chvDiaCheckOut[] = bookingDetail.getCheckOutDate().toString().split("-");
+                Integer qntDia = Utils.diferencaEmDias(Utils.toDate(bookingDetail.getCheckInDate().toString(), "yyyy-MM-dd"), Utils.toDate(bookingDetail.getCheckOutDate().toString(), "yyyy-MM-dd"));
 
-                Double qntDia = Utils.subtrair(Double.parseDouble(chvDiaCheckOut[2]), Double.parseDouble(chvDiaCheckIn[2]));
-                Double vlDiaria = Utils.dividir(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), qntDia);
+                Double vlDiaria = Utils.dividir(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), Double.parseDouble(qntDia.toString()));
 
                 if (bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getChargeType().toString().toUpperCase().equals("FIXED")) {
                     vlCancelamento = Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString());
@@ -79,27 +77,15 @@ public class ConsultarReservaWS {
 
                 } else if (bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getChargeType().toString().toUpperCase().equals("NIGHT")) {
                     vlCancelamento = Utils.multiplicar(vlDiaria, Double.parseDouble(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCancellationCharge().toString()));
-
                 }
 
                 Boolean stNaoRefundable = false;
-                if (vlCancelamento == Double.parseDouble(rd.getRoomRate().getTotalFare().toString())) {
-                    stNaoRefundable = true;
+                Boolean stImediata = false;
 
-                } else if (vlCancelamento < Double.parseDouble(rd.getRoomRate().getTotalFare().toString())) {
-                    stNaoRefundable = false;
-                }
+                Date dtMinimaCancelamento = Utils.addDias(Utils.toDate(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getFromDate(), "yyyy-MM-dd"), -3);
 
-                Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getToDate(), "yyyy-MM-dd"), -3);
-
-                boolean stImediata = false; //Inicia Multa em normalmente falso
-
-                if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
-                    stImediata = true;  // entra em multa
-                }
-
-                if (stNaoRefundable == true) { // checa se o conector tem prazo de cancelamento
-                    stImediata = true; // entra em multa
+                if (new Date().compareTo(dtMinimaCancelamento) == 1) {
+                    stImediata = true;
                 }
 
                 WSUh uh = new WSUh(null,
@@ -140,8 +126,7 @@ public class ConsultarReservaWS {
                 if (bookingDetail.getHotelCancelPolicies().getCancelPolicy() != null && !bookingDetail.getHotelCancelPolicies().getCancelPolicy().equals("")) {
                     try {
                         for (CancelPolicy cp : bookingDetail.getHotelCancelPolicies().getCancelPolicy()) {
-
-                            if (cp.getRoomIndex().equals(sqQuarto)) {
+                            if (cp.getRoomIndex().equals(sqQuarto) && !vlCancelamento.equals(0.0)) {
                                 politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
                                         bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy(),
                                         cp.getCurrency(),

@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import tektravel.hotelbookingapi.ArrayOfInt;
 import tektravel.hotelbookingapi.ArrayOfRoomGuest;
+import tektravel.hotelbookingapi.Filters;
 import tektravel.hotelbookingapi.HotelResult;
 import tektravel.hotelbookingapi.HotelRoom;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityRequest;
@@ -91,6 +92,8 @@ public class DisponibilidadeWS {
             throw new ErrorException(disponibilidadeRQ.getIntegrador(), DisponibilidadeWS.class, "disponibilidade", WSMensagemErroEnum.HDICUH, "Ocorreu uma falha na montagem dos hospedes", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
+        Filters filters = new Filters();
+
         if (disponibilidadeRQ.getMunicipioId() != null && !disponibilidadeRQ.getMunicipioId().equals("")) {
             hotelSearchRequest.setCityId(Integer.parseInt(disponibilidadeRQ.getMunicipioId()));
         } else {
@@ -103,10 +106,11 @@ public class DisponibilidadeWS {
                 }
             }
 
-            hotelSearchRequest.getFilters().setHotelCodeList(hotelCodeList);
+            filters.setHotelCodeList(hotelCodeList);
+            hotelSearchRequest.setFilters(filters);
         }
 
-      hotelSearchRequest.setResultCount(1);
+        hotelSearchRequest.setResultCount(1);
         hotelSearchRequest.setCheckInDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtEntrada(), true));
         hotelSearchRequest.setCheckOutDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtSaida(), true));
         hotelSearchRequest.setNoOfRooms(sqQuarto);
@@ -151,7 +155,7 @@ public class DisponibilidadeWS {
 
                 WSTarifa tarifa = new WSTarifa(hr.getMinHotelPrice().getCurrency(), Double.parseDouble(hr.getMinHotelPrice().getTotalPrice().toString()), null);
 
-                quartoUhList.add(new WSQuartoUh(1, new WSUh(null, "hotel", "hotel", "hotel", "hotel", null), new WSRegime("hotel", "hotel", "hotel"), tarifa));
+                quartoUhList.add(new WSQuartoUh(1, new WSUh(), new WSRegime(), tarifa));
 
                 quartoList.add(new WSQuarto(Integer.parseInt(hotelSearchResponse.getNoOfRoomsRequested()),
                         new WSConfigUh(),
@@ -229,7 +233,7 @@ public class DisponibilidadeWS {
         }
 
         List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-//        tarifaAdicionalList.add(new WSTarifaAdicional());
+        tarifaAdicionalList.add(new WSTarifaAdicional());
         try {
             for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
 
@@ -295,8 +299,7 @@ public class DisponibilidadeWS {
                             }
                         }
 
-//                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
-
+                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
                         quartoPesquisa = new WSQuartoUh(sqPesquisa,
                                 new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
                                 new WSRegime(hr.getInclusion(), null, hr.getInclusion()),

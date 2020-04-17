@@ -79,8 +79,8 @@ public class DetalharHotelWS {
 
         WSHotelCategoria hotelCategoria = new WSHotelCategoria(hotelDetailsResponse.getHotelDetails().getHotelRating().toString(), hotelDetailsResponse.getHotelDetails().getHotelRating().toString());
 
-        WSHotel hotel = new WSHotel(null,
-                Integer.parseInt(hotelDetailsResponse.getHotelDetails().getHotelCode()),
+        WSHotel hotel = new WSHotel(hotelDetailsResponse.getHotelDetails().getHotelCode(),
+                null,
                 hotelDetailsResponse.getHotelDetails().getHotelName(),
                 hotelDetailsResponse.getHotelDetails().getDescription(),
                 endereco,

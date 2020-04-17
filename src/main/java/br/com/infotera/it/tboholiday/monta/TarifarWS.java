@@ -1,7 +1,6 @@
 package br.com.infotera.it.tboholiday.monta;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSTarifa;
@@ -20,20 +19,12 @@ import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRS;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRS;
-import br.com.infotera.common.politica.WSPolitica;
-import br.com.infotera.common.politica.WSPoliticaCancelamento;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
 import br.com.infotera.it.tboholiday.ParDisp;
 import br.com.infotera.it.tboholiday.UtilsWS;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import tektravel.hotelbookingapi.BookingOptions;
-import tektravel.hotelbookingapi.CancelPolicy;
-import tektravel.hotelbookingapi.HotelCancellationPolicyRequest;
-import tektravel.hotelbookingapi.HotelCancellationPolicyResponse;
-import tektravel.hotelbookingapi.RoomCombination;
 
 public class TarifarWS {
 
@@ -42,6 +33,8 @@ public class TarifarWS {
     public WSTarifarHotelRS tarifarHotel(WSTarifarHotelRQ tarifarHotelRQ) throws ErrorException {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
+        
+        String chvSessao = null;
 
         if (tarifarHotelRQ.getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.ORCAMENTO)) {
             DisponibilidadeWS disponibilidadeWS = new DisponibilidadeWS();
@@ -69,7 +62,7 @@ public class TarifarWS {
                     hotelList));
 
             WSQuartoUh quartoUh = null;
-            String chvSessao = null;
+            
 
             try {
                 for (WSHotelPesquisa hp : disponibilidadeHotelRS.getHotelPesquisaList()) {
@@ -112,8 +105,6 @@ public class TarifarWS {
                                 Utils.gerarWSReservaNome(pd.getA3()),
                                 WSReservaStatusEnum.SOLICITACAO));
 
-                        List<WSPolitica> politicaList = listaPolitica(tarifarHotelRQ.getIntegrador(), reservaHotelUhList.get(count), chvSessao);
-                        reservaHotelUhList.get(count).getTarifa().setPoliticaList(politicaList);
                         count++;
 
                     }
@@ -132,66 +123,8 @@ public class TarifarWS {
                 null,
                 WSReservaStatusEnum.SOLICITACAO,
                 null,
-                tarifarHotelRQ.getReservaHotel().getDsParametro());
+                chvSessao);
 
         return new WSTarifarHotelRS(reservaHotel, tarifarHotelRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
-    }
-
-    public List<WSPolitica> listaPolitica(WSIntegrador integrador, WSReservaHotelUh reservaHotelUh, String sessao) throws ErrorException {
-
-        HotelCancellationPolicyRequest hotelCancellationPolicyRequest = new HotelCancellationPolicyRequest();
-
-        BookingOptions bookingOptions = new BookingOptions();
-
-        bookingOptions.setFixedFormat(true);
-
-        RoomCombination roomCombination = new RoomCombination();
-
-        ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(reservaHotelUh.getUh().getDsParametro(), ParDisp.class);
-        roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
-
-        bookingOptions.getRoomCombination().add(roomCombination);
-
-        String chvSessao[] = sessao.split("#");
-
-        hotelCancellationPolicyRequest.setResultIndex(Integer.parseInt(chvSessao[1]));
-        hotelCancellationPolicyRequest.setSessionId(chvSessao[0]);
-        hotelCancellationPolicyRequest.setOptionsForBooking(bookingOptions);
-
-        HotelCancellationPolicyResponse hotelCancellationPolicyResponse = chamaWS.chamadaPadrao(integrador, hotelCancellationPolicyRequest, HotelCancellationPolicyResponse.class);
-
-        List<WSPolitica> politicaCancelamentoList = new ArrayList();
-
-        if (hotelCancellationPolicyResponse != null && !hotelCancellationPolicyResponse.equals("")) {
-            if (hotelCancellationPolicyResponse.getCancelPolicies() != null && !hotelCancellationPolicyResponse.getCancelPolicies().equals("")) {
-                try {
-                    for (CancelPolicy cp : hotelCancellationPolicyResponse.getCancelPolicies().getCancelPolicy()) {
-
-                        Date dtMaximaCancelamento = Utils.addDias(Utils.toDate(cp.getToDate(), "yyyy-MM-dd"), -3);
-
-                        Boolean stImediata = false; //Inicia Multa em normalmente falso
-                        Boolean stNaoRefundable = false;
-
-                        if (new Date().compareTo(dtMaximaCancelamento) == 1) { //Compara se o dia de hoje passou a data máxima de ccanelmento
-                            stImediata = true;  // entra em multa
-                        }
-
-                        politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
-                                hotelCancellationPolicyResponse.getCancelPolicies().getDefaultPolicy(),
-                                cp.getCurrency(),
-                                null,
-                                null,
-                                null,
-                                stImediata,
-                                Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
-                                Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
-                                stNaoRefundable));
-                    }
-                } catch (Exception ex) {
-                    throw new ErrorException(integrador, TarifarWS.class, "listaPolitica", WSMensagemErroEnum.HPC, "Ocorreu uma falha ao gerar politicas de cancelamento", WSIntegracaoStatusEnum.NEGADO, ex);
-                }
-            }
-        }
-        return politicaCancelamentoList;
     }
 }

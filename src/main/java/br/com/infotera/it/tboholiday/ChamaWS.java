@@ -25,6 +25,8 @@ import static org.glassfish.hk2.utilities.reflection.Pretty.method;
 import static org.glassfish.jersey.internal.util.Pretty.method;
 import org.tempuri.HotelService;
 import tektravel.hotelbookingapi.AuthenticationData;
+import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
+import tektravel.hotelbookingapi.AvailabilityAndPricingResponse;
 import tektravel.hotelbookingapi.GiataHotelCodesRequest;
 import tektravel.hotelbookingapi.GiataHotelCodesResponse;
 import tektravel.hotelbookingapi.HotelBookRequest;
@@ -85,7 +87,6 @@ public class ChamaWS {
         httpConduit.setTlsClientParameters(tlsCP);
 
 //        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
-
         BindingProvider bp = (BindingProvider) port;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
 
@@ -93,14 +94,12 @@ public class ChamaWS {
 //        in.setLimit(-1);
 //        in.setPrintWriter(new PrintWriter(xmlResponse));
 //        client.getInInterceptors().add(in);
-
         java.util.Map<String, Object> requestContext = ((javax.xml.ws.BindingProvider) port).getRequestContext();
         requestContext.put("set-jaxb-validation-event-handler", "false");
 
         AuthenticationData authenticationData = new AuthenticationData();
         authenticationData.setUserName(integrador.getDsCredencialList().get(0));
         authenticationData.setPassword(integrador.getDsCredencialList().get(1));
-        Object tipoObjeto = new Object();
 
         try {
             if (envio instanceof HotelSearchRequest) {
@@ -108,6 +107,9 @@ public class ChamaWS {
 
             } else if (envio instanceof HotelRoomAvailabilityRequest) {
                 metodo = "availableHotelRooms";
+
+            } else if (envio instanceof AvailabilityAndPricingRequest) {
+                metodo = "availabilityAndPricing";
 
             } else if (envio instanceof HotelBookRequest) {
                 metodo = "hotelBook";
@@ -151,7 +153,7 @@ public class ChamaWS {
 //
 //            System.out.println("RQ - > " + metodo + request);
 //            System.out.println("RS - > " + metodo + response);
-
+            
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.XML,
                     metodo,
@@ -180,7 +182,7 @@ public class ChamaWS {
                     dsErro = "Erro não retornado pelo conector.";
                 }
             }
-            
+
         } else if (objResponse instanceof HotelRoomAvailabilityResponse) {
             HotelRoomAvailabilityResponse erro = (HotelRoomAvailabilityResponse) objResponse;
 
@@ -192,8 +194,20 @@ public class ChamaWS {
                     dsErro = "Erro não retornado pelo conector.";
                 }
             }
-            
-        } else if (objResponse instanceof HotelBookResponse) {
+
+        }else if (objResponse instanceof AvailabilityAndPricingResponse) {
+            AvailabilityAndPricingResponse erro = (AvailabilityAndPricingResponse) objResponse;
+
+            if (erro.getStatus().getStatusCode().equals("01")) {
+            } else {
+                if (erro.getStatus().getDescription() != null && !erro.getStatus().getDescription().equals("")) {
+                    dsErro = erro.getStatus().getDescription();
+                } else {
+                    dsErro = "Erro não retornado pelo conector.";
+                }
+            }
+
+        }else if (objResponse instanceof HotelBookResponse) {
             HotelBookResponse erro = (HotelBookResponse) objResponse;
 
             if (erro.getStatus().getStatusCode().equals("01")) {
@@ -204,7 +218,7 @@ public class ChamaWS {
                     dsErro = "Erro não retornado pelo conector.";
                 }
             }
-            
+
         } else if (objResponse instanceof HotelBookingDetailResponse) {
             HotelBookingDetailResponse erro = (HotelBookingDetailResponse) objResponse;
 
@@ -216,7 +230,7 @@ public class ChamaWS {
                     dsErro = "Erro não retornado pelo conector.";
                 }
             }
-            
+
         } else if (objResponse instanceof HotelDetailsResponse) {
             HotelDetailsResponse erro = (HotelDetailsResponse) objResponse;
 

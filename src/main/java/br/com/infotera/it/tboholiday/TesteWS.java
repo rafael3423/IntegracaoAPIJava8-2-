@@ -125,9 +125,9 @@ public class TesteWS {
 //        RELATORIO DE RESERVAS
         montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-04-01","yyyy-MM-dd"), Utils.toDate("2020-04-05","yyyy-MM-dd")));
 //        PRE-CANCELAR
-        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
+//        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
 //        CANCELAR
-        montaWS.cancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("127707"))));
+//        montaWS.cancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("127707"))));
 //        TARIFAR
 //        montaWS.tarifar(new WSTarifarHotelRQ(integrador, new WSReservaHotel("")));
 //        PESQUISAR
