@@ -6,6 +6,7 @@
 package br.com.infotera.it.tboholiday;
 
 import br.com.infotera.common.ErrorException;
+import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import tektravel.hotelbookingapi.CancelPolicies;
 import tektravel.hotelbookingapi.CancelPolicy;
 import tektravel.hotelbookingapi.Guest;
 
@@ -56,20 +58,19 @@ public class UtilsWS {
 
     }
 
-    public WSPoliticaCancelamento montaPolitica() {
+    public List<WSPolitica> montaPolitica(WSIntegrador integrador, CancelPolicies cancelPolicies, Double vlTotal, Double diferencaEmDias, String normasHotel, String roomIndex) throws ErrorException {
 
         List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
-        if (availabilityAndPricingResponse.getHotelCancellationPolicies() != null && !availabilityAndPricingResponse.getHotelCancellationPolicies().equals("")) {
-            if (availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies() != null && !availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies().equals("")) {
+        
+        if (cancelPolicies != null && !cancelPolicies.equals("")) {
+            if (cancelPolicies.getCancelPolicy() != null && !cancelPolicies.getCancelPolicy().equals("")) {
                 try {
-                    for (CancelPolicy cp : availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies().getCancelPolicy()) {
+                    for (CancelPolicy cp : cancelPolicies.getCancelPolicy()) {
 
                         Double vlCancelamento = 0.0;
 
-                        Double vlTotal = Utils.somar(rhu.getTarifa().getVlNeto(), rhu.getTarifa().getTarifaAdicionalList().get(0).getVlNeto());
-
-                        Double vlDiaria = Utils.dividir(vlTotal, Double.parseDouble(Utils.diferencaEmDias(rhu.getDtEntrada(), rhu.getDtSaida()).toString()));
+                        Double vlDiaria = Utils.dividir(vlTotal, diferencaEmDias);
 
                         if (cp.getChargeType().toString().toUpperCase().equals("FIXED")) {
                             vlCancelamento = Double.parseDouble(cp.getCancellationCharge().toString());
@@ -101,8 +102,6 @@ public class UtilsWS {
                                 Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
                                 stNaoRefundable);
 
-                        ParDisp pd = (ParDisp) UtilsWS.fromJson(rhu.getUh().getDsParametro(), ParDisp.class);
-                       
                         if (cp.getRoomIndex() != null && !cp.getRoomIndex().equals("")) {
                             if (!vlCancelamento.equals(0.0) && cp.getRoomIndex().equals(roomIndex)) {
                                 politicaCancelamentoList.add(politicaCancelamento);
@@ -113,9 +112,10 @@ public class UtilsWS {
 
                     }
                 } catch (Exception ex) {
-                    throw new ErrorException(preReservarRQ.getIntegrador(), PreCancelarReservaWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao gerar politicas de cancelamento", WSIntegracaoStatusEnum.NEGADO, ex);
+                    throw new ErrorException(integrador, UtilsWS.class, "montaPolitica", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao gerar politicas de cancelamento", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
             }
         }
+        return politicaCancelamentoList;
     }
 }

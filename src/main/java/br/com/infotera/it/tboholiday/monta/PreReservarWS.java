@@ -41,7 +41,7 @@ public class PreReservarWS {
     public WSPreReservarRS preReservar(WSPreReservarRQ preReservarRQ) throws ErrorException {
 
         TarifarWS tarifarWS = new TarifarWS();
-        
+
         preReservarRQ.getReserva().getReservaHotel().setReservaStatus(WSReservaStatusEnum.ORCAMENTO);
 
         WSTarifarHotelRS tarifarHotelRS = tarifarWS.tarifarHotel(new WSTarifarHotelRQ(preReservarRQ.getIntegrador(), preReservarRQ.getReserva().getReservaHotel()));
@@ -83,6 +83,8 @@ public class PreReservarWS {
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
 
         int sqQuarto = 0;
+
+        UtilsWS utilsWS = new UtilsWS();
 
         try {
             for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
@@ -129,7 +131,7 @@ public class PreReservarWS {
                                         Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
                                         Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
                                         stNaoRefundable);
-                                
+
                                 ParDisp pd = (ParDisp) UtilsWS.fromJson(rhu.getUh().getDsParametro(), ParDisp.class);
 
                                 if (cp.getRoomIndex() != null && !cp.getRoomIndex().equals("")) {
@@ -146,6 +148,20 @@ public class PreReservarWS {
                         }
                     }
                 }
+//                ParDisp pd = (ParDisp) UtilsWS.fromJson(rhu.getUh().getDsParametro(), ParDisp.class);
+//
+//                String roomIndex = pd.getA0();
+//                Double vlTotal = Utils.somar(rhu.getTarifa().getVlNeto(), rhu.getTarifa().getTarifaAdicionalList().get(0).getVlNeto());
+//                Double diferencaEmDias = Double.parseDouble(Utils.diferencaEmDias(rhu.getDtEntrada(), rhu.getDtSaida()).toString());
+//
+//                if (availabilityAndPricingResponse.getHotelCancellationPolicies() != null && !availabilityAndPricingResponse.getHotelCancellationPolicies().equals("")) {
+//                    politicaCancelamentoList = utilsWS.montaPolitica(preReservarRQ.getIntegrador(),
+//                            availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies(),
+//                            vlTotal,
+//                            diferencaEmDias,
+//                            normasHotel,
+//                            roomIndex);
+//                }
 
                 WSTarifa tarifa = new WSTarifa(rhu.getTarifa().getSgMoedaNeto(),
                         rhu.getTarifa().getVlNeto(),
@@ -190,7 +206,6 @@ public class PreReservarWS {
                         WSReservaStatusEnum.SOLICITACAO));
             }
         } catch (Exception ex) {
-
             throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
