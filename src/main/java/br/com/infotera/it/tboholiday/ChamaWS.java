@@ -86,14 +86,14 @@ public class ChamaWS {
         tlsCP.setDisableCNCheck(true);
         httpConduit.setTlsClientParameters(tlsCP);
 
-//        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
+        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
         BindingProvider bp = (BindingProvider) port;
         bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
 
-//        LoggingInInterceptor in = new LoggingInInterceptor();
-//        in.setLimit(-1);
-//        in.setPrintWriter(new PrintWriter(xmlResponse));
-//        client.getInInterceptors().add(in);
+        LoggingInInterceptor in = new LoggingInInterceptor();
+        in.setLimit(-1);
+        in.setPrintWriter(new PrintWriter(xmlResponse));
+        client.getInInterceptors().add(in);
         java.util.Map<String, Object> requestContext = ((javax.xml.ws.BindingProvider) port).getRequestContext();
         requestContext.put("set-jaxb-validation-event-handler", "false");
 

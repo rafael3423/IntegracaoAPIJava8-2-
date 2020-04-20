@@ -61,62 +61,32 @@ public class ConsultarReservaWS {
         int sqQuarto = 0;
         UtilsWS utilsWS = new UtilsWS();
 
+        Double vlTotalTodosQuartos = 0.0;
+        String vlTotalCadaQuarto = "";
+
+        for (RoomDetails rd : bookingDetail.getRoomtype().getRoomDetails()) {
+
+            vlTotalCadaQuarto += rd.getRoomRate().getTotalFare().toString() + "#";
+            vlTotalTodosQuartos += Double.parseDouble(rd.getRoomRate().getTotalFare().toString());
+        }
+
         try {
             for (RoomDetails rd : bookingDetail.getRoomtype().getRoomDetails()) {
 
                 List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
-                if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("")) {
-                    if (bookingDetail.getHotelCancelPolicies().getCancelPolicy() != null && !bookingDetail.getHotelCancelPolicies().getCancelPolicy().equals("")) {
-                       
-                        for (CancelPolicy cp : bookingDetail.getHotelCancelPolicies().getCancelPolicy()) {
+                String normasHotel = bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy();
 
-                            Double vlCancelamento = 0.0;
+                String vlTotal = vlTotalTodosQuartos + "#" + vlTotalCadaQuarto;
+                Double diferencaEmDias = Double.parseDouble(Utils.diferencaEmDias(Utils.toDate(bookingDetail.getCheckInDate().toString(), "yyyy-MM-dd"), Utils.toDate(bookingDetail.getCheckOutDate().toString(), "yyyy-MM-dd")).toString());
 
-                            Double vlDiaria = Utils.dividir(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), Double.parseDouble(Utils.diferencaEmDias(Utils.toDate(bookingDetail.getCheckInDate().toString(), "yyyy-MM-dd"), Utils.toDate(bookingDetail.getCheckOutDate().toString(), "yyyy-MM-dd")).toString()));
-
-                            if (cp.getChargeType().toString().toUpperCase().equals("FIXED")) {
-                                vlCancelamento = Double.parseDouble(cp.getCancellationCharge().toString());
-
-                            } else if (cp.getChargeType().toString().toUpperCase().equals("PERCENTAGE")) {
-                                vlCancelamento = Utils.dividir(Utils.multiplicar(Double.parseDouble(rd.getRoomRate().getTotalFare().toString()), Double.parseDouble(cp.getCancellationCharge().toString())), 100.00);
-
-                            } else if (cp.getChargeType().toString().toUpperCase().equals("NIGHT")) {
-                                vlCancelamento = Utils.multiplicar(vlDiaria, Double.parseDouble(cp.getCancellationCharge().toString()));
-                            }
-
-                            Boolean stNaoRefundable = false;
-                            Boolean stImediata = false;
-
-                            Date dtMinimaCancelamento = Utils.addDias(Utils.toDate(bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getFromDate(), "yyyy-MM-dd"), -3);
-
-                            if (new Date().compareTo(dtMinimaCancelamento) == 1) {
-                                stImediata = true;
-                            }
-
-                            politicaCancelamentoList.add(new WSPoliticaCancelamento(cp.getRoomTypeName(),
-                                    bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy(),
-                                    cp.getCurrency(),
-                                    vlCancelamento,
-                                    null,
-                                    null,
-                                    stImediata,
-                                    Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
-                                    Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
-                                    stNaoRefundable));
-
-                        }
-                    }
+                if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("") && sqQuarto == 0) {
+                    politicaCancelamentoList = utilsWS.montaPolitica(integrador,
+                            bookingDetail.getHotelCancelPolicies(),
+                            vlTotal,
+                            diferencaEmDias,
+                            normasHotel);
                 }
-
-//                for(WSReservaHotelUh rhu: )
-//                ParDisp pd = (ParDisp) UtilsWS.fromJson(rhu.getUh().getDsParametro(), ParDisp.class);
-//
-//                Double vlTotal = Double.parseDouble(rd.getRoomRate().getTotalFare().toString());
-//                Double diferencaEmDias = Double.parseDouble(Utils.diferencaEmDias(Utils.toDate(bookingDetail.getCheckInDate().toString(), "yyyy-MM-dd"), Utils.toDate(bookingDetail.getCheckOutDate().toString(), "yyyy-MM-dd")).toString());
-//                String normasHotel = bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy();
-//
-//                utilsWS.montaPolitica(integrador, bookingDetail.getHotelCancelPolicies(), vlTotal, diferencaEmDias, normasHotel, sqQuarto);
 
                 sqQuarto++;
 

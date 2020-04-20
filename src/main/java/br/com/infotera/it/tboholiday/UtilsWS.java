@@ -58,17 +58,26 @@ public class UtilsWS {
 
     }
 
-    public List<WSPolitica> montaPolitica(WSIntegrador integrador, CancelPolicies cancelPolicies, Double vlTotal, Double diferencaEmDias, String normasHotel, String roomIndex) throws ErrorException {
+    public List<WSPolitica> montaPolitica(WSIntegrador integrador, CancelPolicies cancelPolicies, String valores, Double diferencaEmDias, String normasHotel) throws ErrorException {
 
         List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
-        
         if (cancelPolicies != null && !cancelPolicies.equals("")) {
             if (cancelPolicies.getCancelPolicy() != null && !cancelPolicies.getCancelPolicy().equals("")) {
+
                 try {
                     for (CancelPolicy cp : cancelPolicies.getCancelPolicy()) {
 
                         Double vlCancelamento = 0.0;
+                        Double vlTotal = null;
+
+                        String chvVlTotal[] = valores.split("#");
+
+                        if (cp.getRoomIndex() != null && !cp.getRoomIndex().equals("")) {
+                            vlTotal = Double.parseDouble(chvVlTotal[Integer.parseInt(cp.getRoomIndex())]);
+                        }else{
+                            vlTotal = Double.parseDouble(chvVlTotal[0]);
+                        }
 
                         Double vlDiaria = Utils.dividir(vlTotal, diferencaEmDias);
 
@@ -102,18 +111,14 @@ public class UtilsWS {
                                 Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
                                 stNaoRefundable);
 
-                        if (cp.getRoomIndex() != null && !cp.getRoomIndex().equals("")) {
-                            if (!vlCancelamento.equals(0.0) && cp.getRoomIndex().equals(roomIndex)) {
-                                politicaCancelamentoList.add(politicaCancelamento);
-                            }
-                        } else if (!vlCancelamento.equals(0.0)) {
+                        if (!vlCancelamento.equals(0.0)) {
                             politicaCancelamentoList.add(politicaCancelamento);
                         }
-
                     }
                 } catch (Exception ex) {
                     throw new ErrorException(integrador, UtilsWS.class, "montaPolitica", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao gerar politicas de cancelamento", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
+
             }
         }
         return politicaCancelamentoList;

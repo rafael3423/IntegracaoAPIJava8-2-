@@ -1,0 +1,66 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <Credentials xmlns="http://TekTravel/HotelBookingApi" UserName="InfoteraTest" Password="Inf@64890970"/>
+    </soap:Header>
+    <soap:Body>
+        <HotelBookRequest xmlns="http://TekTravel/HotelBookingApi">
+            <ClientReferenceNumber>200420173733000#TBOH</ClientReferenceNumber>
+            <GuestNationality>BR</GuestNationality>
+            <Guests>
+                <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>STU</FirstName>
+                    <LastName>STY</LastName>
+                    <Age>30</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>STU</FirstName>
+                    <LastName>STY</LastName>
+                    <Age>2</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
+                    <Title>MR</Title>
+                    <FirstName>STU</FirstName>
+                    <LastName>STY</LastName>
+                    <Age>30</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Child" GuestInRoom="2">
+                    <Title>MR</Title>
+                    <FirstName>STU</FirstName>
+                    <LastName>STY</LastName>
+                    <Age>2</Age>
+                </Guest>
+            </Guests>
+            <PaymentInfo VoucherBooking="true" PaymentModeType="Limit"/>
+            <SessionId>a966ef7b-b766-467f-9147-cb16800de5ce</SessionId>
+            <NoOfRooms>2</NoOfRooms>
+            <ResultIndex>1</ResultIndex>
+            <HotelCode>1162224</HotelCode>
+            <HotelName>Marco Polo Hotel</HotelName>
+            <HotelRooms>
+                <HotelRoom>
+                    <RoomIndex>1</RoomIndex>
+                    <RoomTypeName>Standard Room</RoomTypeName>
+                    <RoomTypeCode>3040642|e384db0a-97f9-132b-00a8-394477e44f13|1^^1^^2661869|165586227|e384db0a-97f9-132b-00a8-394477e44f13</RoomTypeCode>
+                    <RatePlanCode>2661869|165586227|e384db0a-97f9-132b-00a8-394477e44f13</RatePlanCode>
+                    <RoomRate RoomFare="50.19" RoomTax="9.53" TotalFare="59.73"/>
+                    <Supplements>
+                        <SuppInfo SuppID="1" SuppChargeType="AtProperty" Price="24.48" SuppIsSelected="false"/>
+                    </Supplements>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>2</RoomIndex>
+                    <RoomTypeName>Standard Room</RoomTypeName>
+                    <RoomTypeCode>3040642|e384db0a-97f9-132b-00a8-394477e44f13|2^^2^^2661869|165586227|e384db0a-97f9-132b-00a8-394477e44f13</RoomTypeCode>
+                    <RatePlanCode>2661869|165586227|e384db0a-97f9-132b-00a8-394477e44f13</RatePlanCode>
+                    <RoomRate RoomFare="50.19" RoomTax="9.53" TotalFare="59.73"/>
+                    <Supplements>
+                        <SuppInfo SuppID="1" SuppChargeType="AtProperty" Price="24.48" SuppIsSelected="false"/>
+                    </Supplements>
+                </HotelRoom>
+            </HotelRooms>
+            <RestrictDuplicateBooking>false</RestrictDuplicateBooking>
+        </HotelBookRequest>
+    </soap:Body>
+</soap:Envelope>

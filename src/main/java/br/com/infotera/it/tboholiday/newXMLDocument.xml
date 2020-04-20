@@ -1,80 +1,13 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
     <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <HotelBookingDetailResponse xmlns="http://TekTravel/HotelBookingApi">
+        <HotelBookResponse xmlns="http://TekTravel/HotelBookingApi">
             <Status>
-                <StatusCode>01</StatusCode>
-                <Description>Successful: HotelBookingDetail Successful</Description>
+                <StatusCode>05-70</StatusCode>
+                <Description>ProcessingErr: Technical Failure</Description>
             </Status>
-            <BookingDetail BookingId="127707" AmendmentStatus="NotRequested" BookingStatus="Cancelled" VoucherStatus="true" InvoiceNumber="MW109119" SupplierReferenceNo="" ConfirmationNo="IMMN5H">
-                <HotelName>Sun &amp; Sky Al Rigga Hotel</HotelName>
-                <Rating>FourStar</Rating>
-                <AddressLine1>Al Riqqa road, Opposite Al Ghurair Shopping Mall, Dubai, United Arab Emirates ZipCode: </AddressLine1>
-                <AddressLine2/>
-                <Map>25.26547|55.31933</Map>
-                <City>Dubai</City>
-                <CheckInDate>2020-05-12</CheckInDate>
-                <CheckOutDate>2020-05-15</CheckOutDate>
-                <BookingDate>2020-04-09</BookingDate>
-                <HotelCancelPolicies PolicyFormat="Nodes">
-                    <LastCancellationDeadline>2020-05-07T00:00:00</LastCancellationDeadline>
-                    <CancelPolicy RoomTypeName="Deluxe Room" RoomIndex="1" FromDate="2020-04-08" ToDate="2020-05-07" ChargeType="Fixed" CancellationCharge="0.00" Currency="USD"/>
-                    <CancelPolicy RoomTypeName="Deluxe Room" RoomIndex="1" FromDate="2020-05-08" ToDate="2020-05-11" ChargeType="Percentage" CancellationCharge="100.00" Currency="USD"/>
-                    <NoShowPolicy RoomTypeName="Deluxe Room" RoomIndex="1" FromDate="2020-05-12" ToDate="2020-05-15" ChargeType="Percentage" CancellationCharge="100.00" Currency="USD"/>
-                    <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
-                    <AutoCancellationText>Hotel Destination Local Date and Time:07-May-2020 , 21:30:00</AutoCancellationText>
-                </HotelCancelPolicies>
-                <HotelPolicyDetails>Remark :The property reserves the right of admission. Accommodation can be denied to guests posing as married couples if suitable ID proof is not presented at the time of check-in. &amp;lt;br/&amp;gt; A tourism tax will be charged directly at the property.Infant 1 year(s) : Stay for free if using existing bedding. Note, if you need a cot there may be an extra charge.Children 2 - 6 year(s) : Stay for free if using existing bedding.|||W.e.f 31.03.2014, Government of Dubai is applying “Tourism Dirham” a fee ranging from AED 7-20 per room per night, which the guests availing the stay will have to pay to the hotel directly as applied before check-out.</HotelPolicyDetails>
-                <FlightInfo/>
-                <SpecialRequest/>
-                <Roomtype>
-                    <RoomDetails>
-                        <AdultCount>1</AdultCount>
-                        <ChildCount>1</ChildCount>
-                        <ChildAge>2</ChildAge>
-                        <RoomName>Deluxe Room</RoomName>
-                        <GuestInfo>
-                            <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>nullNOME</FirstName>
-                                <LastName>nullSOBRENOME</LastName>
-                                <Age>2</Age>
-                            </Guest>
-                            <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>nullNOME</FirstName>
-                                <LastName>nullSOBRENOME</LastName>
-                                <Age>30</Age>
-                            </Guest>
-                        </GuestInfo>
-                        <RoomPromtion>Early Booking Saver. Price includes 5% discount!</RoomPromtion>
-                        <Supplements>
-                            <Supp_info Type="PerStaySupplement" SuppName="Tourism Dirham Fee" SuppChargeType="AtProperty" Price="12.24" Currency="USD"/>
-                        </Supplements>
-                        <RoomRate IsPackageRate="false" IsInstantConfirmed="false" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="46.74" RoomTax="8.91" TotalFare="55.65">
-                            <ExtraGuestCharges>0</ExtraGuestCharges>
-                            <ChildCharges>0</ChildCharges>
-                            <Discount>0</Discount>
-                            <OtherCharges>0</OtherCharges>
-                            <ServiceTax>0</ServiceTax>
-                        </RoomRate>
-                        <MealType>Room_Only</MealType>
-                    </RoomDetails>
-                </Roomtype>
-                <Currency>USD</Currency>
-                <NoOfRooms>1</NoOfRooms>
-                <AgencyDetails>
-                    <Name>Infotera</Name>
-                    <AddressLine1>Test 1234</AddressLine1>
-                    <Email/>
-                    <Phone>78901234</Phone>
-                    <City>Sao Paulo</City>
-                    <BookingMemberName>Infotera Test</BookingMemberName>
-                </AgencyDetails>
-                <CityId>115936</CityId>
-                <TripName>nullSOBRENOME_12May_Dubai</TripName>
-                <TBOHotelCode>1017415</TBOHotelCode>
-                <AppliedCancellationCharges>0.0</AppliedCancellationCharges>
-            </BookingDetail>
-        </HotelBookingDetailResponse>
+            <BookingStatus>Failed</BookingStatus>
+            <BookingId>0</BookingId>
+            <TripId>0</TripId>
+        </HotelBookResponse>
     </s:Body>
 </s:Envelope>

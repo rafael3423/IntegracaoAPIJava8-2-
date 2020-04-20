@@ -103,13 +103,13 @@ public class ReservarWS {
                             guestType = guestType.ADULT;
                         } else if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
                             guestType = guestType.CHILD;
-                        }
-
+                        }                      
+                          
                         guest.setGuestType(guestType);
                         guest.setGuestInRoom(sqQuato);
                         guest.setTitle("MR");
-                        guest.setFirstName(rn.getNmNome() + "NOME");
-                        guest.setLastName(rn.getNmSobrenome() + "SOBRENOME");
+                        guest.setFirstName(Utils.tiraAcento(rn.getNmNome()));
+                        guest.setLastName(Utils.tiraAcento(rn.getNmSobrenome()));
                         guest.setAge(rn.getQtIdade());
                         guest.setLeadGuest(leadGuest);
                         leadGuest = false;
@@ -146,7 +146,7 @@ public class ReservarWS {
         hotelBookRequest.setResultIndex(Integer.parseInt(chvSplit[1]));
         hotelBookRequest.setHotelCode(reservarRQ.getReserva().getReservaHotel().getHotel().getIdExterno());
         hotelBookRequest.setHotelName(reservarRQ.getReserva().getReservaHotel().getHotel().getNome());
-        hotelBookRequest.setRestrictDuplicateBooking(false);
+        hotelBookRequest.setRestrictDuplicateBooking(true);
         hotelBookRequest.setHotelRooms(arrayOfRequestedRooms);
 
         HotelBookResponse hotelBookResponse = chamaWS.chamadaPadrao(reservarRQ.getIntegrador(), hotelBookRequest, HotelBookResponse.class);

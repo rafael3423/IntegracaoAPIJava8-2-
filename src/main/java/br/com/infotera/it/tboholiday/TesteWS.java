@@ -55,26 +55,24 @@ public class TesteWS {
                 null,
                 null,
                 null,
-                WSPaxTipoEnum.CHD,
-                2,
-                "BR",
-                null,
-                null));
-
-        reservaNomeList.add(new WSReservaNome(null,
-                "nome2",
-                "sobrenome2",
-                null,
-                null,
-                null,
                 WSPaxTipoEnum.ADT,
                 20,
                 "BR",
                 null,
                 null));
 
-        configUhList.add(new WSConfigUh(reservaNomeList));
-        configUhList.add(new WSConfigUh(reservaNomeList));
+//        reservaNomeList.add(new WSReservaNome(null,
+//                "nome2",
+//                "sobrenome2",
+//                null,
+//                null,
+//                null,
+//                WSPaxTipoEnum.ADT,
+//                20,
+//                "BR",
+//                null,
+//                null));
+
         configUhList.add(new WSConfigUh(reservaNomeList));
 
         WSDisponibilidadeHotelRQ disponibilidadeHotelRQ = new WSDisponibilidadeHotelRQ(integrador,
@@ -121,9 +119,9 @@ public class TesteWS {
 //        CONSULTA
         montaWS.consultar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel(reservarRS.getReserva().getReservaHotel().getNrLocalizador()))));
 //        DETALHE HOTEL
-        montaWS.detalharHotel(new WSDetalheHotelRQ(integrador, new WSHotel(null, disponibilidadeHotelRS.getHotelPesquisaList().get(0).getHotel().getIdExterno(), null)));
+//        montaWS.detalharHotel(new WSDetalheHotelRQ(integrador, new WSHotel(null, disponibilidadeHotelRS.getHotelPesquisaList().get(0).getHotel().getIdExterno(), null)));
 //        RELATORIO DE RESERVAS
-        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-04-01","yyyy-MM-dd"), Utils.toDate("2020-04-05","yyyy-MM-dd")));
+//        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-04-01","yyyy-MM-dd"), Utils.toDate("2020-04-05","yyyy-MM-dd")));
 //        PRE-CANCELAR
 //        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
 //        CANCELAR
