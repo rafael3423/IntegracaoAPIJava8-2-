@@ -144,15 +144,15 @@ public class ChamaWS {
 
         } finally {
 
-//            String[] aa = xmlRequest.toString().split("Payload: ");
-//            String[] ab = aa[1].split("-------");
-//            String request = ab[0];
-//            String[] ba = xmlResponse.toString().split("Payload: ");
-//            String[] bb = ba[1].split("-------");
-//            String response = bb[0];
-//
-//            System.out.println("RQ - > " + metodo + request);
-//            System.out.println("RS - > " + metodo + response);
+            String[] aa = xmlRequest.toString().split("Payload: ");
+            String[] ab = aa[1].split("-------");
+            String request = ab[0];
+            String[] ba = xmlResponse.toString().split("Payload: ");
+            String[] bb = ba[1].split("-------");
+            String response = bb[0];
+
+            System.out.println("RQ - > " + metodo + request);
+            System.out.println("RS - > " + metodo + response);
             
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.XML,

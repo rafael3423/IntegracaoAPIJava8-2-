@@ -110,7 +110,7 @@ public class DisponibilidadeWS {
             hotelSearchRequest.setFilters(filters);
         }
 
-        hotelSearchRequest.setResultCount(1);
+//        hotelSearchRequest.setResultCount(1);
         hotelSearchRequest.setCheckInDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtEntrada(), true));
         hotelSearchRequest.setCheckOutDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtSaida(), true));
         hotelSearchRequest.setNoOfRooms(sqQuarto);

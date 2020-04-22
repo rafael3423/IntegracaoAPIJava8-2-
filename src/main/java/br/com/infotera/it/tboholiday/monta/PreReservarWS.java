@@ -70,7 +70,7 @@ public class PreReservarWS {
         for (String s : availabilityAndPricingResponse.getHotelCancellationPolicies().getHotelNorms().getString()) {
 
             if (normasHotel.equals("")) {
-                normasHotel = s;
+                normasHotel = s + "; " + availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies().getDefaultPolicy();
             } else {
                 normasHotel = normasHotel + "; " + s;
             }
