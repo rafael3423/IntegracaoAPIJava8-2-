@@ -20,17 +20,23 @@ import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRS;
 import br.com.infotera.common.media.WSMedia;
+import br.com.infotera.common.politica.WSPolitica;
+import br.com.infotera.common.politica.WSPoliticaCancelamento;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
 import br.com.infotera.it.tboholiday.ParDisp;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import tektravel.hotelbookingapi.ArrayOfInt;
 import tektravel.hotelbookingapi.ArrayOfRoomGuest;
+import tektravel.hotelbookingapi.CancelPolicies;
+import tektravel.hotelbookingapi.CancelPolicy;
+import tektravel.hotelbookingapi.CancellationChargeTypeForHotel;
 import tektravel.hotelbookingapi.Filters;
 import tektravel.hotelbookingapi.HotelResult;
 import tektravel.hotelbookingapi.HotelRoom;
@@ -231,9 +237,6 @@ public class DisponibilidadeWS {
         } catch (Exception ex) {
             throw new ErrorException(integrador, DisponibilidadeWS.class, "disponibilidadeUh", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao consultar os quartos disponiveis", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-
-        List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-        tarifaAdicionalList.add(new WSTarifaAdicional());
         try {
             for (Map.Entry<Integer, List<HotelRoom>> map : mapQuartoPesquisadoList.entrySet()) {
 
@@ -245,6 +248,7 @@ public class DisponibilidadeWS {
                 String roomChaveId = "";
                 String roomNameId = "";
                 LinkedHashMap<String, Integer> quartoConfig = new LinkedHashMap<>();
+                List<WSPolitica> politicaList = new ArrayList();
                 try {
                     for (HotelRoom hr : map.getValue()) {
 
@@ -299,11 +303,18 @@ public class DisponibilidadeWS {
                             }
                         }
 
-                        tarifaAdicionalList.set(0, new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda = hr.getRoomRate().getCurrency(), vlTaxa));
+                        politicaList.addAll(montaPoliticaCancelamento(hr.getCancelPolicies(), hr.getRoomRate().getTotalFare().doubleValue()));
+                        List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
+                        sgMoeda = hr.getRoomRate().getCurrency();
+                        tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda, vlTaxa));
+
+                        WSTarifa tarifa = new WSTarifa(sgMoeda, vlNeto, null, hr.getRatePlanCode(), null, null, tarifaAdicionalList);
+                        tarifa.setPoliticaList(politicaList);
+
                         quartoPesquisa = new WSQuartoUh(sqPesquisa,
                                 new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
-                                new WSRegime(hr.getInclusion(), null, hr.getInclusion()),
-                                new WSTarifa(sgMoeda = hr.getRoomRate().getCurrency(), vlNeto, null, hr.getRatePlanCode(), null, null, tarifaAdicionalList));
+                                new WSRegime(hr.getMealType().replace("_", ""), null, hr.getMealType().replace("_", "")),
+                                tarifa);
 
                     }
                 } catch (Exception ex) {
@@ -329,5 +340,52 @@ public class DisponibilidadeWS {
                 quartoList,
                 sqPesquisa,
                 hotelPesquisa.getDsParametro());
+    }
+
+    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria) {
+
+        List<WSPolitica> politicaList = new ArrayList();
+
+        if (cancelPolicies != null && cancelPolicies.getCancelPolicy() != null) {
+            cancelPolicies.getCancelPolicy().forEach((cp) -> {
+                Double pcCancelamento = null;
+                Double vlCancelamento = null;
+                if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        pcCancelamento = cp.getCancellationCharge().doubleValue();
+                    }
+                } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        vlCancelamento = cp.getCancellationCharge().doubleValue();
+                    }
+                } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                    }
+                }
+
+                if (pcCancelamento != null || vlCancelamento != null) {
+                    Date dtMinCancelamento = Utils.addDias(Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"), -3);
+                    Date dtMaxCancelamento = Utils.toDate(cp.getToDate(), "yyyy-MM-dd");
+                    boolean stImediata = false;
+                    if (dtMinCancelamento.before(new Date())) {
+                        stImediata = true;
+                    }
+
+                    politicaList.add(new WSPoliticaCancelamento("Politica de cancelamento",
+                            null,
+                            cp.getCurrency(),
+                            vlCancelamento,
+                            pcCancelamento,
+                            null,
+                            stImediata,
+                            dtMinCancelamento,
+                            dtMaxCancelamento,
+                            false));
+                }
+            });
+        }
+
+        return politicaList;
     }
 }
