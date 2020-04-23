@@ -130,7 +130,7 @@ public class PreReservarWS {
                         rhu.getUh().getCdUh(),
                         rhu.getUh().getDsCategoria(),
                         rhu.getUh().getDsUh(),
-                        rhu.getUh().getDsParametro());
+                        rhu.getUh().getDsParametro() + "%" + tarifarHotelRS.getReservaHotel().getDsParametro());
 
                 List<WSReservaNome> reservaNomeList = new ArrayList();
                 try {
