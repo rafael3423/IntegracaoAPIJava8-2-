@@ -238,7 +238,7 @@ public class ConsultarReservaWS {
                     if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
                         pcCancelamento = cp.getCancellationCharge().doubleValue();
 
-                        vlCancelamento = Utils.multiplicar(Utils.dividir(vlTotal, pcCancelamento), 100.00);
+                        vlCancelamento = Utils.dividir(Utils.multiplicar(vlTotal, pcCancelamento), 100.00);
 
                     }
                 } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
