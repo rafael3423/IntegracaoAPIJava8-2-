@@ -269,7 +269,8 @@ public class DisponibilidadeWS {
                                 Utils.gerarDsReservaNome(reservanomeMap.get(count)),
                                 gson.toJson(supplementList),
                                 hr.getRoomRate().getRoomFare().toString() + "#" + hr.getRoomRate().getRoomTax().toString() + "#" + hr.getRoomRate().getTotalFare().toString(),
-                                hr.getRoomTypeName());
+                                hr.getRoomTypeName(),
+                                hotelPesquisa.getDsParametro());
 
                         parDispList.add(parDisp);
 
@@ -304,9 +305,9 @@ public class DisponibilidadeWS {
                         }
 
                         politicaList.addAll(montaPoliticaCancelamento(hr.getCancelPolicies(), hr.getRoomRate().getTotalFare().doubleValue()));
-                        
+
                         List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-                        
+
                         sgMoeda = hr.getRoomRate().getCurrency();
                         tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda, vlTaxa));
 

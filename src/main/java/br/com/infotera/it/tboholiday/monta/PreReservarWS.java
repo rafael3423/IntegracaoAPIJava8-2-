@@ -45,23 +45,34 @@ public class PreReservarWS {
 
         AvailabilityAndPricingRequest availabilityAndPricingRequest = new AvailabilityAndPricingRequest();
 
-        String chvSessao[] = tarifarHotelRS.getReservaHotel().getDsParametro().split("#");
-
         BookingOptions bookingOptions = new BookingOptions();
 
         RoomCombination roomCombination = new RoomCombination();
 
-        for (WSReservaHotelUh rhuh : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
+        List<WSReservaHotelUh> reservaHotelUhListFormarado = montaReservaHotelUhList(tarifarHotelRS.getReservaHotel().getReservaHotelUhList());
+
+        String resultIndex = null;
+        String sessionId = null;
+        String parametroReservaHotel = null;
+
+        for (WSReservaHotelUh rhuh : reservaHotelUhListFormarado) {
             ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+
+            String result[] = parDispRetono.getA7().split("#");
+            resultIndex = result[1];
+            sessionId = result[0];
+
+            parametroReservaHotel = parDispRetono.getA7();
+            
             roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
         }
 
         bookingOptions.setFixedFormat(false);
         bookingOptions.getRoomCombination().add(roomCombination);
 
-        availabilityAndPricingRequest.setResultIndex(Integer.parseInt(chvSessao[1]));
+        availabilityAndPricingRequest.setResultIndex(Integer.parseInt(resultIndex));
         availabilityAndPricingRequest.setOptionsForBooking(bookingOptions);
-        availabilityAndPricingRequest.setSessionId(chvSessao[0]);
+        availabilityAndPricingRequest.setSessionId(sessionId);
 
         AvailabilityAndPricingResponse availabilityAndPricingResponse = chamaWS.chamadaPadrao(preReservarRQ.getIntegrador(), availabilityAndPricingRequest, AvailabilityAndPricingResponse.class);
 
@@ -83,14 +94,14 @@ public class PreReservarWS {
         Double vlTotalTodosQuartos = 0.0;
         String vlTotalCadaQuarto = "";
 
-        for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
+        for (WSReservaHotelUh rhu : reservaHotelUhListFormarado) {
 
             vlTotalCadaQuarto += Utils.somar(rhu.getTarifa().getVlNeto(), rhu.getTarifa().getTarifaAdicionalList().get(0).getVlNeto()) + "#";
             vlTotalTodosQuartos += Utils.somar(rhu.getTarifa().getVlNeto(), rhu.getTarifa().getTarifaAdicionalList().get(0).getVlNeto());
         }
 
         try {
-            for (WSReservaHotelUh rhu : tarifarHotelRS.getReservaHotel().getReservaHotelUhList()) {
+            for (WSReservaHotelUh rhu : reservaHotelUhListFormarado) {
 
                 List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
@@ -155,10 +166,37 @@ public class PreReservarWS {
 
         WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
         reservaHotel.setHotel(preReservarRQ.getReserva().getReservaHotel().getHotel());
-        reservaHotel.setDsParametro(tarifarHotelRS.getReservaHotel().getDsParametro());
+        reservaHotel.setDsParametro(parametroReservaHotel);
 
         WSReserva reserva = new WSReserva(reservaHotel);
 
         return new WSPreReservarRS(reserva, preReservarRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
+
+    private List<WSReservaHotelUh> montaReservaHotelUhList(List<WSReservaHotelUh> reservaHotelUhListChegada) {
+
+        List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
+        for (WSReservaHotelUh rhuh : reservaHotelUhListChegada) {
+            ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
+            int sqQuarto = 0;
+            for (ParDisp p : parDispRetono) {
+
+                rhuh.getUh().setDsParametro(UtilsWS.toJson(p));
+                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
+                        rhuh.getUh(),
+                        rhuh.getRegime(),
+                        rhuh.getTarifa(),
+                        rhuh.getDtEntrada(),
+                        rhuh.getDtSaida(),
+                        Utils.gerarWSReservaNome(p.getA3()),
+                        WSReservaStatusEnum.SOLICITACAO));
+
+                sqQuarto++;
+            }
+
+        }
+
+        return reservaHotelUhList;
+    }
+
 }
