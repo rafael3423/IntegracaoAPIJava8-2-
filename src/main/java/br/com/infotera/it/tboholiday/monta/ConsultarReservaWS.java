@@ -76,7 +76,7 @@ public class ConsultarReservaWS {
 
                 if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("") && sqQuarto == 0) {
 
-                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria));
+                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria, rd.getRoomRate().getTotalFare().doubleValue()));
                 }
 
                 sqQuarto++;
@@ -224,7 +224,7 @@ public class ConsultarReservaWS {
         return new WSReserva(reservaHotel);
     }
 
-    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria) {
+    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria, Double vlTotal) {
 
         List<WSPolitica> politicaList = new ArrayList();
 
@@ -237,6 +237,9 @@ public class ConsultarReservaWS {
                 if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
                     if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
                         pcCancelamento = cp.getCancellationCharge().doubleValue();
+
+                        vlCancelamento = Utils.multiplicar(Utils.dividir(vlTotal, pcCancelamento), 100.00);
+
                     }
                 } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
                     if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
