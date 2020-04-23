@@ -68,14 +68,14 @@ public class UtilsWS {
                 try {
                     for (CancelPolicy cp : cancelPolicies.getCancelPolicy()) {
 
-                        Double vlCancelamento = 0.0;
+                        Double vlCancelamento = null;
                         Double vlTotal = null;
 
                         String chvVlTotal[] = valores.split("#");
 
                         if (cp.getRoomIndex() != null && !cp.getRoomIndex().equals("")) {
                             vlTotal = Double.parseDouble(chvVlTotal[Integer.parseInt(cp.getRoomIndex())]);
-                        }else{
+                        } else {
                             vlTotal = Double.parseDouble(chvVlTotal[0]);
                         }
 
@@ -94,25 +94,26 @@ public class UtilsWS {
                         Boolean stImediata = false;
                         Boolean stNaoRefundable = false;
 
-                        Date dtMinimaCancelamento = Utils.addDias(Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"), -3);
+                        if (vlCancelamento != null && !vlCancelamento.equals(0.0)) {
+                            Date dtMinimaCancelamento = Utils.addDias(Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"), -3);
 
-                        if (new Date().compareTo(dtMinimaCancelamento) == 1) {
-                            stImediata = true;
-                        }
+                            if (new Date().compareTo(dtMinimaCancelamento) == 1) {
+                                stImediata = true;
+                            }
 
-                        WSPoliticaCancelamento politicaCancelamento = new WSPoliticaCancelamento(cp.getRoomTypeName(),
-                                normasHotel,
-                                cp.getCurrency(),
-                                vlCancelamento,
-                                null,
-                                null,
-                                stImediata,
-                                Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"),
-                                Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
-                                stNaoRefundable);
+                            WSPoliticaCancelamento politicaCancelamento = new WSPoliticaCancelamento(cp.getRoomTypeName(),
+                                    normasHotel,
+                                    cp.getCurrency(),
+                                    vlCancelamento,
+                                    null,
+                                    null,
+                                    stImediata,
+                                    dtMinimaCancelamento,
+                                    Utils.toDate(cp.getToDate(), "yyyy-MM-dd"),
+                                    stNaoRefundable);
 
-                        if (!vlCancelamento.equals(0.0)) {
                             politicaCancelamentoList.add(politicaCancelamento);
+
                         }
                     }
                 } catch (Exception ex) {

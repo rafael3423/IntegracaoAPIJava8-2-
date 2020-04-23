@@ -116,7 +116,7 @@ public class DisponibilidadeWS {
             hotelSearchRequest.setFilters(filters);
         }
 
-//        hotelSearchRequest.setResultCount(1);
+//      hotelSearchRequest.setResultCount(1);
         hotelSearchRequest.setCheckInDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtEntrada(), true));
         hotelSearchRequest.setCheckOutDate(Utils.convertStringDateToXmlGregorianCalendar(disponibilidadeRQ.getDtSaida(), true));
         hotelSearchRequest.setNoOfRooms(sqQuarto);
@@ -304,7 +304,9 @@ public class DisponibilidadeWS {
                         }
 
                         politicaList.addAll(montaPoliticaCancelamento(hr.getCancelPolicies(), hr.getRoomRate().getTotalFare().doubleValue()));
+                        
                         List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
+                        
                         sgMoeda = hr.getRoomRate().getCurrency();
                         tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO, "Taxa de serviço", sgMoeda, vlTaxa));
 
@@ -348,8 +350,10 @@ public class DisponibilidadeWS {
 
         if (cancelPolicies != null && cancelPolicies.getCancelPolicy() != null) {
             cancelPolicies.getCancelPolicy().forEach((cp) -> {
+
                 Double pcCancelamento = null;
                 Double vlCancelamento = null;
+
                 if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
                     if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
                         pcCancelamento = cp.getCancellationCharge().doubleValue();
@@ -368,6 +372,7 @@ public class DisponibilidadeWS {
                     Date dtMinCancelamento = Utils.addDias(Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"), -3);
                     Date dtMaxCancelamento = Utils.toDate(cp.getToDate(), "yyyy-MM-dd");
                     boolean stImediata = false;
+
                     if (dtMinCancelamento.before(new Date())) {
                         stImediata = true;
                     }

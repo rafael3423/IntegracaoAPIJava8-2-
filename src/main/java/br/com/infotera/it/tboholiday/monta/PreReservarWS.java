@@ -155,7 +155,7 @@ public class PreReservarWS {
 
         WSReservaHotel reservaHotel = new WSReservaHotel(reservaHotelUhList);
         reservaHotel.setHotel(preReservarRQ.getReserva().getReservaHotel().getHotel());
-        reservaHotel.setDsParametro(preReservarRQ.getReserva().getReservaHotel().getDsParametro());
+        reservaHotel.setDsParametro(tarifarHotelRS.getReservaHotel().getDsParametro());
 
         WSReserva reserva = new WSReserva(reservaHotel);
 
