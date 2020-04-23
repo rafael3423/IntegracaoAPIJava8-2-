@@ -46,6 +46,7 @@ public class ReservarWS {
         PaymentInfo paymentInfo = new PaymentInfo();
         Boolean leadGuest = true;
         int sqQuato = 0;
+        String sessionDisp = null;
 
         try {
             for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
@@ -56,6 +57,8 @@ public class ReservarWS {
 
                 ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
+                sessionDisp = parDisp.getA7();
+                
                 String chvTarifas[] = parDisp.getA5().split("#");
 
                 BigDecimal bigFare = new BigDecimal(chvTarifas[0]);
@@ -132,7 +135,7 @@ public class ReservarWS {
             throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
-        String chvSplit[] = reservarRQ.getReserva().getReservaHotel().getDsParametro().split("#");
+         String chvSplit[] = sessionDisp.split("#");
 
         String date = Utils.formatData(new Date(), "ddMMyyHHmmss000");
 

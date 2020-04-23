@@ -103,7 +103,7 @@ public class ConsultarReservaWS {
                         tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.MULTA, "Multa de cancelamento", bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCurrency(), vlMulta));
                     }
                 } catch (Exception ex) {
-                    throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+                        throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
                 tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO,
