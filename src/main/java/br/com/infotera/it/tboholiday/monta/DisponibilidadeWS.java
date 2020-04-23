@@ -315,7 +315,7 @@ public class DisponibilidadeWS {
                         tarifa.setPoliticaList(politicaList);
 
                         quartoPesquisa = new WSQuartoUh(sqPesquisa,
-                                new WSUh(null, textoQuarto, textoQuarto, textoQuarto, textoQuarto, dsParametro),
+                                new WSUh(null, hr.getRoomTypeCode(), textoQuarto, textoQuarto, textoQuarto, dsParametro),
                                 new WSRegime(hr.getMealType().replace("_", ""), null, hr.getMealType().replace("_", "")),
                                 tarifa);
 

@@ -202,6 +202,7 @@ public class PreReservarWS {
         reservaHotelUhListChegada.forEach((rhuh) -> {
             ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
             int sqQuarto = 0;
+            
             for (ParDisp p : parDispRetono) {
                 String dsParametro = UtilsWS.toJson(p);
 
@@ -219,7 +220,7 @@ public class PreReservarWS {
                             vltaxa));
                 });
 
-                WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, tarifaAdicionalList);
+                WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, null, rhuh.getTarifa().getCdTarifa(), null, null, tarifaAdicionalList);
 
                 reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
                         uh,
