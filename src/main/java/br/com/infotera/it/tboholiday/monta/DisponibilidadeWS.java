@@ -300,7 +300,7 @@ public class DisponibilidadeWS {
                             if (textoQuarto == null) {
                                 textoQuarto = quarto.getValue() + "x " + quarto.getKey();
                             } else {
-                                textoQuarto = textoQuarto + "+ " + quarto.getValue() + "x " + quarto.getKey();
+                                textoQuarto = textoQuarto + "<br/>" + quarto.getValue() + "x " + quarto.getKey();
                             }
                         }
 
