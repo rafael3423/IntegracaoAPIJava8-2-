@@ -29,6 +29,10 @@ import br.com.infotera.it.tboholiday.ParDisp;
 import br.com.infotera.it.tboholiday.UtilsWS;
 import java.util.ArrayList;
 import java.util.List;
+import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
+import tektravel.hotelbookingapi.AvailabilityAndPricingResponse;
+import tektravel.hotelbookingapi.BookingOptions;
+import tektravel.hotelbookingapi.RoomCombination;
 
 public class TarifarWS {
 
@@ -41,6 +45,7 @@ public class TarifarWS {
 
         if (tarifarHotelRQ.getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.ORCAMENTO)) {
             reservaHotelUhList.addAll(tarifarOrcamento(tarifarHotelRQ));
+
         } else {
             if (tarifarHotelRQ.getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.SOLICITACAO)) {
                 DisponibilidadeWS disponibilidadeWS = new DisponibilidadeWS();
@@ -71,7 +76,7 @@ public class TarifarWS {
                     for (WSHotelPesquisa hp : disponibilidadeHotelRS.getHotelPesquisaList()) {
                         for (WSQuartoUh quh : hp.getQuartoList().get(0).getQuartoUhList()) {
                             if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getTarifa().getVlNeto().equals(quh.getTarifa().getVlNeto())) {
-                                String dsUh = quh.getUh().getDsUh().substring(3, quh.getUh().getDsUh().length());
+                                String dsUh = quh.getUh().getDsUh();//.substring(3, quh.getUh().getDsUh().length());
                                 if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getUh().getDsUh().equals(dsUh)) {
                                     if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getRegime().getDsRegime().equals(quh.getRegime().getDsRegime())) {
                                         quartoUh = quh;
@@ -93,6 +98,7 @@ public class TarifarWS {
                     ParDisp[] parDispRetono = (ParDisp[]) UtilsWS.fromJson(quartoUh.getUh().getDsParametro(), ParDisp[].class);
                     int count = 0;
                     try {
+
                         for (ParDisp pd : parDispRetono) {
 
                             String dsParametro = UtilsWS.toJson(pd);
@@ -119,6 +125,34 @@ public class TarifarWS {
                         throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
                     }
                 }
+                AvailabilityAndPricingRequest availabilityAndPricingRequest = new AvailabilityAndPricingRequest();
+
+                BookingOptions bookingOptions = new BookingOptions();
+
+                RoomCombination roomCombination = new RoomCombination();
+
+                String resultIndex = null;
+                String sessionId = null;
+
+                for (WSReservaHotelUh rhuh : reservaHotelUhList) {
+
+                    ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+
+                    String result[] = parDispRetono.getA7().split("#");
+                    resultIndex = result[1];
+                    sessionId = result[0];
+
+                    roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
+                }
+
+                bookingOptions.setFixedFormat(false);
+                bookingOptions.getRoomCombination().add(roomCombination);
+
+                availabilityAndPricingRequest.setResultIndex(Integer.parseInt(resultIndex));
+                availabilityAndPricingRequest.setOptionsForBooking(bookingOptions);
+                availabilityAndPricingRequest.setSessionId(sessionId);
+
+                chamaWS.chamadaPadrao(tarifarHotelRQ.getIntegrador(), availabilityAndPricingRequest, AvailabilityAndPricingResponse.class);
 
             }
         }
@@ -142,7 +176,7 @@ public class TarifarWS {
         DisponibilidadeWS disponibilidadeWS = new DisponibilidadeWS();
         List<WSHotel> hotelList = new ArrayList();
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
-        
+
         hotelList.add(tarifarHotelRQ.getReservaHotel().getHotel());
 
         ParDisp[] parDisp = (ParDisp[]) UtilsWS.fromJson(tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getUh().getDsParametro(), ParDisp[].class);
@@ -185,6 +219,7 @@ public class TarifarWS {
         if (quartoUh == null) {
             throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifar", WSMensagemErroEnum.HTA, "Quarto não disponivel", WSIntegracaoStatusEnum.NEGADO, null);
         } else {
+
             reservaHotelUhList.add(new WSReservaHotelUh(0,
                     quartoUh.getUh(),
                     quartoUh.getRegime(),
@@ -194,6 +229,7 @@ public class TarifarWS {
                     null,
                     WSReservaStatusEnum.SOLICITACAO));
         }
+
         return reservaHotelUhList;
     }
 

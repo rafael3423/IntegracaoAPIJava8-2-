@@ -1,43 +1,14 @@
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <AvailabilityAndPricingResponse xmlns="http://TekTravel/HotelBookingApi">
-            <Status>
-                <StatusCode>01</StatusCode>
-                <Description>Successful: AvailabilityAndPricing Successful</Description>
-            </Status>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <Credentials xmlns="http://TekTravel/HotelBookingApi" UserName="InfoteraTest" Password="Inf@64890970"/>
+    </soap:Header>
+    <soap:Body>
+        <HotelRoomAvailabilityRequest xmlns="http://TekTravel/HotelBookingApi">
+            <SessionId>4b441352-4835-4fd4-81e5-eea0bc211507</SessionId>
             <ResultIndex>1</ResultIndex>
-            <AvailableForBook>true</AvailableForBook>
-            <AvailableForConfirmBook>true</AvailableForConfirmBook>
-            <CancellationPoliciesAvailable>true</CancellationPoliciesAvailable>
-            <HotelCancellationPolicies>
-                <HotelNorms>
-                    <string>CheckIn Time-Begin: 1:00 PM </string>
-                    <string> CheckIn Time-End: 5:30 PM</string>
-                    <string>CheckOut Time: 12:00 PM</string>
-                    <string>CheckIn Instructions: Extra-person charges may apply and vary depending on property policy. &amp;lt;br /&amp;gt;Government-issued photo identification and a credit card, debit card, or cash deposit are required at check-in for incidental charges. &amp;lt;br /&amp;gt;Special requests are subject to availability upon check-in and may incur additional charges. Special requests cannot be guaranteed. &amp;lt;ul&amp;gt;  &amp;lt;/ul&amp;gt;</string>
-                    <string>Minimum CheckIn Age : 18</string>
-                    <string>Cards Accepted: Cash,Mastercard,Visa,Debit cards</string>
-                    <string>&amp;lt;ul&amp;gt;  &amp;lt;li&amp;gt;Parents or a legal guardian traveling with children under 18 years must present the child's birth certificate and an identity card with photo (passport, for example) at the check-in. For international travels from Brazil, if just one of the parents is traveling with the child, she/he must present – in addition to the child's certificate of birth and identity card with photo – a letter authorizing the trip signed by the other parent with a notarial certification of signature. In case the parents or the legal guardian, as applicable, cannot or are unwilling to give this authorization, a judicial authorization is required. People who intend to travel to Brazil with children must consult with the Brazilian consulate before traveling for more information. &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt;,Only service animals are allowed,Service animals are exempt from fees/restrictions,Pets not allowed,No cribs (infant beds) available,No rollaway/extra beds available</string>
-                    <string>Please refer to the following Terms of Use - http://mytravelagent.online/termsofuse.pdf</string>
-                    <string>Please note that bedding type will be </string>
-                </HotelNorms>
-                <CancelPolicies PolicyFormat="Nodes">
-                    <LastCancellationDeadline>2020-05-15T00:00:00</LastCancellationDeadline>
-                    <CancelPolicy FromDate="2020-04-22" ToDate="2020-05-15" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
-                    <CancelPolicy FromDate="2020-05-16" ToDate="2020-05-18" ChargeType="Fixed" CancellationCharge="21.48" Currency="USD"/>
-                    <CancelPolicy FromDate="2020-05-19" ToDate="2020-05-19" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
-                    <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
-                    <AutoCancellationText>Hotel Destination Local Date and Time:15-May-2020 , 21:30:00</AutoCancellationText>
-                </CancelPolicies>
-            </HotelCancellationPolicies>
-            <PriceVerification Status="Successful" PriceChanged="false" AvailableOnNewPrice="false"/>
-            <AccountInfo AgencyBalance="Sufficient" AgencyBlocked="false"/>
-            <HotelDetailsVerification Status="Successful" Remarks=""/>
-            <HotelDetails HotelName="Hotel Joamar" HotelRating="TwoStar">
-                <Address>Rua Dom José de Barros, 187,Sao Paulo,SP,BR</Address>
-                <Map>-23.544135|-46.640382</Map>
-            </HotelDetails>
-            <IsFlightDetailsMandatory>false</IsFlightDetailsMandatory>
-        </AvailabilityAndPricingResponse>
-    </s:Body>
-</s:Envelope>
+            <HotelCode>1246485</HotelCode>
+            <ResponseTime>30</ResponseTime>
+            <IsCancellationPolicyRequired>true</IsCancellationPolicyRequired>
+        </HotelRoomAvailabilityRequest>
+    </soap:Body>
+</soap:Envelope>

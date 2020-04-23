@@ -46,23 +46,15 @@ public class ReservarWS {
         PaymentInfo paymentInfo = new PaymentInfo();
         Boolean leadGuest = true;
         int sqQuato = 0;
-        String sessionId = "";
 
         try {
             for (WSReservaHotelUh rhuh : reservarRQ.getReserva().getReservaHotel().getReservaHotelUhList()) {
 
-                paymentInfo.setVoucherBooking(true);
-                paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
-
                 RequestedRooms requestedRooms = new RequestedRooms();
 
                 SuppInfo suppInfo = new SuppInfo();
-                
-                String pd[] = rhuh.getUh().getDsParametro().split("%");
-                
-                sessionId = pd[1];
 
-                ParDisp parDisp = (ParDisp) UtilsWS.fromJson(pd[0], ParDisp.class);
+                ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
                 String chvTarifas[] = parDisp.getA5().split("#");
 
@@ -108,8 +100,10 @@ public class ReservarWS {
                             guestType = guestType.ADULT;
                         } else if (rn.getPaxTipo().isChd() || rn.getPaxTipo().isInf()) {
                             guestType = guestType.CHILD;
-                        }                      
-                          
+                        }
+
+                        paymentInfo.setVoucherBooking(true);
+                        paymentInfo.setPaymentModeType(PaymentModeType.LIMIT);
                         guest.setGuestType(guestType);
                         guest.setGuestInRoom(sqQuato);
                         guest.setTitle("MR");
@@ -138,7 +132,7 @@ public class ReservarWS {
             throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
-        String chvSplit[] = sessionId.split("#");
+        String chvSplit[] = reservarRQ.getReserva().getReservaHotel().getDsParametro().split("#");
 
         String date = Utils.formatData(new Date(), "ddMMyyHHmmss000");
 

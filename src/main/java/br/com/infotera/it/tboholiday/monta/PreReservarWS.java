@@ -130,7 +130,7 @@ public class PreReservarWS {
                         rhu.getUh().getCdUh(),
                         rhu.getUh().getDsCategoria(),
                         rhu.getUh().getDsUh(),
-                        rhu.getUh().getDsParametro() + "%" + tarifarHotelRS.getReservaHotel().getDsParametro());
+                        rhu.getUh().getDsParametro());
 
                 List<WSReservaNome> reservaNomeList = new ArrayList();
                 try {
@@ -177,6 +177,7 @@ public class PreReservarWS {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
         for (WSReservaHotelUh rhuh : reservaHotelUhListChegada) {
+            
             ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
             int sqQuarto = 0;
             for (ParDisp p : parDispRetono) {
