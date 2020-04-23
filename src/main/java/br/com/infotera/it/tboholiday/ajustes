@@ -1,3 +1,5 @@
-Lista de tarifa adicional fora do for
-Moeda no construtor
-nm do regime
+Disponibilidade, pre reservar, cancelar, tarifar, relatorio, detalhe = Status ErrorException NEGAGO
+Reservar, consultar, monta reserva = Status ErrorException INCONSISTENTE
+
+limpar os comentarios desnecessarios
+limpar imports não usados

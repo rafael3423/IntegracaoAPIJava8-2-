@@ -40,7 +40,6 @@ public class ConsultarReservaWS {
     ChamaWS chamaWS = new ChamaWS();
 
     public WSReservaRS consultar(WSReservaRQ reservaRQ, Boolean isCancelamento) throws ErrorException {
-
         HotelBookingDetailRequest hotelBookingDetailRequest = new HotelBookingDetailRequest();
 
         hotelBookingDetailRequest.setBookingId(Integer.parseInt(reservaRQ.getReserva().getReservaHotel().getNrLocalizador()));
@@ -83,7 +82,7 @@ public class ConsultarReservaWS {
 
                 List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
                 Double vlMulta = 0.0;
-
+                String sgMoedaCancelamento = null;
                 try {
                     for (WSPolitica politica : politicaCancelamentoList) {
                         if (politica.getPoliticaTipo().isCancelamento()) {
@@ -91,19 +90,21 @@ public class ConsultarReservaWS {
                                 if (politica.getPoliticaCancelamento().getDtMaxCancelamento() != null) {
                                     if (new Date().compareTo(politica.getPoliticaCancelamento().getDtMinCancelamento()) == 1 && new Date().compareTo(politica.getPoliticaCancelamento().getDtMaxCancelamento()) == -1) {
                                         vlMulta = politica.getPoliticaCancelamento().getVlCancelamento();
+                                        sgMoedaCancelamento = politica.getPoliticaCancelamento().getSgMoeda();
                                     }
                                 } else {
                                     vlMulta = politica.getPoliticaCancelamento().getVlCancelamento();
+                                    sgMoedaCancelamento = politica.getPoliticaCancelamento().getSgMoeda();
                                 }
                             }
                         }
                     }
 
                     if (vlMulta != 0.0 && isCancelamento) {
-                        tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.MULTA, "Multa de cancelamento", bookingDetail.getHotelCancelPolicies().getCancelPolicy().get(sqQuarto).getCurrency(), vlMulta));
+                        tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.MULTA, "Multa de cancelamento", sgMoedaCancelamento, vlMulta));
                     }
                 } catch (Exception ex) {
-                        throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
+                    throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao montar a tarifa de cancelamento", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
                 tarifaAdicionalList.add(new WSTarifaAdicional(WSTarifaAdicionalTipoEnum.TAXA_SERVICO,
@@ -185,6 +186,10 @@ public class ConsultarReservaWS {
                 break;
             default:
                 break;
+        }
+
+        if (reservaStatusEnum.equals(WSReservaStatusEnum.INCONSISTENTE)) {
+            throw new ErrorException(integrador, ConsultarReservaWS.class, "montareserva", WSMensagemErroEnum.HCO, "Erro ao consultar a reserva, status: " + bookingDetail.getBookingStatus().toString(), WSIntegracaoStatusEnum.INCONSISTENTE, null);
         }
 
         String chvMap[] = bookingDetail.getMap().split("\\|");
