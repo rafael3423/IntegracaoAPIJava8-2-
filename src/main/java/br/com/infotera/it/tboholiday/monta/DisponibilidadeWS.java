@@ -393,5 +393,5 @@ public class DisponibilidadeWS {
         }
 
         return politicaList;
-    }
+    }                                                                                                                                                                                                                                                                                                                                    
 }
