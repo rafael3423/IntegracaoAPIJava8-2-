@@ -25,14 +25,12 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
-import br.com.infotera.it.tboholiday.UtilsWS;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tektravel.hotelbookingapi.APIBookingDetail;
 import tektravel.hotelbookingapi.CancelPolicies;
 import tektravel.hotelbookingapi.CancellationChargeTypeForHotel;
-import tektravel.hotelbookingapi.Guest;
 import tektravel.hotelbookingapi.HotelBookingDetailRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailResponse;
 import tektravel.hotelbookingapi.RoomDetails;
@@ -133,14 +131,13 @@ public class ConsultarReservaWS {
 
                 List<WSReservaNome> reservaNomeList = new ArrayList();
                 try {
-                    for (Guest g : rd.getGuestInfo().getGuest()) {
-
+                    rd.getGuestInfo().getGuest().forEach((g) -> {
                         WSPaxTipoEnum paxTipoEnum = null;
 
-                        if (g.getGuestType().toString().toString().toUpperCase().equals("ADULT")) {
-                            paxTipoEnum = paxTipoEnum.ADT;
-                        } else if (g.getGuestType().toString().toString().toUpperCase().equals("CHILD")) {
-                            paxTipoEnum = paxTipoEnum.CHD;
+                        if (g.getGuestType().toString().toUpperCase().equals("ADULT")) {
+                            paxTipoEnum = WSPaxTipoEnum.ADT;
+                        } else if (g.getGuestType().toString().toUpperCase().equals("CHILD")) {
+                            paxTipoEnum = WSPaxTipoEnum.CHD;
                         }
 
                         reservaNomeList.add(new WSReservaNome(g.getFirstName(),
@@ -149,7 +146,7 @@ public class ConsultarReservaWS {
                                 null,
                                 g.getAge(),
                                 null));
-                    }
+                    });
                 } catch (Exception ex) {
                     throw new ErrorException(integrador, ConsultarReservaWS.class, "montaReserva", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao efetuar a consulta da reserva", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
@@ -172,25 +169,19 @@ public class ConsultarReservaWS {
 
         switch (bookingDetail.getBookingStatus().toString().toUpperCase()) {
             case "CONFIRMED":
-                reservaStatusEnum = reservaStatusEnum.CONFIRMADO;
+                reservaStatusEnum = WSReservaStatusEnum.CONFIRMADO;
                 break;
             case "REJECTED":
-                reservaStatusEnum = reservaStatusEnum.NEGADO;
+                reservaStatusEnum = WSReservaStatusEnum.NEGADO;
                 break;
             case "CANCELLED":
-                reservaStatusEnum = reservaStatusEnum.CANCELADO;
+                reservaStatusEnum = WSReservaStatusEnum.CANCELADO;
                 break;
             case "PENDING":
-                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                break;
             case "FAILED":
-                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                break;
             case "CANCELLATION_IN_PROGRESS":
-                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
-                break;
             case "VOUCHERED":
-                reservaStatusEnum = reservaStatusEnum.INCONSISTENTE;
+                reservaStatusEnum = WSReservaStatusEnum.INCONSISTENTE;
                 break;
             default:
                 break;
@@ -209,7 +200,7 @@ public class ConsultarReservaWS {
 
         WSHotelCategoria hotelCategoria = new WSHotelCategoria(null, bookingDetail.getRating().toString());
 
-        WSHotel hotel = new WSHotel("",
+        WSHotel hotel = new WSHotel(bookingDetail.getTBOHotelCode(),
                 bookingDetail.getHotelName(),
                 null,
                 hotelCategoria,
@@ -218,8 +209,6 @@ public class ConsultarReservaWS {
                 endereco,
                 null,
                 null);
-
-        hotel.setId(Integer.parseInt(bookingDetail.getTBOHotelCode()));
 
         WSReservaHotel reservaHotel = new WSReservaHotel(Utils.toDate(bookingDetail.getBookingDate().toString(), "yyyy-MM-dd"),
                 null,
