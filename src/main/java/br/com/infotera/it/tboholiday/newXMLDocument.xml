@@ -3,32 +3,56 @@
         <Credentials xmlns="http://TekTravel/HotelBookingApi" UserName="InfoteraTest" Password="Inf@64890970"/>
     </soap:Header>
     <soap:Body>
-        <HotelRoomAvailabilityRequest xmlns="http://TekTravel/HotelBookingApi">
-            <SessionId>4b441352-4835-4fd4-81e5-eea0bc211507</SessionId>
+        <HotelBookRequest xmlns="http://TekTravel/HotelBookingApi">
+            <ClientReferenceNumber>230420145207000#TBOH</ClientReferenceNumber>
+            <GuestNationality>BR</GuestNationality>
+            <Guests>
+                <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>NIVALDO</FirstName>
+                    <LastName>MAIA</LastName>
+                    <Age>40</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>LEONETE</FirstName>
+                    <LastName>MEDEIROS</LastName>
+                    <Age>40</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
+                    <Title>MR</Title>
+                    <FirstName>DOMINGOS</FirstName>
+                    <LastName>BARRETO</LastName>
+                    <Age>40</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
+                    <Title>MR</Title>
+                    <FirstName>MAGALI</FirstName>
+                    <LastName>FREITAS</LastName>
+                    <Age>40</Age>
+                </Guest>
+            </Guests>
+            <PaymentInfo VoucherBooking="true" PaymentModeType="Limit"/>
+            <SessionId>9a0d9020-c522-4e7b-ace9-a88e824c5603</SessionId>
+            <NoOfRooms>2</NoOfRooms>
             <ResultIndex>1</ResultIndex>
-            <AvailableForBook>true</AvailableForBook>
-            <AvailableForConfirmBook>true</AvailableForConfirmBook>
-            <CancellationPoliciesAvailable>true</CancellationPoliciesAvailable>
-            <HotelCancellationPolicies>
-                <HotelNorms>
-                    <string>No breakfast service-This booking is non-amendable No breakfast service-This booking is non-amendable</string>
-                </HotelNorms>
-                <CancelPolicies PolicyFormat="Nodes">
-                    <LastCancellationDeadline>2020-05-17T00:00:00</LastCancellationDeadline>
-                    <CancelPolicy FromDate="2020-04-22" ToDate="2020-05-17" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
-                    <CancelPolicy FromDate="2020-05-18" ToDate="2020-05-24" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
-                    <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
-                    <AutoCancellationText>Hotel Destination Local Date and Time:17-May-2020 , 21:30:00</AutoCancellationText>
-                </CancelPolicies>
-            </HotelCancellationPolicies>
-            <PriceVerification Status="Successful" PriceChanged="false" AvailableOnNewPrice="false"/>
-            <AccountInfo AgencyBalance="Sufficient" AgencyBlocked="false"/>
-            <HotelDetailsVerification Status="Successful" Remarks=""/>
-            <HotelDetails HotelName="Ibis Fujairah" HotelRating="ThreeStar">
-                <Address>Hamad Bin Abdullah Road, United Arab Emirates</Address>
-            </HotelDetails>
-            <IsFlightDetailsMandatory>false</IsFlightDetailsMandatory>
-        </AvailabilityAndPricingResponse>
-    </s:Body>
-</s:Envelope>
-
+            <HotelCode>1246485</HotelCode>
+            <HotelName>Hotel Joamar</HotelName>
+            <HotelRooms>
+                <HotelRoom>
+                    <RoomIndex>1</RoomIndex>
+                    <RoomTypeName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeName>
+                    <RoomTypeCode>2x Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeCode>
+                    <RoomRate RoomFare="49.35" RoomTax="2.46" TotalFare="51.81"/>
+                </HotelRoom>
+                <HotelRoom>
+                    <RoomIndex>2</RoomIndex>
+                    <RoomTypeName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeName>
+                    <RoomTypeCode>2x Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeCode>
+                    <RoomRate RoomFare="49.35" RoomTax="2.46" TotalFare="51.81"/>
+                </HotelRoom>
+            </HotelRooms>
+            <RestrictDuplicateBooking>true</RestrictDuplicateBooking>
+        </HotelBookRequest>
+    </soap:Body>
+</soap:Envelope>
