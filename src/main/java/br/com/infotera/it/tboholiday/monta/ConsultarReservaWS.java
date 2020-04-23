@@ -20,17 +20,18 @@ import br.com.infotera.common.hotel.WSRegime;
 import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.politica.WSPolitica;
 import br.com.infotera.common.politica.WSPoliticaCancelamento;
+import br.com.infotera.common.politica.WSPoliticaCondicaoGeral;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
-import br.com.infotera.it.tboholiday.ParDisp;
 import br.com.infotera.it.tboholiday.UtilsWS;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import tektravel.hotelbookingapi.APIBookingDetail;
-import tektravel.hotelbookingapi.CancelPolicy;
+import tektravel.hotelbookingapi.CancelPolicies;
+import tektravel.hotelbookingapi.CancellationChargeTypeForHotel;
 import tektravel.hotelbookingapi.Guest;
 import tektravel.hotelbookingapi.HotelBookingDetailRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailResponse;
@@ -59,16 +60,6 @@ public class ConsultarReservaWS {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
         int sqQuarto = 0;
-        UtilsWS utilsWS = new UtilsWS();
-
-        Double vlTotalTodosQuartos = 0.0;
-        String vlTotalCadaQuarto = "";
-
-        for (RoomDetails rd : bookingDetail.getRoomtype().getRoomDetails()) {
-
-            vlTotalCadaQuarto += rd.getRoomRate().getTotalFare().toString() + "#";
-            vlTotalTodosQuartos += Double.parseDouble(rd.getRoomRate().getTotalFare().toString());
-        }
 
         try {
             for (RoomDetails rd : bookingDetail.getRoomtype().getRoomDetails()) {
@@ -77,15 +68,17 @@ public class ConsultarReservaWS {
 
                 String normasHotel = bookingDetail.getHotelPolicyDetails() + "; " + bookingDetail.getHotelCancelPolicies().getDefaultPolicy();
 
-                String vlTotal = vlTotalTodosQuartos + "#" + vlTotalCadaQuarto;
+                if (normasHotel != null && !normasHotel.equals("")) {
+                    politicaCancelamentoList.add(new WSPoliticaCondicaoGeral("Condição geral", normasHotel));
+                }
+
                 Double diferencaEmDias = Double.parseDouble(Utils.diferencaEmDias(Utils.toDate(bookingDetail.getCheckInDate().toString(), "yyyy-MM-dd"), Utils.toDate(bookingDetail.getCheckOutDate().toString(), "yyyy-MM-dd")).toString());
 
+                Double vlDiaria = Utils.dividir(rd.getRoomRate().getTotalFare().doubleValue(), diferencaEmDias);
+
                 if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("") && sqQuarto == 0) {
-                    politicaCancelamentoList = utilsWS.montaPolitica(integrador,
-                            bookingDetail.getHotelCancelPolicies(),
-                            vlTotal,
-                            diferencaEmDias,
-                            normasHotel);
+
+                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria));
                 }
 
                 sqQuarto++;
@@ -240,5 +233,55 @@ public class ConsultarReservaWS {
                 null);
 
         return new WSReserva(reservaHotel);
+    }
+
+    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria) {
+
+        List<WSPolitica> politicaList = new ArrayList();
+
+        if (cancelPolicies != null && cancelPolicies.getCancelPolicy() != null) {
+            cancelPolicies.getCancelPolicy().forEach((cp) -> {
+
+                Double pcCancelamento = null;
+                Double vlCancelamento = null;
+
+                if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        pcCancelamento = cp.getCancellationCharge().doubleValue();
+                    }
+                } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        vlCancelamento = cp.getCancellationCharge().doubleValue();
+                    }
+                } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                    if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                        vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                    }
+                }
+
+                if (pcCancelamento != null || vlCancelamento != null) {
+                    Date dtMinCancelamento = Utils.addDias(Utils.toDate(cp.getFromDate(), "yyyy-MM-dd"), -3);
+                    Date dtMaxCancelamento = Utils.toDate(cp.getToDate(), "yyyy-MM-dd");
+                    boolean stImediata = false;
+
+                    if (dtMinCancelamento.before(new Date())) {
+                        stImediata = true;
+                    }
+
+                    politicaList.add(new WSPoliticaCancelamento("Politica de cancelamento",
+                            null,
+                            cp.getCurrency(),
+                            vlCancelamento,
+                            pcCancelamento,
+                            null,
+                            stImediata,
+                            dtMinCancelamento,
+                            dtMaxCancelamento,
+                            false));
+                }
+            });
+        }
+
+        return politicaList;
     }
 }
