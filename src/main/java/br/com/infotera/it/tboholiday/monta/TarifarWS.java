@@ -71,8 +71,7 @@ public class TarifarWS {
                     for (WSHotelPesquisa hp : disponibilidadeHotelRS.getHotelPesquisaList()) {
                         for (WSQuartoUh quh : hp.getQuartoList().get(0).getQuartoUhList()) {
                             if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getTarifa().getVlNeto().equals(quh.getTarifa().getVlNeto())) {
-                                String dsUh = quh.getUh().getDsUh().substring(3,quh.getUh().getDsUh().length());
-                                if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getUh().getDsUh().equals(dsUh)) {
+                                if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getUh().getDsUh().equals(quh.getUh().getDsUh())) {
                                     if (tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(0).getRegime().getDsRegime().equals(quh.getRegime().getDsRegime())) {
                                         quartoUh = quh;
                                         chvSessao = hp.getDsParametro();
