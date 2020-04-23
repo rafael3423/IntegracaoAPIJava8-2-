@@ -210,7 +210,7 @@ public class TarifarWS {
 
             WSQuartoUh quartoUh = mapUhTarifaDisponivel.get(chave);
             if (quartoUh != null) {
-                
+
                 List<WSReservaHotelUh> reservaHotelUhListTemp = new ArrayList();
 
                 reservaHotelUhListTemp.add(new WSReservaHotelUh(0,
@@ -222,14 +222,13 @@ public class TarifarWS {
                         null,
                         WSReservaStatusEnum.SOLICITACAO));
 
-                
                 reservaHotelUhListTemp.forEach((rhuh) -> {
                     ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
                     int sqQuarto = 0;
                     for (ParDisp p : parDispRetono) {
                         String dsParametro = UtilsWS.toJson(p);
 
-                        WSUh uh = new WSUh(rhuh.getUh().getHotel(), rhuh.getUh().getCdUh(), rhuh.getUh().getIdExterno(), rhuh.getUh().getDsCategoria(), rhuh.getUh().getDsUh(), dsParametro);
+                        WSUh uh = new WSUh(rhuh.getUh().getHotel(), p.getA1(), rhuh.getUh().getIdExterno(), rhuh.getUh().getDsCategoria(), rhuh.getUh().getDsUh(), dsParametro);
 
                         Double vlNeto = Utils.dividir(rhuh.getTarifa().getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
 
@@ -243,7 +242,7 @@ public class TarifarWS {
                                     vltaxa));
                         });
 
-                        WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, tarifaAdicionalList);
+                        WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, null, p.getA2(), null, null, tarifaAdicionalList);
 
                         reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
                                 uh,
@@ -264,7 +263,7 @@ public class TarifarWS {
         } catch (Exception ex) {
             throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifar", WSMensagemErroEnum.HTA, "Falha ao atribuir tarifa ao quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-        
+
         AvailabilityAndPricingRequest availabilityAndPricingRequest = new AvailabilityAndPricingRequest();
 
         BookingOptions bookingOptions = new BookingOptions();

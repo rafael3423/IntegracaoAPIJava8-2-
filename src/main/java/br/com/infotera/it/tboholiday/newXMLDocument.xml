@@ -4,54 +4,35 @@
     </soap:Header>
     <soap:Body>
         <HotelBookRequest xmlns="http://TekTravel/HotelBookingApi">
-            <ClientReferenceNumber>230420161357000#TBOH</ClientReferenceNumber>
+            <ClientReferenceNumber>230420172946000#TBOH</ClientReferenceNumber>
             <GuestNationality>BR</GuestNationality>
             <Guests>
                 <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
                     <Title>MR</Title>
-                    <FirstName>URBINA</FirstName>
-                    <LastName>ANDRADE</LastName>
+                    <FirstName>MIRU</FirstName>
+                    <LastName>OLIVEIRA</LastName>
                     <Age>39</Age>
                 </Guest>
                 <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
                     <Title>MR</Title>
-                    <FirstName>LITO</FirstName>
-                    <LastName>FERNANDES</LastName>
-                    <Age>39</Age>
-                </Guest>
-                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
-                    <Title>MR</Title>
-                    <FirstName>BRIZIDA</FirstName>
-                    <LastName>FERNANDES</LastName>
-                    <Age>39</Age>
-                </Guest>
-                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
-                    <Title>MR</Title>
-                    <FirstName>ANALIDE</FirstName>
-                    <LastName>BARCELLOS</LastName>
+                    <FirstName>AMELIA</FirstName>
+                    <LastName>MONTEIRO</LastName>
                     <Age>39</Age>
                 </Guest>
             </Guests>
             <PaymentInfo VoucherBooking="true" PaymentModeType="Limit"/>
-            <SessionId>237c13b3-c5fd-48a2-93e9-700014b00a1b</SessionId>
-            <NoOfRooms>2</NoOfRooms>
+            <SessionId>d892ad79-6c8b-490a-8713-a3532cface9a</SessionId>
+            <NoOfRooms>1</NoOfRooms>
             <ResultIndex>1</ResultIndex>
-            <HotelCode>1246485</HotelCode>
-            <HotelName>Hotel Joamar</HotelName>
+            <HotelCode>1246193</HotelCode>
+            <HotelName>Ibis Fujairah</HotelName>
             <HotelRooms>
                 <HotelRoom>
                     <RoomIndex>1</RoomIndex>
-                    <RoomTypeName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeName>
-                    <RoomTypeCode>201470146|207343287$37341^^2^^201470146|207343287|37341</RoomTypeCode>
-                    <RatePlanCode>201470146|207343287|37341</RatePlanCode>
-                    <RoomRate RoomFare="20.46" RoomTax="1.02" TotalFare="21.48"/>
-                </HotelRoom>
-                <HotelRoom>
-                    <RoomIndex>2</RoomIndex>
-                    <RoomTypeName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomTypeName>
-                    <RoomTypeCode>201470146|207343287$37341^^2^^201470146|207343287|37341</RoomTypeCode>
-                    <RatePlanCode>201470146|207343287|37341</RatePlanCode>
-                    <RoomRate RoomFare="20.46" RoomTax="1.02" TotalFare="21.48"/>
+                    <RoomTypeName>1x Standard Room 1 Double</RoomTypeName>
+                    <RoomTypeCode>3076891|27b57490-6edd-0d37-306e-1b2eccb984c2|1^^1^^2831186||27b57490-6edd-0d37-306e-1b2eccb984c2</RoomTypeCode>
+                    <RatePlanCode>2831186||27b57490-6edd-0d37-306e-1b2eccb984c2</RatePlanCode>
+                    <RoomRate RoomFare="30.91" RoomTax="7.88" TotalFare="38.78"/>
                 </HotelRoom>
             </HotelRooms>
             <RestrictDuplicateBooking>true</RestrictDuplicateBooking>
