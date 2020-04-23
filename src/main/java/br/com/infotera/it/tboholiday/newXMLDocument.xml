@@ -1,10 +1,10 @@
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <AvailabilityAndPricingResponse xmlns="http://TekTravel/HotelBookingApi">
-            <Status>
-                <StatusCode>01</StatusCode>
-                <Description>Successful: AvailabilityAndPricing Successful</Description>
-            </Status>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <Credentials xmlns="http://TekTravel/HotelBookingApi" UserName="InfoteraTest" Password="Inf@64890970"/>
+    </soap:Header>
+    <soap:Body>
+        <HotelRoomAvailabilityRequest xmlns="http://TekTravel/HotelBookingApi">
+            <SessionId>4b441352-4835-4fd4-81e5-eea0bc211507</SessionId>
             <ResultIndex>1</ResultIndex>
             <AvailableForBook>true</AvailableForBook>
             <AvailableForConfirmBook>true</AvailableForConfirmBook>

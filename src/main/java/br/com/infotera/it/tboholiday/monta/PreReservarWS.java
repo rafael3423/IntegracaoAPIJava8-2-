@@ -154,7 +154,7 @@ public class PreReservarWS {
                         rhu.getUh().getCdUh(),
                         nmQuartoFinal,
                         nmQuartoFinal,
-                        rhu.getUh().getDsParametro() + "%" + tarifarHotelRS.getReservaHotel().getDsParametro());
+                        rhu.getUh().getDsParametro());
 
                 List<WSReservaNome> reservaNomeList = new ArrayList();
                 try {
@@ -210,16 +210,14 @@ public class PreReservarWS {
                 Double vlNeto = Utils.dividir(rhuh.getTarifa().getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
 
                 List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-                for (WSTarifaAdicional ta : rhuh.getTarifa().getTarifaAdicionalList()) {
-
+                rhuh.getTarifa().getTarifaAdicionalList().forEach((ta) -> {
                     Double vltaxa = Utils.dividir(ta.getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
 
                     tarifaAdicionalList.add(new WSTarifaAdicional(ta.getTpAdcional(),
                             ta.getDsAdicional(),
                             ta.getSgMoeda(),
                             vltaxa));
-
-                }
+                });
 
                 WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, tarifaAdicionalList);
 
