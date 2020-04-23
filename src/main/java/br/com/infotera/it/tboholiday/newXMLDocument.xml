@@ -1,150 +1,47 @@
-<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
-    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <HotelBookingDetailResponse xmlns="http://TekTravel/HotelBookingApi">
-            <Status>
-                <StatusCode>01</StatusCode>
-                <Description>Successful: HotelBookingDetail Successful</Description>
-            </Status>
-            <BookingDetail BookingId="131715" AmendmentStatus="NotRequested" BookingStatus="Confirmed" VoucherStatus="true" InvoiceNumber="MW109639" SupplierReferenceNo="" ConfirmationNo="W2OM2D">
-                <HotelName>Joamar</HotelName>
-                <Rating>TwoStar</Rating>
-                <AddressLine1>Rua Dom José de Barros, 187,Sao Paulo,SP,BR ZipCode: </AddressLine1>
-                <AddressLine2/>
-                <Map>-23.54414|-46.64038</Map>
-                <City>Sao Paulo</City>
-                <CheckInDate>2020-06-24</CheckInDate>
-                <CheckOutDate>2020-06-25</CheckOutDate>
-                <BookingDate>2020-04-23</BookingDate>
-                <HotelCancelPolicies PolicyFormat="Nodes">
-                    <LastCancellationDeadline>2020-06-19T00:00:00</LastCancellationDeadline>
-                    <CancelPolicy FromDate="2020-04-22" ToDate="2020-06-19" ChargeType="Fixed" CancellationCharge="0.00" Currency="USD"/>
-                    <CancelPolicy FromDate="2020-06-20" ToDate="2020-06-23" ChargeType="Percentage" CancellationCharge="100.00" Currency="USD"/>
-                    <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
-                    <AutoCancellationText>Hotel Destination Local Date and Time:19-Jun-2020 , 21:30:00</AutoCancellationText>
-                </HotelCancelPolicies>
-                <HotelPolicyDetails>CheckIn Time-Begin: 1:00 PM | CheckIn Time-End: 5:30 PM|CheckOut Time: 12:00 PM|CheckIn Instructions: Extra-person charges may apply and vary depending on property policy. &amp;lt;br /&amp;gt;Government-issued photo identification and a credit card, debit card, or cash deposit are required at check-in for incidental charges. &amp;lt;br /&amp;gt;Special requests are subject to availability upon check-in and may incur additional charges. Special requests cannot be guaranteed. &amp;lt;ul&amp;gt;  &amp;lt;/ul&amp;gt;|Minimum CheckIn Age : 18|Cards Accepted: Cash,Mastercard,Visa,Debit cards|&amp;lt;ul&amp;gt;  &amp;lt;li&amp;gt;Parents or a legal guardian traveling with children under 18 years must present the child's birth certificate and an identity card with photo (passport, for example) at the check-in. For international travels from Brazil, if just one of the parents is traveling with the child, she/he must present – in addition to the child's certificate of birth and identity card with photo – a letter authorizing the trip signed by the other parent with a notarial certification of signature. In case the parents or the legal guardian, as applicable, cannot or are unwilling to give this authorization, a judicial authorization is required. People who intend to travel to Brazil with children must consult with the Brazilian consulate before traveling for more information. &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt;,Only service animals are allowed,Service animals are exempt from fees/restrictions,Pets not allowed,No cribs (infant beds) available,No rollaway/extra beds available|</HotelPolicyDetails>
-                <FlightInfo/>
-                <SpecialRequest/>
-                <Roomtype>
-                    <RoomDetails>
-                        <AdultCount>2</AdultCount>
-                        <ChildCount>1</ChildCount>
-                        <ChildAge>0</ChildAge>
-                        <RoomName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomName>
-                        <Ameneties>Non-Smoking</Ameneties>
-                        <Ameneties>Minibar</Ameneties>
-                        <Ameneties>Free WiFi</Ameneties>
-                        <Ameneties>Daily housekeeping</Ameneties>
-                        <Ameneties>Room service</Ameneties>
-                        <Ameneties>Blackout drapes/curtains</Ameneties>
-                        <Ameneties>Phone</Ameneties>
-                        <Ameneties>Desk</Ameneties>
-                        <Ameneties>Towels provided</Ameneties>
-                        <Ameneties>Linens provided</Ameneties>
-                        <Ameneties>Private bathroom</Ameneties>
-                        <Ameneties>In-room safe</Ameneties>
-                        <Ameneties>Shower only</Ameneties>
-                        <Ameneties>Television</Ameneties>
-                        <Ameneties>Cable TV service</Ameneties>
-                        <Ameneties>Free Breakfast,Free Internet</Ameneties>
-                        <GuestInfo>
-                            <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>HADASSA</FirstName>
-                                <LastName>OLIVEIRA</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                            <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>SOLANO</FirstName>
-                                <LastName>ARAUJO</LastName>
-                                <Age>0</Age>
-                            </Guest>
-                            <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>HILDEGARDA</FirstName>
-                                <LastName>SANTANA</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                        </GuestInfo>
-                        <RoomPromtion>Private sale: save 10%</RoomPromtion>
-                        <RoomRate IsPackageRate="false" IsInstantConfirmed="false" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="25.18" RoomTax="1.26" TotalFare="26.44">
-                            <ExtraGuestCharges>0</ExtraGuestCharges>
-                            <ChildCharges>0</ChildCharges>
-                            <Discount>0</Discount>
-                            <OtherCharges>0</OtherCharges>
-                            <ServiceTax>0</ServiceTax>
-                        </RoomRate>
-                        <MealType>BreakFast</MealType>
-                    </RoomDetails>
-                    <RoomDetails>
-                        <AdultCount>2</AdultCount>
-                        <ChildCount>1</ChildCount>
-                        <ChildAge>0</ChildAge>
-                        <RoomName>Standard Twin Room,2 Twin Beds,Nonsmoking</RoomName>
-                        <Ameneties>Non-Smoking</Ameneties>
-                        <Ameneties>Minibar</Ameneties>
-                        <Ameneties>Free WiFi</Ameneties>
-                        <Ameneties>Daily housekeeping</Ameneties>
-                        <Ameneties>Room service</Ameneties>
-                        <Ameneties>Blackout drapes/curtains</Ameneties>
-                        <Ameneties>Phone</Ameneties>
-                        <Ameneties>Desk</Ameneties>
-                        <Ameneties>Towels provided</Ameneties>
-                        <Ameneties>Linens provided</Ameneties>
-                        <Ameneties>Private bathroom</Ameneties>
-                        <Ameneties>In-room safe</Ameneties>
-                        <Ameneties>Shower only</Ameneties>
-                        <Ameneties>Television</Ameneties>
-                        <Ameneties>Cable TV service</Ameneties>
-                        <Ameneties>Free Breakfast,Free Internet</Ameneties>
-                        <GuestInfo>
-                            <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="2">
-                                <Title>MR</Title>
-                                <FirstName>JANINA</FirstName>
-                                <LastName>FERNANDES</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                            <Guest LeadGuest="false" GuestType="Child" GuestInRoom="2">
-                                <Title>MR</Title>
-                                <FirstName>CIDALINA</FirstName>
-                                <LastName>CAMARGO</LastName>
-                                <Age>0</Age>
-                            </Guest>
-                            <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="2">
-                                <Title>MR</Title>
-                                <FirstName>ANIANA</FirstName>
-                                <LastName>GARCIA</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                        </GuestInfo>
-                        <RoomPromtion>Private sale: save 10%</RoomPromtion>
-                        <RoomRate IsPackageRate="false" IsInstantConfirmed="false" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="25.18" RoomTax="1.26" TotalFare="26.44">
-                            <ExtraGuestCharges>0</ExtraGuestCharges>
-                            <ChildCharges>0</ChildCharges>
-                            <Discount>0</Discount>
-                            <OtherCharges>0</OtherCharges>
-                            <ServiceTax>0</ServiceTax>
-                        </RoomRate>
-                        <MealType>BreakFast</MealType>
-                    </RoomDetails>
-                </Roomtype>
-                <Currency>USD</Currency>
-                <NoOfRooms>2</NoOfRooms>
-                <AgencyDetails>
-                    <Name>Infotera</Name>
-                    <AddressLine1>Test 1234</AddressLine1>
-                    <Email/>
-                    <Phone>78901234</Phone>
-                    <City>Sao Paulo</City>
-                    <BookingMemberName>Infotera Test</BookingMemberName>
-                </AgencyDetails>
-                <CityId>136873</CityId>
-                <TripName>SANTANA_24Jun_Sao Paulo</TripName>
-                <TBOHotelCode>1246485</TBOHotelCode>
-                <CurrentCancellationCharges>0.00</CurrentCancellationCharges>
-            </BookingDetail>
-        </HotelBookingDetailResponse>
-    </s:Body>
-</s:Envelope>
-
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+        <Credentials xmlns="http://TekTravel/HotelBookingApi" UserName="InfoteraTest" Password="Inf@64890970"/>
+    </soap:Header>
+    <soap:Body>
+        <HotelBookRequest xmlns="http://TekTravel/HotelBookingApi">
+            <ClientReferenceNumber>230420184646000#TBOH</ClientReferenceNumber>
+            <GuestNationality>BR</GuestNationality>
+            <Guests>
+                <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>CELISIO</FirstName>
+                    <LastName>OLIVEIRA</LastName>
+                    <Age>39</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>ADERIO</FirstName>
+                    <LastName>LESSA</LastName>
+                    <Age>39</Age>
+                </Guest>
+                <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
+                    <Title>MR</Title>
+                    <FirstName>ANSELMO</FirstName>
+                    <LastName>SANTOS</LastName>
+                    <Age>0</Age>
+                </Guest>
+            </Guests>
+            <PaymentInfo VoucherBooking="true" PaymentModeType="Limit"/>
+            <SessionId>e371a8db-c818-4400-b14f-3a56edd5abd7</SessionId>
+            <NoOfRooms>1</NoOfRooms>
+            <ResultIndex>1</ResultIndex>
+            <HotelCode>1246193</HotelCode>
+            <HotelName>Ibis Fujairah</HotelName>
+            <HotelRooms>
+                <HotelRoom>
+                    <RoomIndex>1</RoomIndex>
+                    <RoomTypeName>Twin Standard Room</RoomTypeName>
+                    <RoomTypeCode>TW|2|1^^1^^16e880_234595205427_1_3_2_2_0_0_2916677638_6_2-6-0-8022170885791492183_25-100_30_2.20200518_1_2-1_0_30_1b27d76ae01f4084b655b564652f12b0_158767838100|2|1</RoomTypeCode>
+                    <RatePlanCode>16e880_234595205427_1_3_2_2_0_0_2916677638_6_2-6-0-8022170885791492183_25-100_30_2.20200518_1_2-1_0_30_1b27d76ae01f4084b655b564652f12b0_158767838100|2|1</RatePlanCode>
+                    <RoomRate RoomFare="69.99" RoomTax="0" TotalFare="69.99"/>
+                </HotelRoom>
+            </HotelRooms>
+            <RestrictDuplicateBooking>true</RestrictDuplicateBooking>
+        </HotelBookRequest>
+    </soap:Body>
+</soap:Envelope>
