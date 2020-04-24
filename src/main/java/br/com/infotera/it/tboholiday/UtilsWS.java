@@ -62,8 +62,8 @@ public class UtilsWS {
 
         List<WSPolitica> politicaCancelamentoList = new ArrayList();
 
-        if (cancelPolicies != null && !cancelPolicies.equals("")) {
-            if (cancelPolicies.getCancelPolicy() != null && !cancelPolicies.getCancelPolicy().equals("")) {
+        if (cancelPolicies != null) {
+            if (cancelPolicies.getCancelPolicy() != null) {
 
                 try {
                     for (CancelPolicy cp : cancelPolicies.getCancelPolicy()) {

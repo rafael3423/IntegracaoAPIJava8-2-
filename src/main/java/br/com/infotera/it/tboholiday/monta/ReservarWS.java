@@ -5,7 +5,6 @@ import br.com.infotera.common.WSReserva;
 import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaHotelUh;
 import br.com.infotera.common.WSReservaNome;
-import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
@@ -58,7 +57,7 @@ public class ReservarWS {
                 ParDisp parDisp = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
                 sessionDisp = parDisp.getA7();
-                
+
                 String chvTarifas[] = parDisp.getA5().split("#");
 
                 BigDecimal bigFare = new BigDecimal(chvTarifas[0]);
@@ -87,7 +86,7 @@ public class ReservarWS {
                             arrayOfSuppInfo.getSuppInfo().add(suppInfo);
                         }
                     } catch (Exception ex) {
-                        throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                        throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                     }
 
                     requestedRooms.setSupplements(arrayOfSuppInfo);
@@ -119,7 +118,7 @@ public class ReservarWS {
                         arrayOfGuest.getGuest().add(guest);
                     }
                 } catch (Exception ex) {
-                    throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                    throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
                 requestedRooms.setRoomIndex(sqQuato);
@@ -132,10 +131,10 @@ public class ReservarWS {
 
             }
         } catch (Exception ex) {
-            throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
         }
 
-         String chvSplit[] = sessionDisp.split("#");
+        String chvSplit[] = sessionDisp.split("#");
 
         String date = Utils.formatData(new Date(), "ddMMyyHHmmss000");
 

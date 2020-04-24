@@ -126,10 +126,7 @@ public class ChamaWS {
             } else if (envio instanceof HotelCancelRequest) {
                 metodo = "hotelCancel";
 
-            } else if (envio instanceof HotelCancellationPolicyRequest) {
-                metodo = "hotelCancellationPolicy";
-
-            } else if (envio instanceof GiataHotelCodesRequest) {
+            }  else if (envio instanceof GiataHotelCodesRequest) {
                 metodo = "giataHotelCodeList";
             }
 
