@@ -1,24 +1,19 @@
 package br.com.infotera.it.tboholiday;
 
-//
 import br.com.infotera.common.ErrorException;
 import br.com.infotera.common.WSIntegrador;
 import br.com.infotera.common.WSReservaNome;
-import br.com.infotera.common.WSReservaRelatorioRQ;
 import br.com.infotera.common.enumerator.WSAmbienteEnum;
 import br.com.infotera.common.enumerator.WSPaxTipoEnum;
-import br.com.infotera.common.enumerator.WSRelatorioPeriodoEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
+import br.com.infotera.common.hotel.rqrs.WSPesquisaHotelRQ;
 import br.com.infotera.common.util.Utils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-///**
-// *
-// * @author Bruno
-// */
+
 public class TesteWS {
 
     public static void main(String[] args) throws ErrorException {
@@ -109,7 +104,7 @@ public class TesteWS {
 //        DETALHE HOTEL
 //        montaWS.detalharHotel(new WSDetalheHotelRQ(integrador, new WSHotel(null, disponibilidadeHotelRS.getHotelPesquisaList().get(0).getHotel().getIdExterno(), null)));
 //        RELATORIO DE RESERVAS
-        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-04-21","yyyy-MM-dd"), Utils.toDate("2020-04-24","yyyy-MM-dd")));
+//        montaWS.relatorio(new WSReservaRelatorioRQ(integrador, WSRelatorioPeriodoEnum.ENTRADA, Utils.toDate("2020-04-21","yyyy-MM-dd"), Utils.toDate("2020-04-24","yyyy-MM-dd")));
 //        PRE-CANCELAR
 //        montaWS.preCancelar(new WSReservaRQ(integrador, new WSReserva(new WSReservaHotel("126614"))));
 //        CANCELAR
@@ -117,12 +112,12 @@ public class TesteWS {
 //        TARIFAR
 //        montaWS.tarifar(new WSTarifarHotelRQ(integrador, new WSReservaHotel("")));
 //        PESQUISAR
-//        WSPesquisaHotelRQ pesquisaHotelRQ = new WSPesquisaHotelRQ();
-//
-//        pesquisaHotelRQ.setIntegrador(integrador);
-//        pesquisaHotelRQ.setCdDestino("136873");
-//
-//        montaWS.pesquisarHotel(pesquisaHotelRQ);
+        WSPesquisaHotelRQ pesquisaHotelRQ = new WSPesquisaHotelRQ();
+
+        pesquisaHotelRQ.setIntegrador(integrador);
+        pesquisaHotelRQ.setCdDestino("136873");
+
+        montaWS.pesquisarHotel(pesquisaHotelRQ);
 
     }
 }

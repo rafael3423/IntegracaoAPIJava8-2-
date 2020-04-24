@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.it.tboholiday;
 
 import br.com.infotera.common.ErrorException;
@@ -31,10 +26,7 @@ import br.com.infotera.common.reserva.rqrs.WSReservaRS;
 import br.com.infotera.common.reserva.rqrs.WSReservarRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservarRS;
 
-/**
- *
- * @author rafael
- */
+
 public class TBOHolidayWS implements HotelImpl {
 
     MontaWS montaWS = new MontaWS();

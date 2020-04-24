@@ -37,7 +37,6 @@ import tektravel.hotelbookingapi.ArrayOfRoomGuest;
 import tektravel.hotelbookingapi.CancelPolicies;
 import tektravel.hotelbookingapi.CancellationChargeTypeForHotel;
 import tektravel.hotelbookingapi.Filters;
-import tektravel.hotelbookingapi.HotelResult;
 import tektravel.hotelbookingapi.HotelRoom;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityRequest;
 import tektravel.hotelbookingapi.HotelRoomAvailabilityResponse;
@@ -247,7 +246,6 @@ public class DisponibilidadeWS {
                 String sgMoeda = null;
                 List<ParDisp> parDispList = new ArrayList();
                 String roomChaveId = "";
-                String roomNameId = "";
                 LinkedHashMap<String, Integer> quartoConfig = new LinkedHashMap<>();
                 List<WSPolitica> politicaList = new ArrayList();
                 try {
@@ -294,10 +292,8 @@ public class DisponibilidadeWS {
 
                         if (roomChaveId.equalsIgnoreCase("")) {
                             roomChaveId = Integer.toString(hr.getRoomIndex());
-                            roomNameId = hr.getRoomTypeName();
                         } else {
                             roomChaveId += "#" + Integer.toString(hr.getRoomIndex());
-                            roomNameId += "#" + hr.getRoomTypeName();
                         }
 
                         String textoQuarto = null;

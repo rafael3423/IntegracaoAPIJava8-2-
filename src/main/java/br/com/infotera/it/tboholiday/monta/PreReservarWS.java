@@ -18,7 +18,6 @@ import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
-import br.com.infotera.common.enumerator.WSTarifaAdicionalTipoEnum;
 import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRS;
@@ -63,16 +62,20 @@ public class PreReservarWS {
         String sessionId = null;
         String parametroReservaHotel = null;
 
-        for (WSReservaHotelUh rhuh : reservaHotelUhListFormarado) {
-            ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+        try {
+            for (WSReservaHotelUh rhuh : reservaHotelUhListFormarado) {
+                ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
-            String result[] = parDispRetono.getA7().split("#");
-            resultIndex = result[1];
-            sessionId = result[0];
+                String result[] = parDispRetono.getA7().split("#");
+                resultIndex = result[1];
+                sessionId = result[0];
 
-            parametroReservaHotel = parDispRetono.getA7();
+                parametroReservaHotel = parDispRetono.getA7();
 
-            roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
+                roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         bookingOptions.setFixedFormat(true);
@@ -86,14 +89,18 @@ public class PreReservarWS {
 
         String normasHotel = "";
 
-        for (String s : availabilityAndPricingResponse.getHotelCancellationPolicies().getHotelNorms().getString()) {
+        try {
+            for (String s : availabilityAndPricingResponse.getHotelCancellationPolicies().getHotelNorms().getString()) {
 
-            if (normasHotel.equals("")) {
-                normasHotel = s + "<br/>" + availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies().getDefaultPolicy();
-            } else {
-                normasHotel = normasHotel + "<br/>" + s;
+                if (normasHotel.equals("")) {
+                    normasHotel = s + "<br/>" + availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies().getDefaultPolicy();
+                } else {
+                    normasHotel = normasHotel + "<br/>" + s;
+                }
+
             }
-
+        } catch (Exception ex) {
+            throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
@@ -194,7 +201,6 @@ public class PreReservarWS {
             reservaHotelUhListChegada.forEach((rhuh) -> {
                 ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
                 int sqQuarto = 0;
-
                 for (ParDisp p : parDispRetono) {
                     String dsParametro = UtilsWS.toJson(p);
 

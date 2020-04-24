@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.it.tboholiday;
 
 import br.com.infotera.common.ErrorException;
@@ -21,8 +16,6 @@ import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.transport.http.HTTPConduit;
-import static org.glassfish.hk2.utilities.reflection.Pretty.method;
-import static org.glassfish.jersey.internal.util.Pretty.method;
 import org.tempuri.HotelService;
 import tektravel.hotelbookingapi.AuthenticationData;
 import tektravel.hotelbookingapi.AvailabilityAndPricingRequest;
@@ -37,7 +30,6 @@ import tektravel.hotelbookingapi.HotelBookingDetailRequest;
 import tektravel.hotelbookingapi.HotelBookingDetailResponse;
 import tektravel.hotelbookingapi.HotelCancelRequest;
 import tektravel.hotelbookingapi.HotelCancelResponse;
-import tektravel.hotelbookingapi.HotelCancellationPolicyRequest;
 import tektravel.hotelbookingapi.HotelCancellationPolicyResponse;
 import tektravel.hotelbookingapi.HotelDetailsRequest;
 import tektravel.hotelbookingapi.HotelDetailsResponse;
@@ -46,10 +38,7 @@ import tektravel.hotelbookingapi.HotelRoomAvailabilityResponse;
 import tektravel.hotelbookingapi.HotelSearchRequest;
 import tektravel.hotelbookingapi.HotelSearchResponse;
 
-/**
- *
- * @author Bruno
- */
+
 public class ChamaWS {
 
     private HotelService service;
@@ -77,7 +66,8 @@ public class ChamaWS {
         try {
             port = service.getBasicHttpBindingIHotelService();
         } catch (Exception ex) {
-            aqui
+            throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENPORT, "Erro ao gerar port", WSIntegracaoStatusEnum.NEGADO, ex);
+
         }
 
         Writer xmlRequest = new StringWriter();
@@ -140,14 +130,14 @@ public class ChamaWS {
                 Method method = cls.getDeclaredMethod(metodo, envio.getClass(), AuthenticationData.class);
                 objResponse = method.invoke(port, envio, authenticationData);
             } catch (Exception ex) {
-                aqui
+                throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro ao gerar o method", WSIntegracaoStatusEnum.NEGADO, ex);
             }
 
         } finally {
-            if (Utils.geraArquivoXml) {
-                System.out.println("RQ - > " + xmlRequest.toString());
-                System.out.println("RS - > " + xmlResponse.toString());
-            }
+//            if (Utils.geraArquivoXml) {
+//                System.out.println("RQ - > " + xmlRequest.toString());
+//                System.out.println("RS - > " + xmlResponse.toString());
+//            }
 
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.XML,
@@ -237,6 +227,7 @@ public class ChamaWS {
                     dsErro = "Erro não retornado pelo conector.";
                 }
             }
+
         } else if (objResponse instanceof HotelBookingDetailBasedOnDateResponse) {
             HotelBookingDetailBasedOnDateResponse erro = (HotelBookingDetailBasedOnDateResponse) objResponse;
 

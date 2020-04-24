@@ -37,7 +37,6 @@ public class TarifarWS {
     public WSTarifarHotelRS tarifarHotel(WSTarifarHotelRQ tarifarHotelRQ) throws ErrorException {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
-        String chvSessao = null;
 
         if (tarifarHotelRQ.getReservaHotel().getReservaStatus().equals(WSReservaStatusEnum.ORCAMENTO)) {
             reservaHotelUhList.addAll(tarifarOrcamento(tarifarHotelRQ));
@@ -55,7 +54,7 @@ public class TarifarWS {
                 null,
                 WSReservaStatusEnum.SOLICITACAO,
                 null,
-                chvSessao);
+                null);
 
         return new WSTarifarHotelRS(reservaHotel, tarifarHotelRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }
