@@ -20,22 +20,14 @@ import java.net.URL;
 public class ConfigWsdl {
 
     public static URL buscaWsdl(WSIntegrador integrador, String wsdlFile) throws ErrorException {
-        
-        
-        URL url = Wsdl.class.getResource("HotelService.wsdl");
- 
-        return url;
-
+        return Wsdl.class.getResource("HotelService.wsdl");
     }
 
     public static String buscaEndPoint(WSAmbienteEnum ambiente) throws ErrorException {
-
         String endPoint = null;
         if (WSAmbienteEnum.HOMOLOGACAO.equals(ambiente)) {
             endPoint = "http://api.tbotechnology.in/HotelAPI_V7/HotelService.svc/basic";
-
-        }else if (WSAmbienteEnum.PRODUCAO.equals(ambiente)) {
-               }else{
+        } else if (WSAmbienteEnum.PRODUCAO.equals(ambiente)) {
             throw new ErrorException(null, ConfigWsdl.class, "buscaEndPoint", WSMensagemErroEnum.GENENDPOINT, "Ambiente nao configurado", WSIntegracaoStatusEnum.NEGADO, null);
         }
         return endPoint;

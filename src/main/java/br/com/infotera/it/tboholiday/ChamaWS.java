@@ -59,13 +59,12 @@ public class ChamaWS {
         Long tempoInicio = System.currentTimeMillis();
         Class cls = null;
         Object port = null;
-        String metodo = null;
+        String metodo = "";
         Object objResponse = new Object();
 
         try {
             if (service == null) {
                 service = new HotelService(ConfigWsdl.buscaWsdl(integrador, metodo));
-
             }
         } catch (Exception ex) {
             throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENWSDL, "Erro ao localizar wsdl", WSIntegracaoStatusEnum.NEGADO, ex);
@@ -73,9 +72,13 @@ public class ChamaWS {
         try {
             cls = Class.forName("org.tempuri.IHotelService");
         } catch (Exception ex) {
-            throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENWSDL, "Erro ao localizar wsdl", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro ao localizar wsdl", WSIntegracaoStatusEnum.NEGADO, ex);
         }
-        port = service.getBasicHttpBindingIHotelService();
+        try {
+            port = service.getBasicHttpBindingIHotelService();
+        } catch (Exception ex) {
+            aqui
+        }
 
         Writer xmlRequest = new StringWriter();
         Writer xmlResponse = new StringWriter();
@@ -85,21 +88,6 @@ public class ChamaWS {
         TLSClientParameters tlsCP = new TLSClientParameters();
         tlsCP.setDisableCNCheck(true);
         httpConduit.setTlsClientParameters(tlsCP);
-
-        client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
-        BindingProvider bp = (BindingProvider) port;
-        bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
-
-        LoggingInInterceptor in = new LoggingInInterceptor();
-        in.setLimit(-1);
-        in.setPrintWriter(new PrintWriter(xmlResponse));
-        client.getInInterceptors().add(in);
-        java.util.Map<String, Object> requestContext = ((javax.xml.ws.BindingProvider) port).getRequestContext();
-        requestContext.put("set-jaxb-validation-event-handler", "false");
-
-        AuthenticationData authenticationData = new AuthenticationData();
-        authenticationData.setUserName(integrador.getDsCredencialList().get(0));
-        authenticationData.setPassword(integrador.getDsCredencialList().get(1));
 
         try {
             if (envio instanceof HotelSearchRequest) {
@@ -126,39 +114,46 @@ public class ChamaWS {
             } else if (envio instanceof HotelCancelRequest) {
                 metodo = "hotelCancel";
 
-            } else if (envio instanceof HotelCancellationPolicyRequest) {
-                metodo = "hotelCancellationPolicy";
-
             } else if (envio instanceof GiataHotelCodesRequest) {
                 metodo = "giataHotelCodeList";
             }
 
-            try {
+            if (Utils.geraArquivoXml || (!metodo.equals("hotelSearch") && !metodo.equals("availableHotelRooms"))) {
+                client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
+                LoggingInInterceptor in = new LoggingInInterceptor();
+                in.setLimit(-1);
+                in.setPrintWriter(new PrintWriter(xmlResponse));
+                client.getInInterceptors().add(in);
+            }
 
+            BindingProvider bp = (BindingProvider) port;
+            bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
+
+            java.util.Map<String, Object> requestContext = ((javax.xml.ws.BindingProvider) port).getRequestContext();
+            requestContext.put("set-jaxb-validation-event-handler", "false");
+
+            AuthenticationData authenticationData = new AuthenticationData();
+            authenticationData.setUserName(integrador.getDsCredencialList().get(0));
+            authenticationData.setPassword(integrador.getDsCredencialList().get(1));
+
+            try {
                 Method method = cls.getDeclaredMethod(metodo, envio.getClass(), AuthenticationData.class);
                 objResponse = method.invoke(port, envio, authenticationData);
-
             } catch (Exception ex) {
-                ex.printStackTrace();
+                aqui
             }
 
         } finally {
+            if (Utils.geraArquivoXml) {
+                System.out.println("RQ - > " + xmlRequest.toString());
+                System.out.println("RS - > " + xmlResponse.toString());
+            }
 
-            String[] aa = xmlRequest.toString().split("Payload: ");
-            String[] ab = aa[1].split("-------");
-            String request = ab[0];
-            String[] ba = xmlResponse.toString().split("Payload: ");
-            String[] bb = ba[1].split("-------");
-            String response = bb[0];
-
-            System.out.println("RQ - > " + metodo + request);
-            System.out.println("RS - > " + metodo + response);
-            
             integrador.setIntegradorLogList(Utils.adicionaIntegradorLog(integrador,
                     WSIntegradorLogTipoEnum.XML,
                     metodo,
-                    "",//request,
-                    "",//response,
+                    xmlRequest.toString(),//request,
+                    xmlResponse.toString(),//response,
                     Utils.tempoExecucaoSeg(tempoInicio)));
 
         }
@@ -195,7 +190,7 @@ public class ChamaWS {
                 }
             }
 
-        }else if (objResponse instanceof AvailabilityAndPricingResponse) {
+        } else if (objResponse instanceof AvailabilityAndPricingResponse) {
             AvailabilityAndPricingResponse erro = (AvailabilityAndPricingResponse) objResponse;
 
             if (erro.getStatus().getStatusCode().equals("01")) {
@@ -207,7 +202,7 @@ public class ChamaWS {
                 }
             }
 
-        }else if (objResponse instanceof HotelBookResponse) {
+        } else if (objResponse instanceof HotelBookResponse) {
             HotelBookResponse erro = (HotelBookResponse) objResponse;
 
             if (erro.getStatus().getStatusCode().equals("01")) {

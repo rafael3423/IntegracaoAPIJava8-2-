@@ -1,30 +1,22 @@
 package br.com.infotera.it.tboholiday.monta;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSPreReservarRS;
 import br.com.infotera.common.WSReservaHotel;
 import br.com.infotera.common.WSReservaHotelUh;
-import br.com.infotera.common.WSReservaNome;
 import br.com.infotera.common.WSTarifa;
 import br.com.infotera.common.WSTarifaAdicional;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
-import br.com.infotera.common.enumerator.WSTarifaAdicionalTipoEnum;
 import br.com.infotera.common.hotel.WSConfigUh;
-import br.com.infotera.common.hotel.WSConfigUhIdade;
 import br.com.infotera.common.hotel.WSHotel;
 import br.com.infotera.common.hotel.WSHotelPesquisa;
-import br.com.infotera.common.hotel.WSQuarto;
 import br.com.infotera.common.hotel.WSQuartoUh;
-import br.com.infotera.common.hotel.WSRegime;
 import br.com.infotera.common.hotel.WSUh;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSDisponibilidadeHotelRS;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRQ;
 import br.com.infotera.common.hotel.rqrs.WSTarifarHotelRS;
-import br.com.infotera.common.politica.WSPolitica;
-import br.com.infotera.common.politica.WSPoliticaCancelamento;
 import br.com.infotera.common.util.Utils;
 import br.com.infotera.it.tboholiday.ChamaWS;
 import br.com.infotera.it.tboholiday.ParDisp;
@@ -84,7 +76,7 @@ public class TarifarWS {
                 configUhList.add(new WSConfigUh(Utils.gerarWSReservaNome(pd.getA3())));
             }
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarOrcamento", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         WSDisponibilidadeHotelRS disponibilidadeHotelRS = disponibilidadeWS.disponibilidade(new WSDisponibilidadeHotelRQ(tarifarHotelRQ.getIntegrador(),
@@ -110,11 +102,11 @@ public class TarifarWS {
                 }
             }
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarOrcamento", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         if (quartoUh == null) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifar", WSMensagemErroEnum.HTA, "Quarto não disponivel", WSIntegracaoStatusEnum.NEGADO, null);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarOrcamento", WSMensagemErroEnum.HTA, "Quarto não disponivel", WSIntegracaoStatusEnum.NEGADO, null);
         } else {
 
             reservaHotelUhList.add(new WSReservaHotelUh(0,
@@ -144,7 +136,7 @@ public class TarifarWS {
                 configUhList.add(new WSConfigUh(rhuh.getReservaNomeList()));
             });
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarHotel", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Ocorreu uma falha ao gerar tarifas", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         WSDisponibilidadeHotelRS disponibilidadeHotelRS = disponibilidadeWS.disponibilidade(new WSDisponibilidadeHotelRQ(tarifarHotelRQ.getIntegrador(),
@@ -170,7 +162,7 @@ public class TarifarWS {
                 });
             });
         } catch (Exception ex) {
-            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifar", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
@@ -180,28 +172,36 @@ public class TarifarWS {
             String chave = "";
             String chaveRoom = "";
             Double vlQuarto = 0.0;
-            for (WSReservaHotelUh hu : tarifarHotelRQ.getReservaHotel().getReservaHotelUhList()) {
-                int count = 0;
-                String uhKey = null;
-                for (String a : chavesUh) {
-                    if (a.contains(hu.getUh().getDsUh())) {
-                        uhKey = a;
-                        break;
+            try {
+                for (WSReservaHotelUh hu : tarifarHotelRQ.getReservaHotel().getReservaHotelUhList()) {
+                    int count = 0;
+                    String uhKey = null;
+                    try {
+                        for (String a : chavesUh) {
+                            if (a.contains(hu.getUh().getDsUh())) {
+                                uhKey = a;
+                                break;
+                            }
+                            count++;
+                        }
+                    } catch (Exception ex) {
+                        throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
                     }
-                    count++;
-                }
 
-                if (uhKey != null) {
-                    int qtUh = Integer.parseInt(uhKey.substring(0, 1));
-                    qtUh++;
-                    String qtRoom = qtUh + "";
-                    uhKey = qtRoom + "x " + hu.getUh().getDsUh();
-                    chavesUh.remove(count);
-                    chavesUh.add(uhKey);
-                } else {
-                    chavesUh.add("1x " + hu.getUh().getDsUh());
+                    if (uhKey != null) {
+                        int qtUh = Integer.parseInt(uhKey.substring(0, 1));
+                        qtUh++;
+                        String qtRoom = qtUh + "";
+                        uhKey = qtRoom + "x " + hu.getUh().getDsUh();
+                        chavesUh.remove(count);
+                        chavesUh.add(uhKey);
+                    } else {
+                        chavesUh.add("1x " + hu.getUh().getDsUh());
+                    }
+                    vlQuarto = Utils.somar(vlQuarto, hu.getTarifa().getVlNeto());
                 }
-                vlQuarto = Utils.somar(vlQuarto, hu.getTarifa().getVlNeto());
+            } catch (Exception ex) {
+                throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
             }
 
             chaveRoom = chavesUh.stream().map((chaveIt) -> chaveIt).reduce(chaveRoom, String::concat);
@@ -222,39 +222,44 @@ public class TarifarWS {
                         null,
                         WSReservaStatusEnum.SOLICITACAO));
 
-                reservaHotelUhListTemp.forEach((rhuh) -> {
-                    ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
-                    int sqQuarto = 0;
-                    for (ParDisp p : parDispRetono) {
-                        String dsParametro = UtilsWS.toJson(p);
+                try {
+                    reservaHotelUhListTemp.forEach((rhuh) -> {
+                        ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
+                        int sqQuarto = 0;
+                        for (ParDisp p : parDispRetono) {
+                            String dsParametro = UtilsWS.toJson(p);
 
-                        WSUh uh = new WSUh(rhuh.getUh().getHotel(), p.getA1(), rhuh.getUh().getIdExterno(), rhuh.getUh().getDsCategoria(), rhuh.getUh().getDsUh(), dsParametro);
+                            WSUh uh = new WSUh(rhuh.getUh().getHotel(), p.getA1(), rhuh.getUh().getIdExterno(), rhuh.getUh().getDsCategoria(), rhuh.getUh().getDsUh(), dsParametro);
 
-                        Double vlNeto = Utils.dividir(rhuh.getTarifa().getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
+                            Double vlNeto = Utils.dividir(rhuh.getTarifa().getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
 
-                        List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
-                        rhuh.getTarifa().getTarifaAdicionalList().forEach((ta) -> {
-                            Double vltaxa = Utils.dividir(ta.getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
+                            List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
+                            rhuh.getTarifa().getTarifaAdicionalList().forEach((ta) -> {
+                                Double vltaxa = Utils.dividir(ta.getVlNeto(), Double.parseDouble(parDispRetono.length + ""));
 
-                            tarifaAdicionalList.add(new WSTarifaAdicional(ta.getTpAdcional(),
-                                    ta.getDsAdicional(),
-                                    ta.getSgMoeda(),
-                                    vltaxa));
-                        });
+                                tarifaAdicionalList.add(new WSTarifaAdicional(ta.getTpAdcional(),
+                                        ta.getDsAdicional(),
+                                        ta.getSgMoeda(),
+                                        vltaxa));
+                            });
 
-                        WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, null, p.getA2(), null, null, tarifaAdicionalList);
+                            WSTarifa tarifa = new WSTarifa(rhuh.getTarifa().getSgMoedaNeto(), vlNeto, null, p.getA2(), null, null, tarifaAdicionalList);
 
-                        reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
-                                uh,
-                                rhuh.getRegime(),
-                                tarifa,
-                                rhuh.getDtEntrada(),
-                                rhuh.getDtSaida(),
-                                tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(sqQuarto).getReservaNomeList(),
-                                WSReservaStatusEnum.SOLICITACAO));
-                        sqQuarto++;
-                    }
-                });
+                            reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
+                                    uh,
+                                    rhuh.getRegime(),
+                                    tarifa,
+                                    rhuh.getDtEntrada(),
+                                    rhuh.getDtSaida(),
+                                    tarifarHotelRQ.getReservaHotel().getReservaHotelUhList().get(sqQuarto).getReservaNomeList(),
+                                    WSReservaStatusEnum.SOLICITACAO));
+                            sqQuarto++;
+                        }
+
+                    });
+                } catch (Exception ex) {
+                    throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
+                }
 
             } else {
                 throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifar", WSMensagemErroEnum.HTA, "Quarto não disponivel", WSIntegracaoStatusEnum.NEGADO, null);
@@ -272,26 +277,34 @@ public class TarifarWS {
 
         String resultIndex = null;
         String sessionId = null;
+        
+        try {
+            for (WSReservaHotelUh rhuh : reservaHotelUhList) {
 
-        for (WSReservaHotelUh rhuh : reservaHotelUhList) {
+                ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
 
-            ParDisp parDispRetono = (ParDisp) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp.class);
+                String result[] = parDispRetono.getA7().split("#");
+                resultIndex = result[1];
+                sessionId = result[0];
 
-            String result[] = parDispRetono.getA7().split("#");
-            resultIndex = result[1];
-            sessionId = result[0];
-
-            roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
+                roomCombination.getRoomIndex().add(Integer.parseInt(parDispRetono.getA0()));
+            }
+        } catch (Exception ex) {
+            throw new ErrorException(tarifarHotelRQ.getIntegrador(), TarifarWS.class, "tarifarSolicitacao", WSMensagemErroEnum.HTA, "Erro ao montar tarifa no quarto", WSIntegracaoStatusEnum.NEGADO, ex);
         }
 
-        bookingOptions.setFixedFormat(false);
-        bookingOptions.getRoomCombination().add(roomCombination);
+        bookingOptions.setFixedFormat(
+                false);
+        bookingOptions.getRoomCombination()
+                .add(roomCombination);
 
         availabilityAndPricingRequest.setResultIndex(Integer.parseInt(resultIndex));
         availabilityAndPricingRequest.setOptionsForBooking(bookingOptions);
+
         availabilityAndPricingRequest.setSessionId(sessionId);
 
-        chamaWS.chamadaPadrao(tarifarHotelRQ.getIntegrador(), availabilityAndPricingRequest, AvailabilityAndPricingResponse.class);
+        chamaWS.chamadaPadrao(tarifarHotelRQ.getIntegrador(), availabilityAndPricingRequest, AvailabilityAndPricingResponse.class
+        );
 
         return reservaHotelUhList;
     }

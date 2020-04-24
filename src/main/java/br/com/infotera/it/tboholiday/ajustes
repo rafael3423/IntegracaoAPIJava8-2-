@@ -1,5 +1,3 @@
-HotelCode="1043793" HotelName="Fortune Royal Hotel" Latitude="25.125592" Longitude="56.354595" StarRating="FourStar" CountryName="United Arab Emirates" CityName="al fujairah city" CountryCode="AE"
-         
-HotelCode="1246193" HotelName="ibis Fujairah" Latitude="25.121187" Longitude="56.325434" StarRating="ThreeStar" CountryName="United Arab Emirates" CityName="Al Fujayrah" CountryCode="AE"
-         
-HotelCode="1379022" HotelName="Royal M Hotel Fujairah" " Latitude="25.12275" Longitude="56.3137" StarRating="FiveStar" CountryName="United Arab Emirates" CityName="al fujairah city" CountryCode="AE"
+Colocar try catch em todos os laços for
+Limpar os imports
+remover variaveis não utilizadas
