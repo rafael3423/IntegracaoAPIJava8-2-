@@ -5,6 +5,7 @@ import br.com.infotera.common.WSEndereco;
 import br.com.infotera.common.WSTelefone;
 import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSMensagemErroEnum;
+import br.com.infotera.common.enumerator.WSTelefoneTipoEnum;
 import br.com.infotera.common.hotel.WSFacilidade;
 import br.com.infotera.common.hotel.WSFacilidadeItem;
 import br.com.infotera.common.hotel.WSHotel;
@@ -44,7 +45,7 @@ public class DetalharHotelWS {
 
         List<WSTelefone> telefoneList = new ArrayList();
 
-        WSTelefone telefone = new WSTelefone(hotelDetailsResponse.getHotelDetails().getPhoneNumber(), null);
+        WSTelefone telefone = new WSTelefone(hotelDetailsResponse.getHotelDetails().getPhoneNumber(), WSTelefoneTipoEnum.COMERCIAL);
 
         telefoneList.add(telefone);
 
@@ -84,6 +85,8 @@ public class DetalharHotelWS {
                 hotelCategoria,
                 imagemList,
                 facilidadeList);
+        
+        hotel.setTelefoneList(telefoneList);
 
         return new WSDetalheHotelRS(hotel, detalheHotelRQ.getIntegrador(), WSIntegracaoStatusEnum.OK);
     }

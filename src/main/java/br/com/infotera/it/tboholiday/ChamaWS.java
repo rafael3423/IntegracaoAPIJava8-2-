@@ -130,7 +130,7 @@ public class ChamaWS {
                 Method method = cls.getDeclaredMethod(metodo, envio.getClass(), AuthenticationData.class);
                 objResponse = method.invoke(port, envio, authenticationData);
             } catch (Exception ex) {
-                throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro ao gerar o method", WSIntegracaoStatusEnum.NEGADO, ex);
+                throw new ErrorException(integrador, ChamaWS.class, metodo, WSMensagemErroEnum.GENMETHOD, "Erro ao gerar o method", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
             }
 
         } finally {
