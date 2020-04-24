@@ -35,7 +35,6 @@ import java.util.Map;
 import tektravel.hotelbookingapi.ArrayOfInt;
 import tektravel.hotelbookingapi.ArrayOfRoomGuest;
 import tektravel.hotelbookingapi.CancelPolicies;
-import tektravel.hotelbookingapi.CancelPolicy;
 import tektravel.hotelbookingapi.CancellationChargeTypeForHotel;
 import tektravel.hotelbookingapi.Filters;
 import tektravel.hotelbookingapi.HotelResult;

@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 import tektravel.hotelbookingapi.HotelDetailsRequest;
 import tektravel.hotelbookingapi.HotelDetailsResponse;
-import tektravel.hotelbookingapi.ImageUrlDetails;
 
 public class DetalharHotelWS {
 
@@ -57,9 +56,9 @@ public class DetalharHotelWS {
         List<WSMedia> imagemList = new ArrayList();
 
         try {
-            for (ImageUrlDetails imgUrl : hotelDetailsResponse.getHotelDetails().getImageUrls().getImageUrl()) {
+            hotelDetailsResponse.getHotelDetails().getImageUrls().getImageUrl().forEach((imgUrl) -> {
                 imagemList.add(new WSMedia(null, imgUrl.getValue()));
-            }
+            });
         } catch (Exception ex) {
             throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalharHotelWS.class, "detalharHotel", WSMensagemErroEnum.HDI, "Ocorreu uma falha ao buscar o detalhe do hotel.", WSIntegracaoStatusEnum.NEGADO, ex);
         }
@@ -67,9 +66,9 @@ public class DetalharHotelWS {
         List<WSFacilidadeItem> facilidadeItemList = new ArrayList();
 
         try {
-            for (String facility : hotelDetailsResponse.getHotelDetails().getHotelFacilities().getHotelFacility()) {
+            hotelDetailsResponse.getHotelDetails().getHotelFacilities().getHotelFacility().forEach((facility) -> {
                 facilidadeItemList.add(new WSFacilidadeItem(null, facility, facility, null, null, null, null));
-            }
+            });
         } catch (Exception ex) {
             throw new ErrorException(detalheHotelRQ.getIntegrador(), DetalharHotelWS.class, "detalharHotel", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao buscar o detalhe do hotel.", WSIntegracaoStatusEnum.NEGADO, ex);
         }

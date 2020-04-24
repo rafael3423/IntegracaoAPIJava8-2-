@@ -1,9 +1,6 @@
 package br.com.infotera.it.tboholiday.monta;
 
 import br.com.infotera.common.ErrorException;
-import br.com.infotera.common.WSReserva;
-import br.com.infotera.common.WSReservaHotel;
-import br.com.infotera.common.enumerator.WSIntegracaoStatusEnum;
 import br.com.infotera.common.enumerator.WSReservaStatusEnum;
 import br.com.infotera.common.reserva.rqrs.WSReservaRQ;
 import br.com.infotera.common.reserva.rqrs.WSReservaRS;
@@ -30,7 +27,7 @@ public class CancelarReservaWS {
 
             chamaWS.chamadaPadrao(reservaRQ.getIntegrador(), hotelCancelRequest, HotelCancelResponse.class);
 
-            WSReservaRS reserva = consultarReservaWS.consultar(reservaRQ, true);
+            WSReservaRS reserva = consultarReservaWS.consultar(reservaRQ, false);
 
             return reserva;
         } else {

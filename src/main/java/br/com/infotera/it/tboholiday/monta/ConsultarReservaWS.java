@@ -73,7 +73,7 @@ public class ConsultarReservaWS {
 
                 Double vlDiaria = Utils.dividir(rd.getRoomRate().getTotalFare().doubleValue(), diferencaEmDias);
 
-                if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("")) {
+                if (bookingDetail.getHotelCancelPolicies() != null) {
 
                     politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria, rd.getRoomRate().getTotalFare().doubleValue()));
                 }
@@ -185,6 +185,7 @@ public class ConsultarReservaWS {
                 reservaStatusEnum = WSReservaStatusEnum.INCONSISTENTE;
                 break;
             default:
+                reservaStatusEnum = WSReservaStatusEnum.INCONSISTENTE;
                 break;
         }
 
