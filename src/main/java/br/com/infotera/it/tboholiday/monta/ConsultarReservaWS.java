@@ -73,7 +73,7 @@ public class ConsultarReservaWS {
 
                 Double vlDiaria = Utils.dividir(rd.getRoomRate().getTotalFare().doubleValue(), diferencaEmDias);
 
-                if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("") && sqQuarto == 0) {
+                if (bookingDetail.getHotelCancelPolicies() != null && !bookingDetail.getHotelCancelPolicies().equals("")) {
 
                     politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria, rd.getRoomRate().getTotalFare().doubleValue()));
                 }

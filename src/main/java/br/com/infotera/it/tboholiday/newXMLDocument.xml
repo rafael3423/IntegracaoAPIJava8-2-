@@ -1,75 +1,42 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
     <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <HotelBookingDetailResponse xmlns="http://TekTravel/HotelBookingApi">
+        <AvailabilityAndPricingResponse xmlns="http://TekTravel/HotelBookingApi">
             <Status>
                 <StatusCode>01</StatusCode>
-                <Description>Successful: HotelBookingDetail Successful</Description>
+                <Description>Successful: AvailabilityAndPricing Successful</Description>
             </Status>
-            <BookingDetail BookingId="131725" AmendmentStatus="NotRequested" BookingStatus="CancellationInProgress" VoucherStatus="true" InvoiceNumber="MW109649" SupplierReferenceNo="" ConfirmationNo="W9MXLC">
-                <HotelName>ibis Fujairah</HotelName>
-                <Rating>ThreeStar</Rating>
-                <AddressLine1>Hamad Bin Abdullah Road, Fujairah, Fujairah, United Arab Emirates ZipCode: P.O. Box 2751</AddressLine1>
-                <AddressLine2/>
-                <Map>25.12119|56.32543</Map>
-                <City>Fujairah</City>
-                <CheckInDate>2020-05-17</CheckInDate>
-                <CheckOutDate>2020-05-18</CheckOutDate>
-                <BookingDate>2020-04-23</BookingDate>
-                <HotelCancelPolicies PolicyFormat="Nodes">
-                    <LastCancellationDeadline>2020-04-21T00:00:00</LastCancellationDeadline>
-                    <CancelPolicy RoomTypeName="Standard Room 1 Double" RoomIndex="1" FromDate="2020-04-22" ToDate="2020-05-16" ChargeType="Percentage" CancellationCharge="100.00" Currency="USD"/>
+            <ResultIndex>1</ResultIndex>
+            <AvailableForBook>true</AvailableForBook>
+            <AvailableForConfirmBook>true</AvailableForConfirmBook>
+            <CancellationPoliciesAvailable>true</CancellationPoliciesAvailable>
+            <HotelCancellationPolicies>
+                <HotelNorms>
+                    <string>CheckIn Time-Begin: 1:00 PM </string>
+                    <string> CheckIn Time-End: 5:30 PM</string>
+                    <string>CheckOut Time: 12:00 PM</string>
+                    <string>CheckIn Instructions: Extra-person charges may apply and vary depending on property policy. &amp;lt;br /&amp;gt;Government-issued photo identification and a credit card, debit card, or cash deposit are required at check-in for incidental charges. &amp;lt;br /&amp;gt;Special requests are subject to availability upon check-in and may incur additional charges. Special requests cannot be guaranteed. &amp;lt;ul&amp;gt;  &amp;lt;/ul&amp;gt;</string>
+                    <string>Minimum CheckIn Age : 18</string>
+                    <string>Cards Accepted: Cash,Mastercard,Visa,Debit cards</string>
+                    <string>&amp;lt;ul&amp;gt;  &amp;lt;li&amp;gt;Parents or a legal guardian traveling with children under 18 years must present the child's birth certificate and an identity card with photo (passport, for example) at the check-in. For international travels from Brazil, if just one of the parents is traveling with the child, she/he must present – in addition to the child's certificate of birth and identity card with photo – a letter authorizing the trip signed by the other parent with a notarial certification of signature. In case the parents or the legal guardian, as applicable, cannot or are unwilling to give this authorization, a judicial authorization is required. People who intend to travel to Brazil with children must consult with the Brazilian consulate before traveling for more information. &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt;,Only service animals are allowed,Service animals are exempt from fees/restrictions,Pets not allowed,No cribs (infant beds) available,No rollaway/extra beds available</string>
+                    <string>Please refer to the following Terms of Use - http://mytravelagent.online/termsofuse.pdf</string>
+                    <string>Please note that bedding type will be </string>
+                </HotelNorms>
+                <CancelPolicies PolicyFormat="Nodes">
+                    <LastCancellationDeadline>2020-04-26T00:00:00</LastCancellationDeadline>
+                    <CancelPolicy FromDate="2020-04-23" ToDate="2020-04-26" ChargeType="Fixed" CancellationCharge="0" Currency="USD"/>
+                    <CancelPolicy FromDate="2020-04-27" ToDate="2020-04-30" ChargeType="Percentage" CancellationCharge="100" Currency="USD"/>
                     <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
-                    <AutoCancellationText/>
-                </HotelCancelPolicies>
-                <HotelPolicyDetails>Children 0 - 1 year(s)||</HotelPolicyDetails>
-                <FlightInfo/>
-                <SpecialRequest/>
-                <Roomtype>
-                    <RoomDetails>
-                        <AdultCount>2</AdultCount>
-                        <ChildCount>0</ChildCount>
-                        <RoomName>Standard Room 1 Double</RoomName>
-                        <GuestInfo>
-                            <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>DEMETER</FirstName>
-                                <LastName>VIEIRA</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                            <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
-                                <Title>MR</Title>
-                                <FirstName>FABRICIA</FirstName>
-                                <LastName>FROTA</LastName>
-                                <Age>39</Age>
-                            </Guest>
-                        </GuestInfo>
-                        <RoomPromtion/>
-                        <RoomRate IsPackageRate="false" IsInstantConfirmed="false" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="30.91" RoomTax="7.88" TotalFare="38.79">
-                            <ExtraGuestCharges>0</ExtraGuestCharges>
-                            <ChildCharges>0</ChildCharges>
-                            <Discount>0</Discount>
-                            <OtherCharges>0</OtherCharges>
-                            <ServiceTax>0</ServiceTax>
-                        </RoomRate>
-                        <MealType>Room_Only</MealType>
-                    </RoomDetails>
-                </Roomtype>
-                <Currency>USD</Currency>
-                <NoOfRooms>1</NoOfRooms>
-                <AgencyDetails>
-                    <Name>Infotera</Name>
-                    <AddressLine1>Test 1234</AddressLine1>
-                    <Email/>
-                    <Phone>78901234</Phone>
-                    <City>Sao Paulo</City>
-                    <BookingMemberName>Infotera Test</BookingMemberName>
-                </AgencyDetails>
-                <CityId>119041</CityId>
-                <TripName>FROTA_17May_Fujairah</TripName>
-                <TBOHotelCode>1246193</TBOHotelCode>
-                <AppliedCancellationCharges>38.78</AppliedCancellationCharges>
-            </BookingDetail>
-        </HotelBookingDetailResponse>
+                    <AutoCancellationText>Hotel Destination Local Date and Time:26-Apr-2020 , 21:30:00</AutoCancellationText>
+                </CancelPolicies>
+            </HotelCancellationPolicies>
+            <PriceVerification Status="Successful" PriceChanged="false" AvailableOnNewPrice="false"/>
+            <AccountInfo AgencyBalance="Sufficient" AgencyBlocked="false"/>
+            <HotelDetailsVerification Status="Successful" Remarks=""/>
+            <HotelDetails HotelName="Hotel Joamar" HotelRating="TwoStar">
+                <Address>Rua Dom José de Barros, 187,Sao Paulo,SP,BR</Address>
+                <Map>-23.544135|-46.640382</Map>
+            </HotelDetails>
+            <IsFlightDetailsMandatory>false</IsFlightDetailsMandatory>
+        </AvailabilityAndPricingResponse>
     </s:Body>
 </s:Envelope>
-
