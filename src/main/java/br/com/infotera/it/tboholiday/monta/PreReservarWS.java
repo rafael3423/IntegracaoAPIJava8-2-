@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.infotera.it.tboholiday.monta;
 
 import br.com.infotera.common.ErrorException;
@@ -105,6 +100,7 @@ public class PreReservarWS {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
 
+        int count = 1;
         int sqQuarto = 0;
         String nmQuarto[] = null;
         String nmQuartoFinal = null;
@@ -121,9 +117,9 @@ public class PreReservarWS {
                 Double diferencaEmDias = Double.parseDouble(Utils.diferencaEmDias(rhu.getDtEntrada(), rhu.getDtSaida()).toString());
                 Double vlDiaria = Utils.dividir(rhu.getTarifa().getVlNeto(), diferencaEmDias);
 
-                if (availabilityAndPricingResponse.getHotelCancellationPolicies() != null && availabilityAndPricingResponse.getHotelCancellationPolicies() != null && sqQuarto == 0) {
+                if (availabilityAndPricingResponse.getHotelCancellationPolicies() != null && availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies() != null) {
 
-                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies(), vlDiaria, preReservarRQ.getIntegrador()));
+                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(availabilityAndPricingResponse.getHotelCancellationPolicies().getCancelPolicies(), vlDiaria, preReservarRQ.getIntegrador(), count));
                 }
 
                 WSTarifa tarifa = new WSTarifa(rhu.getTarifa().getSgMoedaNeto(),
@@ -171,7 +167,7 @@ public class PreReservarWS {
                     throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
                 }
 
-                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
+                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
                         uh,
                         rhu.getRegime(),
                         tarifa,
@@ -179,7 +175,7 @@ public class PreReservarWS {
                         rhu.getDtSaida(),
                         reservaNomeList,
                         WSReservaStatusEnum.SOLICITACAO));
-                sqQuarto++;
+                count++;
             }
         } catch (Exception ex) {
             throw new ErrorException(preReservarRQ.getIntegrador(), PreReservarWS.class, "preReservar", WSMensagemErroEnum.HPR, "Ocorreu uma falha ao efetuar a pré reserva do quarto", WSIntegracaoStatusEnum.NEGADO, ex);
@@ -201,6 +197,7 @@ public class PreReservarWS {
             reservaHotelUhListChegada.forEach((rhuh) -> {
                 ParDisp parDispRetono[] = (ParDisp[]) UtilsWS.fromJson(rhuh.getUh().getDsParametro(), ParDisp[].class);
                 int sqQuarto = 0;
+                
                 for (ParDisp p : parDispRetono) {
                     String dsParametro = UtilsWS.toJson(p);
 
@@ -238,7 +235,7 @@ public class PreReservarWS {
         return reservaHotelUhList;
     }
 
-    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria, WSIntegrador integrador) throws ErrorException {
+    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria, WSIntegrador integrador, int sqQuarto) throws ErrorException {
 
         List<WSPolitica> politicaList = new ArrayList();
 
@@ -249,17 +246,36 @@ public class PreReservarWS {
                     Double pcCancelamento = null;
                     Double vlCancelamento = null;
 
-                    if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            pcCancelamento = cp.getCancellationCharge().doubleValue();
+                    if (cp.getRoomIndex() != null) {
+                        if (cp.getRoomIndex().equals(sqQuarto)) {
+                            if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    pcCancelamento = cp.getCancellationCharge().doubleValue();
+                                }
+                            } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    vlCancelamento = cp.getCancellationCharge().doubleValue();
+                                }
+                            } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                                }
+                            }
                         }
-                    } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            vlCancelamento = cp.getCancellationCharge().doubleValue();
-                        }
-                    } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+
+                    } else {
+                        if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                pcCancelamento = cp.getCancellationCharge().doubleValue();
+                            }
+                        } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                vlCancelamento = cp.getCancellationCharge().doubleValue();
+                            }
+                        } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                            }
                         }
                     }
 

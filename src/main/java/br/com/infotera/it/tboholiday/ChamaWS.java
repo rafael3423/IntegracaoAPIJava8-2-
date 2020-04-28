@@ -38,7 +38,6 @@ import tektravel.hotelbookingapi.HotelRoomAvailabilityResponse;
 import tektravel.hotelbookingapi.HotelSearchRequest;
 import tektravel.hotelbookingapi.HotelSearchResponse;
 
-
 public class ChamaWS {
 
     private HotelService service;
@@ -108,13 +107,13 @@ public class ChamaWS {
                 metodo = "giataHotelCodeList";
             }
 
-            if (Utils.geraArquivoXml || (!metodo.equals("hotelSearch") && !metodo.equals("availableHotelRooms"))) {
+//            if (Utils.geraArquivoXml || (!metodo.equals("hotelSearch") && !metodo.equals("availableHotelRooms"))) {
                 client.getOutInterceptors().add(new LoggingOutInterceptor(new PrintWriter(xmlRequest)));
                 LoggingInInterceptor in = new LoggingInInterceptor();
                 in.setLimit(-1);
                 in.setPrintWriter(new PrintWriter(xmlResponse));
                 client.getInInterceptors().add(in);
-            }
+//            }
 
             BindingProvider bp = (BindingProvider) port;
             bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, ConfigWsdl.buscaEndPoint(integrador.getAmbiente()));
@@ -134,6 +133,7 @@ public class ChamaWS {
             }
 
         } finally {
+
 //            if (Utils.geraArquivoXml) {
 //                System.out.println("RQ - > " + xmlRequest.toString());
 //                System.out.println("RS - > " + xmlResponse.toString());

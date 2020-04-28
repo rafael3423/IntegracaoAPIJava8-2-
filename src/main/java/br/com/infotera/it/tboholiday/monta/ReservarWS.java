@@ -70,7 +70,7 @@ public class ReservarWS {
                 rate.setTotalFare(bigTotalFare);
                 
                 Supplement[] supplement = (Supplement[]) UtilsWS.fromJson(parDisp.getA4(), Supplement[].class);
-                
+          
                 sqQuato++;
                 
                 if (supplement != null && supplement.length != 0) {
@@ -121,7 +121,7 @@ public class ReservarWS {
                     throw new ErrorException(reservarRQ.getIntegrador(), ReservarWS.class, "Reservar", WSMensagemErroEnum.HRE, "Ocorreu uma falha ao efetuar a reserva do quarto", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
                 
-                requestedRooms.setRoomIndex(sqQuato);
+                requestedRooms.setRoomIndex(Integer.parseInt(parDisp.getA0()));
                 requestedRooms.setRoomTypeName(rhuh.getUh().getDsUh());
                 requestedRooms.setRoomTypeCode(rhuh.getUh().getCdUh());
                 requestedRooms.setRatePlanCode(rhuh.getTarifa().getCdTarifa());

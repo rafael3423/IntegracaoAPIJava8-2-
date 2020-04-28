@@ -1,15 +1,120 @@
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
     <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <HotelCancelResponse xmlns="http://TekTravel/HotelBookingApi">
+        <HotelBookingDetailResponse xmlns="http://TekTravel/HotelBookingApi">
             <Status>
                 <StatusCode>01</StatusCode>
-                <Description>Successful: Booking Cancelled Successfully</Description>
+                <Description>Successful: HotelBookingDetail Successful</Description>
             </Status>
-            <BookingId>131823</BookingId>
-            <CancellationCharge>0</CancellationCharge>
-            <RefundAmount>52.12</RefundAmount>
-            <RequestStatus>Processed</RequestStatus>
-            <Currency>USD</Currency>
-        </HotelCancelResponse>
+            <BookingDetail BookingId="132050" AmendmentStatus="NotRequested" BookingStatus="Cancelled" VoucherStatus="true" InvoiceNumber="MW109919" SupplierReferenceNo="" ConfirmationNo="296UXH">
+                <HotelName>The New Yorker, A Wyndham Hotel</HotelName>
+                <Rating>FourStar</Rating>
+                <AddressLine1>481 Eighth Ave.,New York,New York,US ZipCode: </AddressLine1>
+                <AddressLine2/>
+                <Map>40.75253|-73.99322</Map>
+                <City>New York City - Manhattan</City>
+                <CheckInDate>2020-08-10</CheckInDate>
+                <CheckOutDate>2020-08-15</CheckOutDate>
+                <BookingDate>2020-04-27</BookingDate>
+                <HotelCancelPolicies PolicyFormat="Nodes">
+                    <LastCancellationDeadline>2020-08-06T00:00:00</LastCancellationDeadline>
+                    <CancelPolicy FromDate="2020-04-26" ToDate="2020-08-06" ChargeType="Fixed" CancellationCharge="0.00" Currency="USD"/>
+                    <CancelPolicy FromDate="2020-08-07" ToDate="2020-08-08" ChargeType="Fixed" CancellationCharge="132.61" Currency="USD"/>
+                    <CancelPolicy FromDate="2020-08-09" ToDate="2020-08-09" ChargeType="Percentage" CancellationCharge="100.00" Currency="USD"/>
+                    <DefaultPolicy>Early check out will attract full cancellation charge unless otherwise specified.</DefaultPolicy>
+                    <AutoCancellationText>Hotel Destination Local Date and Time:06-Aug-2020 , 21:30:00</AutoCancellationText>
+                </HotelCancelPolicies>
+                <HotelPolicyDetails>CheckIn Time-Begin: 4:00 PM | CheckIn Time-End: midnight|CheckOut Time: 12:00 PM|CheckIn Instructions: Extra-person charges may apply and vary depending on property policy. &amp;lt;br /&amp;gt;Government-issued photo identification and a credit card are required at check-in for incidental charges. &amp;lt;br /&amp;gt;Special requests are subject to availability upon check-in and may incur additional charges. Special requests cannot be guaranteed. &amp;lt;ul&amp;gt;  Please note that cultural norms and guest policies may differ by country and by property. The policies listed are provided by the property. &amp;lt;/ul&amp;gt; Parcel deliveries will be accepted only for guests in house or checking in on the day of receipt. Any deliveries received before or after a guest's stay will be returned. The property cannot be held responsible for lost or damaged goods. | Special Instructions : For more details, please contact the property using the information on the booking confirmation.  Due to COVID-19, this property's food and beverage options may be limited pursuant to local regulations. To benefit from the special Healthcare Heroes program rate, healthcare professionals must present proof of employment and photo|Minimum CheckIn Age : 18|Mandatory Fees: &amp;lt;p&amp;gt;You'll be asked to pay the following charges at the property:&amp;lt;/p&amp;gt; &amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Deposit: USD 45 per day&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Resort fee (June - April): USD 39.11 per accommodation, per night &amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt; The resort fee includes:&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;Fitness center access&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Business center/computer access&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Internet access&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Phone calls&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt; &amp;lt;p&amp;gt;We have included all charges provided to us by the property. However, charges can vary, for example, based on length of stay or the room you book. &amp;lt;/p&amp;gt; | Optional Fees: &amp;lt;p&amp;gt;The following fees and deposits are charged by the property at time of service, check-in, or check-out. &amp;lt;/p&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;Breakfast fee: between USD 15 and USD 23 per person (approximately)&amp;lt;/li&amp;gt;         &amp;lt;li&amp;gt;Valet parking fee: USD 70 per day&amp;lt;/li&amp;gt;   &amp;lt;li&amp;gt;Pet deposit: USD 250 per stay&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;Pet fee: USD 50 per pet, per night&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Service animals are exempt from fees&amp;lt;/li&amp;gt;      &amp;lt;li&amp;gt;Refrigerator fee: USD 30 per stay&amp;lt;/li&amp;gt;&amp;lt;li&amp;gt;Rollaway bed fee: USD 50.0 per night&amp;lt;/li&amp;gt;            &amp;lt;/ul&amp;gt; &amp;lt;p&amp;gt;The above list may not be comprehensive. Fees and deposits may not include tax and are subject to change. &amp;lt;/p&amp;gt;|Cards Accepted: Diners Club,Discover,Debit cards not accepted,JCB International,Mastercard,American Express,Visa,Cash not accepted|&amp;lt;ul&amp;gt;  &amp;lt;li&amp;gt;Some facilities may have restricted access. Guests can contact the property for details using the contact information on the booking confirmation. &amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt;,Maximum number of pets per room 1,Only dogs and cats are allowed,Service animals are exempt from fees/restrictions,Pets allowed|</HotelPolicyDetails>
+                <FlightInfo/>
+                <SpecialRequest/>
+                <Roomtype>
+                    <RoomDetails>
+                        <AdultCount>2</AdultCount>
+                        <ChildCount>2</ChildCount>
+                        <ChildAge>0</ChildAge>
+                        <ChildAge>5</ChildAge>
+                        <RoomName>Metro Room, 2 Double Beds,Nonsmoking</RoomName>
+                        <Ameneties>Hair dryer (on request)</Ameneties>
+                        <Ameneties>Daily housekeeping</Ameneties>
+                        <Ameneties>Refrigerator (on request)</Ameneties>
+                        <Ameneties>Shower/tub combination</Ameneties>
+                        <Ameneties>Phone</Ameneties>
+                        <Ameneties>Pillowtop mattress</Ameneties>
+                        <Ameneties>Private bathroom</Ameneties>
+                        <Ameneties>Free toiletries</Ameneties>
+                        <Ameneties>Iron/ironing board</Ameneties>
+                        <Ameneties>In-room safe</Ameneties>
+                        <Ameneties>Free cribs/infant beds</Ameneties>
+                        <Ameneties>Cable TV service</Ameneties>
+                        <Ameneties>Flat-panel TV</Ameneties>
+                        <Ameneties>Non-Smoking</Ameneties>
+                        <Ameneties>Rollaway/extra beds (surcharge)</Ameneties>
+                        <Ameneties>Premium TV channels</Ameneties>
+                        <Ameneties>Free WiFi</Ameneties>
+                        <Ameneties>Blackout drapes/curtains</Ameneties>
+                        <Ameneties>Desk</Ameneties>
+                        <Ameneties>Laptop-friendly workspace</Ameneties>
+                        <Ameneties>In-room climate control (air conditioning)</Ameneties>
+                        <Ameneties>Eco-friendly toiletries</Ameneties>
+                        <Ameneties>Premium bedding</Ameneties>
+                        <Ameneties>Recycling</Ameneties>
+                        <Ameneties>Pay movies</Ameneties>
+                        <Ameneties>Linens not available</Ameneties>
+                        <Ameneties>Room Only</Ameneties>
+                        <GuestInfo>
+                            <Guest LeadGuest="false" GuestType="Adult" GuestInRoom="1">
+                                <Title>MR</Title>
+                                <FirstName>SILVIA</FirstName>
+                                <LastName>CAMARGO</LastName>
+                                <Age>40</Age>
+                            </Guest>
+                            <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
+                                <Title>MR</Title>
+                                <FirstName>ANGELITA</FirstName>
+                                <LastName>FIGUEIRA</LastName>
+                                <Age>0</Age>
+                            </Guest>
+                            <Guest LeadGuest="false" GuestType="Child" GuestInRoom="1">
+                                <Title>MR</Title>
+                                <FirstName>SELESO</FirstName>
+                                <LastName>PARIS</LastName>
+                                <Age>5</Age>
+                            </Guest>
+                            <Guest LeadGuest="true" GuestType="Adult" GuestInRoom="1">
+                                <Title>MR</Title>
+                                <FirstName>LISETE</FirstName>
+                                <LastName>OLIVEIRA</LastName>
+                                <Age>40</Age>
+                            </Guest>
+                        </GuestInfo>
+                        <RoomPromtion>Save 25%</RoomPromtion>
+                        <Supplements>
+                            <Supp_info Type="PerStaySupplement" SuppName="resort_fee" SuppChargeType="AtProperty" Price="195.55" Currency="USD"/>
+                        </Supplements>
+                        <RoomRate IsPackageRate="false" IsInstantConfirmed="false" B2CRates="false" AgentMarkUp="0.00" Currency="USD" RoomFare="564.73" RoomTax="100.66" TotalFare="665.39">
+                            <ExtraGuestCharges>0</ExtraGuestCharges>
+                            <ChildCharges>0</ChildCharges>
+                            <Discount>0</Discount>
+                            <OtherCharges>0</OtherCharges>
+                            <ServiceTax>0</ServiceTax>
+                        </RoomRate>
+                        <MealType>Room_Only</MealType>
+                    </RoomDetails>
+                </Roomtype>
+                <Currency>USD</Currency>
+                <NoOfRooms>1</NoOfRooms>
+                <AgencyDetails>
+                    <Name>Infotera</Name>
+                    <AddressLine1>Test 1234</AddressLine1>
+                    <Email/>
+                    <Phone>78901234</Phone>
+                    <City>Sao Paulo</City>
+                    <BookingMemberName>Infotera Test</BookingMemberName>
+                </AgencyDetails>
+                <CityId>130452</CityId>
+                <TripName>OLIVEIRA_10Aug_New York City - Manhattan</TripName>
+                <TBOHotelCode>1164844</TBOHotelCode>
+                <AppliedCancellationCharges>0.0</AppliedCancellationCharges>
+            </BookingDetail>
+        </HotelBookingDetailResponse>
     </s:Body>
 </s:Envelope>

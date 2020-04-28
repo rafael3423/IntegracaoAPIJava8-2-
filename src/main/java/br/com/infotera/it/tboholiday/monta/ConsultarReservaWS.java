@@ -56,7 +56,7 @@ public class ConsultarReservaWS {
     public WSReserva montaReserva(WSIntegrador integrador, APIBookingDetail bookingDetail, Boolean isCancelamento) throws ErrorException {
 
         List<WSReservaHotelUh> reservaHotelUhList = new ArrayList();
-        int sqQuarto = 0;
+        int sqQuarto = 1;
 
         try {
             for (RoomDetails rd : bookingDetail.getRoomtype().getRoomDetails()) {
@@ -74,10 +74,8 @@ public class ConsultarReservaWS {
                 Double vlDiaria = Utils.dividir(rd.getRoomRate().getTotalFare().doubleValue(), diferencaEmDias);
 
                 if (bookingDetail.getHotelCancelPolicies() != null) {
-                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria, rd.getRoomRate().getTotalFare().doubleValue(), integrador));
+                    politicaCancelamentoList.addAll(montaPoliticaCancelamento(bookingDetail.getHotelCancelPolicies(), vlDiaria, rd.getRoomRate().getTotalFare().doubleValue(), integrador, sqQuarto));
                 }
-
-                sqQuarto++;
 
                 List<WSTarifaAdicional> tarifaAdicionalList = new ArrayList();
                 Double vlMulta = 0.0;
@@ -151,7 +149,7 @@ public class ConsultarReservaWS {
                     throw new ErrorException(integrador, ConsultarReservaWS.class, "montaReserva", WSMensagemErroEnum.HCO, "Ocorreu uma falha ao efetuar a consulta da reserva", WSIntegracaoStatusEnum.INCONSISTENTE, ex);
                 }
 
-                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto,
+                reservaHotelUhList.add(new WSReservaHotelUh(sqQuarto++,
                         uh,
                         regime,
                         tarifa,
@@ -229,7 +227,7 @@ public class ConsultarReservaWS {
         return new WSReserva(reservaHotel);
     }
 
-    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria, Double vlTotal, WSIntegrador integrador) throws ErrorException {
+    private List<WSPolitica> montaPoliticaCancelamento(CancelPolicies cancelPolicies, Double vlDiaria, Double vlTotal, WSIntegrador integrador, int sqQuarto) throws ErrorException {
 
         List<WSPolitica> politicaList = new ArrayList();
 
@@ -240,20 +238,41 @@ public class ConsultarReservaWS {
                     Double pcCancelamento = null;
                     Double vlCancelamento = null;
 
-                    if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            pcCancelamento = cp.getCancellationCharge().doubleValue();
+                    if (cp.getRoomIndex() != null) {
+                        if (cp.getRoomIndex().equals(sqQuarto)) {
+                            if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    pcCancelamento = cp.getCancellationCharge().doubleValue();
+                                    vlCancelamento = Utils.dividir(Utils.multiplicar(vlTotal, pcCancelamento), 100.00);
 
-                            vlCancelamento = Utils.dividir(Utils.multiplicar(vlTotal, pcCancelamento), 100.00);
+                                }
+                            } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    vlCancelamento = cp.getCancellationCharge().doubleValue();
+                                }
+                            } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                                if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                    vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                                }
+                            }
+                        }
 
-                        }
-                    } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            vlCancelamento = cp.getCancellationCharge().doubleValue();
-                        }
-                    } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
-                        if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
-                            vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                    } else {
+                        if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.PERCENTAGE)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                pcCancelamento = cp.getCancellationCharge().doubleValue();
+                                vlCancelamento = Utils.dividir(Utils.multiplicar(vlTotal, pcCancelamento), 100.00);
+                            }
+
+                        } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.FIXED)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                vlCancelamento = cp.getCancellationCharge().doubleValue();
+                            }
+
+                        } else if (cp.getChargeType() != null && cp.getChargeType().equals(CancellationChargeTypeForHotel.NIGHT)) {
+                            if (cp.getCancellationCharge() != null && cp.getCancellationCharge().doubleValue() > 0.0) {
+                                vlCancelamento = Utils.multiplicar(vlDiaria, cp.getCancellationCharge().doubleValue());
+                            }
                         }
                     }
 
