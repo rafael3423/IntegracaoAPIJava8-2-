@@ -157,6 +157,7 @@ public class DisponibilidadeWS {
                 hotel.setIdExterno(hr.getHotelInfo().getHotelCode());
                 hotel.setIdExterno2(disponibilidadeRQ.getMunicipioId());
 
+                
                 List<WSQuarto> quartoList = new ArrayList();
                 List<WSQuartoUh> quartoUhList = new ArrayList();
 

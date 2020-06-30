@@ -175,6 +175,7 @@ public class PreReservarWS {
                         rhu.getDtSaida(),
                         reservaNomeList,
                         WSReservaStatusEnum.SOLICITACAO));
+
                 count++;
             }
         } catch (Exception ex) {
